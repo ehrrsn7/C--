@@ -1,4 +1,0 @@
-[submodule "Asteroids/cpp"]
-	path = Asteroids/cpp
-	url = https://github.com/ehrrsn7/cpp.git
-	branch = main
