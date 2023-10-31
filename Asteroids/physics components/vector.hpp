@@ -62,6 +62,13 @@ public:
    void add(const Vector & v);
 
    /**************************************************
+    * Multipliers
+    **************************************************/
+   void multiply(double magnitude);
+   void multiplyX(double magnitude) { x *= magnitude; }
+   void multiplyY(double magnitude) { y *= magnitude; }
+
+   /**************************************************
     * Other Getters/Setters
     **************************************************/
    double getMagnitude() const      { return mag(*this); }
@@ -74,11 +81,15 @@ public:
    void addPolar(double magnitude, double angleRadians);
    void addMagnitude(double magnitude, double angleRadians); // "
 
+   static Vector forward(double angleRadians);
+
    /**************************************************
     * Operators
     **************************************************/
-   Vector operator+ (const Vector& rhs);
-   Vector& operator+= (const Vector& rhs);
+   Vector operator + (const Vector& rhs);
+   Vector& operator += (const Vector& rhs);
+   Vector operator * (const double rhs);
+   Vector& operator *= (const double rhs);
 
 protected:
    double x; // horizontal position (meters)
@@ -102,8 +113,10 @@ std::istream & operator >> (std::istream & in,        Vector& rhs);
 class Position : public Vector {
 public:
    Position() : Position(0.0, 0.0) { }                      // non-default constructor
+   Position(const Vector& s) : Vector(s) { }                // base implementation constructor
+   Position(bool check) { }
    Position(double metersX, double metersY) : Vector(metersX, metersY) { } // default
-   Position(const Vector & pt) { *this = pt; }              // copy constructor
+   Position(const Position & pt) { *this = pt; }              // copy constructor
    Position & operator = (const Position & pt);             // assignment operator '='
 
    double getMetersX() const { return getX(); }
@@ -132,6 +145,8 @@ public:
    void addMetersX(double dxMeters) { setMetersX(getMetersX() + dxMeters); }
    void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
    void addMeters(double dxMeters, double dyMeters);
+
+  static Position forward(double angleRadians);
 
    double getZoom() const { return metersFromPixels; }
    void setZoom(double metersFromPixels);
@@ -173,6 +188,7 @@ class Velocity : public Vector {
 public:
    // constructors
    Velocity() : Vector(0.0, 0.0)  {                      }  // default constructor
+   Velocity(const Vector& s) : Vector(s) { }                // base implementation constructor
    Velocity(double dx, double dy) { Vector::set(dx, dy); }  // normal "
    Velocity(const Velocity& s)    { *this = s;           }  // copy "
    Velocity & operator = (const Velocity & rhs);            // assignment operator '='
@@ -186,6 +202,8 @@ public:
       Vector::add(dv.getX(), dv.getY()); // call parent add
    }
 
+  static Velocity forward(double angleRadians);
+
    // operators
    Velocity operator+ (const Velocity& rhs) const { // rhs : Δt
       return Velocity(x + rhs.x, y + rhs.y);
@@ -196,7 +214,7 @@ public:
       return *this;
    }
 
-   Position operator* (const double rhs) { // rhs = Δt
+   Position operator* (const double rhs) { // rhs : Δt
       // v{this} * Δt{rhs} -> Δp{Position}
       return toPosition(rhs);
    }
@@ -223,6 +241,7 @@ class Acceleration : public Vector {
 public:
    // constructors
    Acceleration() : Vector(0.0, 0.0)    {                        }   // default constructor
+   Acceleration(const Vector& s) : Vector(s) {                   }   // base implementation constructor
    Acceleration(double ddx, double ddy) { Vector::set(ddx, ddy); }   // normal "
    Acceleration(const Acceleration& s)  { *this = s;             }   // copy "
    Acceleration & operator = (const Acceleration & rhs) {            // assignment operator '='
@@ -238,19 +257,21 @@ public:
       Vector::add(da.getX(), da.getY());
    }
 
+  static Acceleration forward(double angleRadians);
+
    // operators
-   Acceleration operator+ (const Acceleration& rhs) { // rhs : Δt
+   Acceleration operator + (const Acceleration& rhs) { // rhs : Δt
       Acceleration newA = *this;
       newA.add(rhs);
       return newA;
    }
 
-   Acceleration& operator+= (const Acceleration& rhs) { // rhs : Δt
+   Acceleration& operator += (const Acceleration& rhs) { // rhs : Δt
       add(rhs);
       return *this;
    }
 
-   Velocity operator* (const double rhs) { // rhs = Δt
+   Velocity operator * (const double rhs) { // rhs : Δt
       // v{this} * Δt{rhs} -> Δp{Position}
       return toVelocity(rhs);
    }
@@ -277,11 +298,12 @@ class Force : public Vector {
 public:
    // constructors
    Force() : Vector(0.0, 0.0)  {                      }  // default constructor
+   Force(const Vector& s) : Vector(s) {               }  // base implementation constructor
    Force(double fx, double fy) { Vector::set(fx, fy); }  // normal "
    Force(const Force& s)       { *this = s;           }  // copy "
    Force & operator = (const Force & rhs) {              // assignment operator '='
      Vector::set(rhs.getX(), rhs.getY()); return *this;
-  }
+   }
 
    // set
    void set(double x, double y) { Vector::set(x, y); }
@@ -292,19 +314,21 @@ public:
       Vector::add(dF.getX(), dF.getY());
    }
 
+  static Force forward(double angleRadians);
+
    // operators
-   Force operator+ (const Force& rhs) { // rhs : ΔF
+   Force operator + (const Force& rhs) { // rhs : ΔF
       Force newF = *this;
       newF.add(rhs);
       return newF;
    }
 
-   Force& operator+= (const Force& rhs) { // rhs : ΔF
+   Force& operator += (const Force& rhs) { // rhs : ΔF
       add(rhs);
       return *this;
    }
 
-   Acceleration operator/ (const double rhs) { // rhs : mass
+   Acceleration operator / (const double rhs) { // rhs : mass
       return toAcceleration(rhs);
    }
 
@@ -331,6 +355,7 @@ class Gravity : public Force {
 public:
    // constructors
    Gravity() : Force(0.0, 0.0)   {                      }   // default constructor
+   Gravity(const Vector& s) : Force(s) {                }   // base implementation constructor
    Gravity(double fx, double fy) { Vector::set(fx, fy); }   // normal "
    Gravity(const Gravity& s)     { *this = s;           }   // copy "
    Gravity & operator = (const Gravity & rhs) {             // assignment operator '='
@@ -345,6 +370,8 @@ public:
    void add(const Gravity dF) {
       Vector::add(dF.getX(), dF.getY());
    }
+
+  static Gravity forward(double angleRadians);
 
    // operators
    Gravity operator+ (const Gravity& rhs) { // rhs : ΔG

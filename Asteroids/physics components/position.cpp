@@ -1,13 +1,16 @@
 /***********************************************************************
  * Source File:
- *    Point : The representation of a position on the screen
+ *    Position : The representation of a position on the screen
  * Author:
  *    Br. Helfrich
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
+
+// default is 1:1, move this to any cpp file and change to override
+double Position::metersFromPixels = 1.0;
 
 void Position::setMeters(double xMeters, double yMeters) {
    setMetersX(xMeters);
@@ -26,7 +29,7 @@ void Position::setPixels(double xPixels, double yPixels) {
 /**************************************************
  * method: add
  * class: Position
- * Assign a Point
+ * Assign a Position
  * Note: basically the definition of Vector+=
  **************************************************/
 void Position::add(const Velocity& dv, double dt) {
@@ -47,10 +50,14 @@ void Position::setZoom(double metersFromPixels) {
    this->metersFromPixels = metersFromPixels;
 }
 
+/* static */ Position Position::forward(double angleRadians) {
+   return Position(Vector::forward(angleRadians));
+}
+
 /**************************************************
  * operator =
  * class: Position
- * Assign a Point
+ * Assign a Position
  * Note: basically an override of Vector=
  **************************************************/
 Position & Position::operator = (const Position & rhs) {

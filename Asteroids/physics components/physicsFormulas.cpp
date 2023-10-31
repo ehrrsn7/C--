@@ -5,10 +5,10 @@
  * helper function does not retain state)
  **********************************************************************/
 
-#include "physicsFormulas.h"  // header file
-#include "movingObject.h"     // for MovingObject
-#include "ship.h"             // for Projectile (for now)
-#include "earth.h"            // for Earth
+#include "physicsFormulas.hpp"  // header file
+#include "../game objects/moving objects/movingObject.hpp" // for MovingObject
+//#include "ship.hpp"             // for Projectile (for now)
+//#include "earth.hpp"            // for Earth
 
 #include <cmath>              // for math functions
 
@@ -68,7 +68,7 @@ double distance(const Position& p1, const Position& p2) {
  * distance(objects) -> distance(positions)
  * Distance = √[(p1.x-p2.x)^2 + (p1.y-p2.y)^2]
  **************************************************/
-double distance(const MovingObject& obj1, const MovingObject& obj2) {
+double distance(MovingObject& obj1, MovingObject& obj2) {
    return distance(obj1.getPosition(), obj2.getPosition());
 }
 
@@ -175,25 +175,25 @@ double earthRotationSpeed(double dt) {
  *    √[x² + y²] -> distance from origin
  *    r - radius of earth
  **************************************************/
-double calcHeight(const Position & p) {
-   return sqrt(
-      pow(p.getMetersX(), 2) +
-      pow(p.getMetersY(), 2)
-   ) - EARTH_RADIUS;
-}
+//double calcHeight(const Position & p) {
+//   return sqrt(
+//      pow(p.getMetersX(), 2) +
+//      pow(p.getMetersY(), 2)
+//   ) - EARTH_RADIUS;
+//}
 
 /**************************************************
  * height above the earth
  * h = √[(x2 - x1)² + (y2 - y1)²] - r
  *    √[x2² + y2²] -> distance from p1
  **************************************************/
-double calcHeight(const Position & p, const Earth & e) {
-   // should the earth not strictly be at the origin
-   return sqrt(
-      pow(p.getMetersX() - e.getPosition().getMetersX(), 2) +
-      pow(p.getMetersY() - e.getPosition().getMetersY(), 2)
-   ) - EARTH_RADIUS;
-}
+//double calcHeight(const Position & p, const Earth & e) {
+//   // should the earth not strictly be at the origin
+//   return sqrt(
+//      pow(p.getMetersX() - e.getPosition().getMetersX(), 2) +
+//      pow(p.getMetersY() - e.getPosition().getMetersY(), 2)
+//   ) - EARTH_RADIUS;
+//}
 
 /**************************************************
  * direction of gravity pull
@@ -212,7 +212,7 @@ double directionOfGravity(const Position& p1, const Position& p2) {
  * direction of gravity pull
  * a = atan2(p.x2 - p.x2, p.y1 - p.y2)
  **************************************************/
-double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) {
+double directionOfGravity(MovingObject & obj1, MovingObject & obj2) {
    return directionOfGravity(obj1.getPosition(), obj2.getPosition());
 }
 
@@ -221,24 +221,24 @@ double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) 
  * Fg = G * m1 m2 / d^2 @angle towards obj2
  * placed beneath directionOfGravity so that it sees it
  **************************************************/
-Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
-   Gravity g;
-   g.setPolar(
-      G * obj1.getMass() * obj2.getMass() / pow(distance(obj1, obj2), 2),
-      directionOfGravity(obj1, obj2));
-   return g;
-}
+//Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
+//   Gravity g;
+//   g.setPolar(
+//      G * obj1.getMass() * obj2.getMass() / pow(distance(obj1, obj2), 2),
+//      directionOfGravity(obj1, obj2));
+//   return g;
+//}
 
 
 /**************************************************
 * gravity equation
 * gh = g (r/(r + h))^2
 **************************************************/
-double calcGravity(double height) {
-   return ACCEL_DUE_TO_GRAVITY_EARTH * (
-      pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
-   );
-}
+//double calcGravity(double height) {
+//   return ACCEL_DUE_TO_GRAVITY_EARTH * (
+//      pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
+//   );
+//}
 
 /**************************************************
 * gravity equation
@@ -246,14 +246,14 @@ double calcGravity(double height) {
 * but returns an Acceleration vector object in the
 * direction of the origin
 **************************************************/
-Acceleration calcGravityVector(const Position& p) {
-   Acceleration g;
-   g.setPolar(
-      calcGravity(calcHeight(p)),
-      directionOfGravity(p, Position())
-   );
-   return g;
-}
+//Acceleration calcGravityVector(const Position& p) {
+//   Acceleration g;
+//   g.setPolar(
+//      calcGravity(calcHeight(p)),
+//      directionOfGravity(p, Position())
+//   );
+//   return g;
+//}
 
 /**********************************************************************
  * Motion

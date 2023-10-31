@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <cassert>
-#include "vector.h"
+#include "vector.hpp"
 
 using namespace std;
 

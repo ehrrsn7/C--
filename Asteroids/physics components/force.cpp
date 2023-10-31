@@ -3,7 +3,11 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
+
+/* static */ Force Force::forward(double angleRadians) {
+   return Force(Vector::forward(angleRadians));
+}
 
 /**************************************************
  * FORCE ostream insertion

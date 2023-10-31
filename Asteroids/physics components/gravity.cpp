@@ -3,7 +3,11 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
+
+/* static */ Gravity Gravity::forward(double angleRadians) {
+   return Gravity(Vector::forward(angleRadians));
+}
 
 /**************************************************
  * GRAVITY ostream insertion

@@ -10,7 +10,7 @@
 #pragma once
 
 #include <iostream>
-#include "vector.h"
+#include "vector.hpp"
 #include <cassert>
 
 using namespace std;

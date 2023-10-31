@@ -14,7 +14,7 @@
 #include <map> // held keys
 #include <cmath>
 
-#include "vector/point.hpp" // point
+#include "physics components/vector.hpp"
 #include "ui/uiInteract.hpp" // user interaction
 
 // import game objects
@@ -28,11 +28,11 @@
 class Game {
 private:
    // screen positioning
-   float screenLeft;
-   float screenRight;
-   float screenBottom;
-   float screenTop;
-   Point center;
+   double screenLeft;
+   double screenRight;
+   double screenBottom;
+   double screenTop;
+   Position center;
 
    // game objects
    Ship* ship;
@@ -42,10 +42,10 @@ private:
    Score score;
 
    // in game.cpp:
-   void setUpScreen(Point tl, Point br);
+   void setUpScreen(Position tl, Position br);
    void fireLaser();
    void asteroidBelt();
-   Rock * buildRock(int whichRock, Point pInit, Velocity vInit, bool isInitial);
+   Rock * buildRock(int whichRock, Position pInit, Velocity vInit, bool isInitial);
    void update(MovingObject & obj);
    void update(MovingObject * obj);
    void wrap();
@@ -57,7 +57,7 @@ private:
    void handleCollision(MovingObject * obj, Rock * rock);
    bool checkCollision(MovingObject & obj1, MovingObject & obj2);
    bool checkCollision(MovingObject * obj1, MovingObject * obj2);
-   float getClosestDistance(const MovingObject & obj1, const MovingObject & obj2);
+   double getClosestDistance(MovingObject & obj1, MovingObject & obj2);
 
    // "bring out ur deaaaaaaaaaad"
    void cleanUpZombies();
@@ -77,7 +77,7 @@ private:
    void resetScore();
 
 public:
-   Game(Point topLeft, Point bottomRight) {
+   Game(Position topLeft, Position bottomRight) {
       /* Set up the initial conditions of the game */
       setUpScreen(topLeft, bottomRight);
 
@@ -145,8 +145,8 @@ public:
          // left / right
          // rotate (accordingly)
          if (ui.getHeldKey(keys::LEFT) || ui.getHeldKey(keys::RIGHT)) {
-            if (ui.getHeldKey(keys::LEFT))  ship->rotate((int)keys::LEFT);
-            if (ui.getHeldKey(keys::RIGHT)) ship->rotate((int)keys::RIGHT);
+            if (ui.getHeldKey(keys::LEFT))  ship->rotate(keys::LEFT);
+            if (ui.getHeldKey(keys::RIGHT)) ship->rotate(keys::RIGHT);
          }
          else 
             ship->stopRotating();

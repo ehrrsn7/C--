@@ -3,7 +3,11 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
+
+/* static */ Acceleration Acceleration::forward(double angleRadians) {
+   return Acceleration(Vector::forward(angleRadians));
+}
 
 /**************************************************
  * ACCELERATION ostream insertion

@@ -7,14 +7,14 @@
  *    The test runner for all the unit tests
  **********************************************************************/
 
-#include "test.h"
-#include "testVector.h"
-#include "testPosition.h"
-#include "testVelocity.h"
-#include "TestAcceleration.h"
-#include "testForce.h"
-#include "testGravity.h"
-#include "testPhysicsFormulas.h"
+#include "test.hpp"
+#include "testVector.hpp"
+#include "testPosition.hpp"
+#include "testVelocity.hpp"
+#include "TestAcceleration.hpp"
+#include "testForce.hpp"
+#include "testGravity.hpp"
+#include "testPhysicsFormulas.hpp"
 
 /**************************************************
  * TEST RUNNER

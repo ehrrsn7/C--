@@ -35,139 +35,134 @@
 #define MEDIUM_ROCK_SCORE 50
 #define SMALL_ROCK_SCORE 100
 
-
 // rock ids
 enum rockIndex {
-    unknownRock,
-    bigRock,
-    mediumRock,
-    smallRock,
-    noRock
+   unknownRock,
+   bigRock,
+   mediumRock,
+   smallRock,
+   noRock
 };
-
 
 class Rock : public MovingObject {
 protected:
-    int rockIndex;
+   int rockIndex;
 
 public:
-    Rock() {
-        name = "Rock (unknown)";
-        gameObjectID = rock;
-        rockIndex = unknownRock;
-        r = ROCK_RADIUS;
-        dr = ROCK_ROTATE_SPEED * random(-1.0, 1.0);
-        initializePosition();
-        initializeVelocity();
-        scoreAmount = ROCK_SCORE;
-        std::cout << "* " << name << " constructor called." << std::endl;
-    }
+   Rock() {
+      setName("Rock (unknown)");
+      setGameObjectID(rock);
+      rockIndex = unknownRock;
+      setRadius(ROCK_RADIUS);
+      setRotation(ROCK_ROTATE_SPEED * random(-1.0, 1.0));
+      initializePosition();
+      initializeVelocity();
+      setScoreAmount(ROCK_SCORE);
+   }
 
-    void display() override {
-        // debug (pt. 1; pt. 2 located in drawLargeAsteroid())
-        // std::cout << name << ".display() called. // ";
-        
-        // Draw asteroid at Point p and angle r
-        drawLargeAsteroid(p, rotation);
-    }
+   Rock(Position pInit, Velocity vInit) : Rock() {
+      initializePosition(pInit);
+      initializeVelocity(vInit);
+   }
 
-    void initializeRotation();
-    void initializePosition();
-    void initializePosition(Point pInit);
-    void initializeVelocity();
-    void initializeVelocity(Velocity vInit);
-    
-    const static int amountInit = ROCK_INIT_AMOUNT;
-    
-    // getters/setters
-    int getRockIndex() { return rockIndex; }
-    int getNextRockIndex() {
-        switch(rockIndex) {
-            case unknownRock:
-            case bigRock:
-            case mediumRock:
-            case smallRock:
-                return rockIndex + 1;
-            default:
-                return noRock;
-        };
-    }
-    
-    static int getRockRadius(int rockID) {
-        switch (rockID) {
-            case bigRock:    return BIG_ROCK_RADIUS;
-            case mediumRock: return MEDIUM_ROCK_RADIUS;
-            case smallRock:  return SMALL_ROCK_RADIUS;
-            default:         return ROCK_RADIUS;
-        }
-    }
-    
-    static float getRockRotateSpeed(int rockID) {
-        switch (rockID) {
-            case bigRock:    return BIG_ROCK_ROTATE_SPEED;
-            case mediumRock: return MEDIUM_ROCK_ROTATE_SPEED;
-            case smallRock:  return SMALL_ROCK_ROTATE_SPEED;
-            default:         return ROCK_ROTATE_SPEED;
-        }
-    }
+   void display() override {
+      // Draw asteroid at Position p and angle r
+      drawLargeAsteroid(getPosition(), getRotation());
+   }
+
+   void initializeRotation();
+   void initializePosition();
+   void initializePosition(Position pInit);
+   void initializeVelocity();
+   void initializeVelocity(Velocity vInit);
+
+   const static int amountInit = ROCK_INIT_AMOUNT;
+
+   // getters/setters
+   int getRockIndex() { return rockIndex; }
+   int getNextRockIndex() {
+      switch(rockIndex) {
+         case unknownRock:
+         case bigRock:
+         case mediumRock:
+         case smallRock:
+            return rockIndex + 1;
+         default:
+            return noRock;
+      };
+   }
+
+   static int getRockRadius(int rockID) {
+      switch (rockID) {
+         case bigRock:    return BIG_ROCK_RADIUS;
+         case mediumRock: return MEDIUM_ROCK_RADIUS;
+         case smallRock:  return SMALL_ROCK_RADIUS;
+         default:         return ROCK_RADIUS;
+      }
+   }
+
+   static double getRockRotateSpeed(int rockID) {
+      switch (rockID) {
+         case bigRock:    return BIG_ROCK_ROTATE_SPEED;
+         case mediumRock: return MEDIUM_ROCK_ROTATE_SPEED;
+         case smallRock:  return SMALL_ROCK_ROTATE_SPEED;
+         default:         return ROCK_ROTATE_SPEED;
+      }
+   }
 };
 
 class BigRock : public Rock {
 public:
-    BigRock(Point pInit, Velocity vInit) {
-        name = "Big Rock";
-        rockIndex = bigRock;
-        r = BIG_ROCK_RADIUS;
-        initializePosition(pInit);
-        initializeVelocity(vInit);
-        scoreAmount = BIG_ROCK_SCORE;
-    }
+   BigRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+      setName("Big Rock");
+      setGameObjectID(rock);
+      rockIndex = bigRock;
+      setRadius(BIG_ROCK_RADIUS);
+      setRotation(BIG_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
+      setScoreAmount(BIG_ROCK_SCORE);
+   }
 };
 
 class MediumRock : public Rock {
 public:
-    MediumRock(Point pInit, Velocity vInit) {
-        name = "Medium Rock";
-        rockIndex = mediumRock;
-        r = MEDIUM_ROCK_RADIUS;
-        initializePosition(pInit);
-        initializeVelocity(vInit);
-        scoreAmount = MEDIUM_ROCK_SCORE;
-    }
-    MediumRock(Point pInit, Velocity vInit, Velocity vShipInit) {
-        name = "Medium Rock";
-        rockIndex = mediumRock;
-        r = MEDIUM_ROCK_RADIUS;
-        initializePosition(pInit);
-        initializeVelocity(vInit);
-        scoreAmount = MEDIUM_ROCK_SCORE;
-    }
-    
-    void display() override {
-        drawMediumAsteroid(p, rotation);
-    }
+   MediumRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+      setName("Medium Rock");
+      setGameObjectID(mediumRock);
+      rockIndex = mediumRock;
+      setRadius(MEDIUM_ROCK_RADIUS);
+      setRotation(MEDIUM_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
+      setScoreAmount(MEDIUM_ROCK_SCORE);
+   }
+
+   MediumRock(Position pInit, Velocity vInit, Velocity vShipInit) :
+      MediumRock(pInit, vInit)
+   {
+      setVelocity(getVelocity() + vShipInit);
+   }
+
+   void display() override {
+      drawMediumAsteroid(getPosition(), getRotation());
+   }
 };
 
 class SmallRock : public Rock {
 public:
-    SmallRock(Point pInit, Velocity vInit) {
-        name = "Small Rock";
-        rockIndex = smallRock;
-        r = SMALL_ROCK_RADIUS;
-        initializePosition(pInit);
-        initializeVelocity(vInit);
-        scoreAmount = SMALL_ROCK_SCORE;
-    }
-    SmallRock(Point pInit, Velocity vInit, Velocity vShipInit) {
-        name = "Small Rock";
-        rockIndex = smallRock;
-        r = SMALL_ROCK_RADIUS;
-        initializePosition(pInit);
-        initializeVelocity(vInit);
-        scoreAmount = SMALL_ROCK_SCORE;
-    }
-    
-    void display() override {
-        drawSmallAsteroid(p, rotation);
-    }
+   SmallRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+      setName("Small Rock");
+      setGameObjectID(smallRock);
+      rockIndex = bigRock;
+      setRadius(SMALL_ROCK_RADIUS);
+      setRotation(SMALL_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
+      setScoreAmount(SMALL_ROCK_SCORE);
+   }
+
+   SmallRock(Position pInit, Velocity vInit, Velocity vShipInit) :
+      SmallRock(pInit, vInit)
+   {
+      setVelocity(getVelocity() + vShipInit);
+   }
+
+   void display() override {
+      drawSmallAsteroid(getPosition(), getRotation());
+   }
 };

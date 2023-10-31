@@ -15,7 +15,7 @@ class Level {
 
 private:
     int level;
-    Point position;
+    Position position;
 
 public:
     Level() {
@@ -23,7 +23,7 @@ public:
         level = 1;
     }
     
-    void set(Point p) { position.set(p); }
+    void set(Position p) { position.set(p); }
     
     void display() {
         // TODO: not displaying properly.

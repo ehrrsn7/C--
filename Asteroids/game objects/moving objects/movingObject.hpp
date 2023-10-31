@@ -12,112 +12,108 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#include "../../vector/point.hpp"
-#include "../../vector/velocity.hpp"
-
+#include "../../physics components/vector.hpp"
 #define FPS 60.0
 
 enum gameObjectEnumID {
-    movingObject,
-    rock,
-    laser,
-    playerShip,
-    ufo,
-    score,
-    level
+   movingObject,
+   rock,
+   laser,
+   playerShip,
+   ufo,
+   score,
+   level
 };
 
 class MovingObject {
-
-protected:
-    int gameObjectID;
-    std::string name;
-    Point p;
-    Velocity v;
-    float r; // radius
-    float da; // angular velocity
-    float rotation; // orientation angle (in radians)
-    float dr; // orientation angle angular vel.
-    float thrust;
-    float mass;
-    float timer;
-    int scoreAmount;
-    bool timerOn; // self-destruct timer y/n
-    bool alive; // is alive y/n
-    bool friction; // apply friction/slow down object naturally
-    bool brake; // apply brakes/slow down object when brakes are activated
-    
-    // debug
-    int i;
+private:
+   bool alive; // is alive y/n
+   bool brake; // apply brakes/slow down object when brakes are activated
+   bool friction; // apply friction/slow down object naturally
+   bool timerOn; // self-destruct timer y/n
+   double da; // angular velocity
+   double dr; // orientation angle angular vel.
+   double mass;
+   double r; // radius
+   double rotation; // orientation angle (in radians)
+   double thrust;
+   double timer;
+   int gameObjectID;
+   int i; // debug
+   int scoreAmount;
+   Position p;
+   std::string name;
+   Velocity v;
 
 public:
-    MovingObject() {
-        gameObjectID = movingObject;
-        name        = "* Moving object";
-        r           = 10.0; // in pixels
-        rotation    = 0.0; // current orientation angle (degrees)
-        dr          = 0.0; // orientation angle rot. vel. in deg. per second
-        thrust      = 0.0; // acceleration in pixels/s/s
-        mass        = 1.0; // kg (default)
-        timer       = 0.0; // self-destruct timer in seconds
-        scoreAmount = 0; // points to be added to score when destroyed (if applicable)
-        timerOn     = false; // self-destruct timer y/n
-        alive       = true; // is alive y/n
-        friction    = false; // apply friction/brakes
-        brake       = false; // apply brakes
-        
-        // debug
-        i           = 0;
-        // std::cout << name << " constructor called." << std::endl;
-    }
+   MovingObject() :
+      alive        (true), // is alive y/n
+      brake        (false), // apply brakes
+      dr           (0.0), // orientation angle rot. vel. in deg. per second
+      friction     (false), // apply friction/brakes
+      gameObjectID (movingObject),
+      mass         (1.0), // kg (default)
+      name         ("* Moving object"),
+      r            (10.0), // in pixels
+      rotation     (0.0), // current orientation angle (degrees)
+      scoreAmount  (0), // points to be added to score when destroyed (if applicable)
+      thrust       (0.0), // acceleration in pixels/s/s
+      timer        (0.0), // self-destruct timer in seconds
+      timerOn      (false), // self-destruct timer y/n
+      i            (0) // debug
+      { }
 
-    void update() {
-        // quick exit
-        if (!alive) return;
+   void update() {
+      if (!alive) return;
 
-        // displayDebugUpdateInfo(); // debug
+      p.add(v);
 
-        // update position
-        p.add(v);
+      // update orientation angle ('rotation')
+      rotation += dr / FPS;
+      if (rotation < 0) rotation = M_PI * 2;
+      else if (rotation > M_PI * 2) rotation = 0;
 
-        // update orientation angle ('rotation')
-        rotation += dr / FPS;
-        if (rotation < 0) rotation = M_PI * 2;
-        else if (rotation > M_PI * 2) rotation = 0;
-        
-        // update timer (if timer == 0, do nothing)
-        if (timerOn) {
-            if (timer > 0) timer -= 1.0;
-            else alive = false;
-        }
-    }
-    
-    void displayDebugUpdateInfo();
-    void accelerate();
-    void hit();
+      // update timer (if timer == 0, do nothing)
+      if (timerOn) {
+         if (timer > 0) timer -= 1.0;
+         else alive = false;
+      }
+   }
 
-    // polymorphism
-    virtual void display() { }
+   void displayDebugUpdateInfo();
+   void accelerate();
+   void hit();
 
-    // getters
-    std::string getName()   const { return name; }
-    int getGameObjectID()   const { return gameObjectID; }
-    Point getPoint()        const { return p; }
-    Velocity getVelocity()  const { return v; }
-    float getRadius()       const { return r; }
-    float getRotation()     const { return rotation; }
-    bool isAlive()          const { return alive; }
-    float getMass()         const { return mass; }
-    float getMomentum()     const { return mass * v.getSpeed(); }
-    int getScoreAmount()    const { return scoreAmount; }
-    
-    // setters
-    void setPoint(Point new_p)       { p = new_p; }
-    void setPointX(float new_x)      { p.setX(new_x); }
-    void setPointY(float new_y)      { p.setY(new_y); }
-    void setVelocity(Velocity new_v) { v = new_v; }
-    void setRadius(float new_r)      { r = new_r; }
-    void setRotation(float new_dr)   { dr = new_dr; }
-    void setAlive(bool new_alive)    { alive = new_alive; }
-    void setDeathTimer(float duration);
+   // polymorphism
+   virtual void display() { }
+
+   // getters
+   bool getFriction()    const { return friction; }
+   bool isAlive()        const { return alive; }
+   double getMass()      const { return mass; }
+   double getMomentum()  const { return mass * v.getMagnitude(); }
+   double getRadius()    const { return r; }
+   double getRotation()  const { return rotation; }
+   double getThrust()    const { return thrust; }
+   int getGameObjectID() const { return gameObjectID; }
+   int getScoreAmount()  const { return scoreAmount; }
+   std::string getName() const { return name; }
+   Position & getPosition() { return p; }
+   Velocity & getVelocity() { return v; }
+
+   // setters
+   void setAlive(bool alive)              { this->alive = alive; }
+   void setFriction(bool friction)        { this->friction = friction; }
+   void setGameObjectID(int id)           { gameObjectID = id; }
+   void setName(std::string name)         { this->name = name; }
+   void setPosition(double x, double y)   { p = Position(x, y); }
+   void setPosition(Position p)           { this->p = p; }
+   void setPositionX(double x)            { p.setX(x); }
+   void setPositionY(double y)            { p.setY(y); }
+   void setRadius(double r)               { this->r = r; }
+   void setRotation(double dr)            { this->dr = dr; }
+   void setScoreAmount(int score)         { scoreAmount = score; }
+   void setThrust(double thrust)          { this->thrust = thrust; }
+   void setVelocity(Velocity v)           { this->v = v; }
+   void setDeathTimer(double duration);
 };

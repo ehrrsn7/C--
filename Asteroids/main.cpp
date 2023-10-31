@@ -63,8 +63,8 @@ void update(const Interface * pUI, void * p) {
  * That is all!
  *********************************/
 int main(int argc, char ** argv) {
-    Point topLeft(-SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
-    Point bottomRight(SCREEN_WIDTH/2, -SCREEN_HEIGHT/2);
+    Position topLeft(-SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    Position bottomRight(SCREEN_WIDTH/2, -SCREEN_HEIGHT/2);
 
     Interface ui(argc, argv, "Asteroids", topLeft, bottomRight);
     Game game(topLeft, bottomRight);

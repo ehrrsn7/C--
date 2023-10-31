@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "vector.h"
+#include "vector.hpp"
 
 class TestAcceleration {
 public:

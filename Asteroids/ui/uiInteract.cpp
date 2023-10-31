@@ -30,8 +30,8 @@
 #ifdef _WIN32
 #include <stdio.h>
 #include <stdlib.h>
-#include <Gl/glut.h>           // OpenGL library we copied
-#include <ctime>            // for ::Sleep();
+#include <Gl/glut.h> // OpenGL library we copied
+#include <ctime> // for ::Sleep();
 #include <Windows.h>
 
 #define _USE_MATH_DEFINES
@@ -39,7 +39,7 @@
 #endif // _WIN32
 
 #include "uiInteract.hpp"
-#include "../vector/point.hpp"
+#include "../physics components/vector.hpp"
 
 using namespace std;
 
@@ -274,7 +274,7 @@ Interface::~Interface() { }
  *           argv:       The actual command-line parameters
  *           title:      The text for the titlebar of the window
  *************************************************************************/
-void Interface::initialize(int argc, char ** argv, const char * title, Point topLeft, Point bottomRight)
+void Interface::initialize(int argc, char ** argv, const char * title, Position topLeft, Position bottomRight)
 {
    if (initialized)
       return;
@@ -284,7 +284,7 @@ void Interface::initialize(int argc, char ** argv, const char * title, Point top
 
    // create the window
    glutInit(&argc, argv);
-   Point point;
+   Position point;
    glutInitWindowSize(   // size of the window
       (int)(bottomRight.getX() - topLeft.getX()),
       (int)(topLeft.getY() - bottomRight.getY()));

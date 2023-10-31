@@ -8,16 +8,14 @@
 #include "movingObject.hpp"
 
 void MovingObject::displayDebugUpdateInfo() {
-    std::cout << name << ".update() :: ";
-    std::cout << "p.add(v)";
-    std::cout << "\t// v: ";
-    v.print();
-    std::cout << "\t// p: ";
-    p.print();
-    std::cout << "   ";
+    std::cout << name << ".update() :: "
+       << "p.add(v)"
+       << "\t// v: " << v
+       << "\t// p: " << p
+       << "   ";
 }
 
-void MovingObject::setDeathTimer(float duration) {
+void MovingObject::setDeathTimer(double duration) {
     timer = duration;
     timerOn = true;
     // std::cout << "Laser death timer set to " << duration << std::endl; // debug
@@ -26,7 +24,7 @@ void MovingObject::setDeathTimer(float duration) {
 void MovingObject::accelerate() {
     if (!alive) return; // quick exit
     std::cout << name << ".accelerate(v";
-    Velocity(v.forward(rotation) * thrust).print() ; std::cout << ") called.\n";
+    std::cout << Velocity(v.forward(rotation) * thrust) << ") called.\n";
     v.add(v.forward(rotation) * thrust);
 }
 

@@ -9,8 +9,7 @@
 
 #include <iostream>
 #include "movingObject.hpp"
-#include "../../vector/point.hpp"
-#include "../../vector/velocity.hpp"
+#include "../../physics components/vector.hpp"
 #include "../../ui/uiDraw.hpp"
 
 #define FIRE_DELAY_TIME .05 // laser firing rate delay in seconds
@@ -23,25 +22,17 @@
 
 class Laser : public MovingObject {
 public:
-    Laser(float firingAngle, Point shipPoint, Velocity shipVelocity, float shipRadius) {
-        // initialize
-        name = "Laser";
-        gameObjectID = laser;
+   Laser(double firingAngle, Position shipPoint, Velocity shipVelocity, double shipRadius)
+   {
+      setName("Laser");
+      setGameObjectID(laser);
+      setPosition(Position(
+         shipPoint + // initialize at ship's position
+         Velocity::forward(firingAngle) * shipRadius * 6 // offset to front of ship
+      ));
+      setVelocity(Velocity::forward(firingAngle) * LASER_SPEED); // fire!!
+      setDeathTimer(LASER_DEATH_TIME); // set to expire after desired amount (LASER_DEATH_TIME)
+    }
 
-        // fire laser
-        setPoint(shipPoint); // initialize at ship's position
-        p.add(Velocity::forward(firingAngle) * shipRadius * 6); // offset to front of ship
-        setVelocity(Velocity::forward(firingAngle) * LASER_SPEED); // fire!!
-        setDeathTimer(LASER_DEATH_TIME); // set to expire after desired amount (LASER_DEATH_TIME)
-        
-        // debug
-        // std::cout << "Laser constructor called.";
-        // std::cout << " v "; v.print();
-        // std::cout << " p "; p.print();
-        // std::cout << std::endl;
-    }
-    
-    void display() {
-        drawDot(p);
-    }
+    void display() override { drawDot(getPosition()); }
 };

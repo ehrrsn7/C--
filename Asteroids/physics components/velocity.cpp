@@ -3,7 +3,11 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
+
+/* static */ Velocity Velocity::forward(double angleRadians) {
+   return Velocity(Vector::forward(angleRadians));
+}
 
 Velocity& Velocity::operator= (const Velocity & rhs) {
    Vector::set(rhs.getX(), rhs.getY()); return *this;

@@ -11,13 +11,13 @@
 #include <string>
 
 #include "../../ui/uiDraw.hpp"
-#include "../../vector/point.hpp"
+#include "../../physics components/vector.hpp"
 
 class Score {
 
 private:
     int score;
-    Point position;
+    Position position;
 
 public:
     Score() {
@@ -25,7 +25,7 @@ public:
         score = 0;
     }
     
-    void set(Point p) { position.set(p); }
+    void set(Position p) { position.set(p); }
     
     void display() {
         std::string scoreText = "Score: ";

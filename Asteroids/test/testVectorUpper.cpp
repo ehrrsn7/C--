@@ -3,7 +3,7 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "testVector.h"
+#include "testVector.hpp"
 
 /********************
  * Constructors

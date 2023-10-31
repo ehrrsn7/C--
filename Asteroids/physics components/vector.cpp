@@ -2,9 +2,9 @@
  * Source File: Vector
  **********************************************************************/
 
-#include "vector.h"
+#include "vector.hpp"
 
-#include "physicsFormulas.h"
+#include "physicsFormulas.hpp"
 
 void Vector::set(double x, double y) {
    setX(x);
@@ -19,6 +19,11 @@ void Vector::add(double dx, double dy) {
 void Vector::add(const Vector & v) {
    // v stands for ds/dt where s is the base vector
    add(v.getX(), v.getY());
+}
+
+void Vector::multiply(double magnitude) {
+   multiplyX(magnitude * sin(getAngleRadians()));
+   multiplyY(magnitude * cos(getAngleRadians()));
 }
 
 void Vector::setPolar(double magnitude, double angleRadians) {
@@ -37,13 +42,28 @@ void Vector::addPolar(double magnitude, double angleRadians) {
    addMagnitude(magnitude, angleRadians);
 }
 
-Vector Vector::operator+ (const Vector& rhs) {
+/* static */ Vector Vector::forward(double angleRadians) {
+   return Vector(cos(angleRadians), sin(angleRadians));
+}
+
+Vector Vector::operator + (const Vector& rhs) {
    Vector newS;
    newS.add(rhs.getX(), rhs.getY());
    return newS;
 }
 
-Vector& Vector::operator+= (const Vector& rhs) {
+Vector& Vector::operator += (const Vector& rhs) {
    add(rhs.getX(), rhs.getY());
+   return *this;
+}
+
+Vector Vector::operator * (const double rhs) {
+   Vector newS = *this;
+   newS.multiply(rhs);
+   return newS;
+}
+
+Vector& Vector::operator *= (const double rhs) {
+   multiply(rhs);
    return *this;
 }

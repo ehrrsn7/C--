@@ -29,13 +29,13 @@ void test_timePerFrame();
 
 void test_rotationSpeed();
 
-void test_calcHeight();
-void test_calcHeight_earth();
+//void test_calcHeight();
+//void test_calcHeight_earth();
 void test_directionOfGravity();
 void test_directionOfGravity_objs();
-void test_forceDueToGravity();
-void test_calcGravity();
-void test_calcGravityVector();
+//void test_forceDueToGravity();
+//void test_calcGravity();
+//void test_calcGravityVector();
 
 void test_aToD();
 void test_aToX();
