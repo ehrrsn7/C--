@@ -1,3 +1,5 @@
 .DS_Store
 **build
-Asteroids/.vscode/settings.json
+.vscode
+.vs
+x64

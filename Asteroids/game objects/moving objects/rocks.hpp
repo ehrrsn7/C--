@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-#include "movingObject.hpp"
+#include ".\movingObject.hpp"
 #include "uiDraw.hpp"
 
 #define ROCK_INIT_AMOUNT 3 // amount of rocks spawned in first level scene
