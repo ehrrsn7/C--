@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef velocity_hpp
-#define velocity_hpp
+#pragma once
 
 #include <math.h>
 #include <iostream>
@@ -154,5 +153,3 @@ public:
     
     void print() const { std::cout << "(" << dx << ", " << dy << ")"; }
 };
-
-#endif /* velocity_hpp */

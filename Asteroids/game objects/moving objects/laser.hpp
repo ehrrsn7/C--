@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/8/20.
 //
 
-#ifndef laser_hpp
-#define laser_hpp
+#pragma once
 
 #import <iostream>
 #import "movingObject.hpp"
@@ -46,5 +45,3 @@ public:
         drawDot(p);
     }
 };
-
-#endif /* laser_hpp */

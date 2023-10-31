@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/14/20.
 //
 
-#ifndef rocks_hpp
-#define rocks_hpp
+#pragma once
 
 #include <iostream>
 
@@ -172,5 +171,3 @@ public:
         drawSmallAsteroid(p, rotation);
     }
 };
-
-#endif /* rocks_hpp */

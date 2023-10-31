@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef ship_hpp
-#define ship_hpp
+#pragma once
 
 #include <stdio.h>
 #include <string>
@@ -84,12 +83,12 @@ public:
         // std::cout << "rotating " << direction << std::endl; // debug
         // std::cout << "rotation: (" << rotation << ")\n";
         
-        if (direction == LEFT) {
+        if (direction == (int)keys::LEFT) {
             // std::cout << "turn left" << std::endl;
             setRotation(SHIP_ROTATE_AMOUNT);
         }
 
-        if (direction == RIGHT) {
+        if (direction == (int)keys::RIGHT) {
             // std::cout << "turn right" << std::endl;
             setRotation(-SHIP_ROTATE_AMOUNT);
         }
@@ -119,5 +118,3 @@ public:
         }
     }
 };
-
-#endif /* ship_hpp */

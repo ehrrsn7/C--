@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef point_hpp
-#define point_hpp
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -68,5 +67,3 @@ public:
     // "check" constructor
     Point(bool check) : x(0.0), y(0.0) {}
 };
-
-#endif /* point_hpp */

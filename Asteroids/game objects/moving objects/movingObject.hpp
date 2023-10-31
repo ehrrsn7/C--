@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef movingObject_hpp
-#define movingObject_hpp
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -121,5 +120,3 @@ public:
     void setAlive(bool new_alive)    { alive = new_alive; }
     void setDeathTimer(float duration);
 };
-
-#endif /* movingObject_hpp */

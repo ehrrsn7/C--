@@ -10,8 +10,7 @@
  *    (variables) or a mixture (objects)
  ************************************************************************/
 
-#ifndef UI_DRAW_H
-#define UI_DRAW_H
+#pragma once
 
 #include <string>     // To display text on the screen
 #include <cmath>      // for M_PI, sin() and cos()
@@ -130,6 +129,3 @@ void drawLargeAsteroid( const Point & point, int rotation);
  ****************************************************************/
 int    random(int    min, int    max);
 double random(double min, double max);
-
-
-#endif // UI_DRAW_H

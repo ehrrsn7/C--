@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef level_hpp
-#define level_hpp
+#pragma once
 
 #include <iostream>
 #include "point.hpp"
@@ -36,5 +35,3 @@ public:
     void next() { level += 1; }
     void reset() { level = 1; }
 };
-
-#endif /* level_hpp */

@@ -14,18 +14,38 @@
 *    4. isDown()     - Is a given key pressed on this loop?
 **********************************************/
 
-#ifndef UI_INTERFACE_H
-#define UI_INTERFACE_H
+#pragma once
 
-enum keys {
-    SPACE,
-    LEFT,
-    RIGHT,
-    DOWN,
-    UP,
-    Q,
-    R,
-    ESC
+#ifdef __APPLE__
+#include <openGL/gl.h>    // Main OpenGL library
+#include <GLUT/glut.h>    // Second OpenGL library
+#endif // __APPLE__
+
+#ifdef __linux__
+#include <GL/gl.h>    // Main OpenGL library
+#include <GL/glut.h>  // Second OpenGL library
+#endif // __linux__
+
+#ifdef _WIN32
+#include <stdio.h>
+#include <stdlib.h>
+#include <Gl/glut.h>           // OpenGL library we copied
+#include <ctime>            // for ::Sleep();
+#include <Windows.h>
+
+#define _USE_MATH_DEFINES
+#include <math.h>
+#endif // _WIN32
+
+enum class keys {
+   SPACE = GLUT_KEY_HOME,
+   LEFT = GLUT_KEY_LEFT,
+   RIGHT = GLUT_KEY_RIGHT,
+   DOWN = GLUT_KEY_DOWN,
+   UP = GLUT_KEY_UP,
+   Q = 113,
+   R = 114,
+   ESC = 27
 };
 
 #include "point.hpp"
@@ -38,60 +58,58 @@ enum keys {
 ********************************************/
 class Interface {
     
-    public:
-    // Default constructor useful for setting up the random variables
-    // or for opening the file for output
-    Interface() { initialize(0, 0x0000, "Window", Point(-50, 50), Point(50, -50)); };
+public:
+   // Default constructor useful for setting up the random variables
+   // or for opening the file for output
+   Interface() { initialize(0, 0x0000, "Window", Point(-50, 50), Point(50, -50)); };
 
-    // Constructor if you want to set up the window with anything but
-    // the default parameters
-    Interface(int argc, char ** argv, const char * title, Point topLeft, Point bottomRight)
-    {
+   // Constructor if you want to set up the window with anything but
+   // the default parameters
+   Interface(int argc, char ** argv, const char * title, Point topLeft, Point bottomRight)
+   {
       initialize(argc, argv, title, topLeft, bottomRight);
-    }
+   }
 
-    // Destructor, incase any housecleaning needs to occr
-    ~Interface();
+   // Destructor, incase any housecleaning needs to occr
+   ~Interface();
 
-    // This will set the game in motion
-    void run(void (*callBack)(const Interface *, void *), void *p);
+   // This will set the game in motion
+   void run(void (*callBack)(const Interface *, void *), void *p);
 
-    // Is it time to redraw the screen
-    bool isTimeToDraw();
+   // Is it time to redraw the screen
+   bool isTimeToDraw();
 
-    // Set the next draw time based on current time and time period
-    void setNextDrawTime();
+   // Set the next draw time based on current time and time period
+   void setNextDrawTime();
 
-    // Retrieve the next tick time... the time of the next draw.
-    unsigned int getNextTick() { return nextTick; };
+   // Retrieve the next tick time... the time of the next draw.
+   unsigned int getNextTick() { return nextTick; };
 
-    // How many frames per second are we configured for?
-    void setFramesPerSecond(double value);
+   // How many frames per second are we configured for?
+   void setFramesPerSecond(double value);
 
-    // Key event indicating a key has been pressed or not.  The callbacks
-    // should be the only onces to call this
-    void keyEvent(int key, bool fDown);
+   // Key event indicating a key has been pressed or not.  The callbacks
+   // should be the only onces to call this
+   void keyEvent(int key, bool fDown);
 
-    // Get/Set various key events
-    bool getHeldKey(int key) const;
-    void setHeldKey(int key, bool value);
+   // Get/Set various key events
+   bool getHeldKey(keys key) const;
+   void setHeldKey(keys key, bool value);
 
-    void displayAllKeyEventsStatus() const;
+   // Current frame rate
+   double frameRate() const { return timePeriod;   };
 
-    // Current frame rate
-    double frameRate() const { return timePeriod;   };
+   static void *p;                     // for client
+   static void (*callBack)(const Interface *, void *);
 
-    static void *p;                     // for client
-    static void (*callBack)(const Interface *, void *);
+private:
+   void initialize(int argc, char ** argv, const char * title, Point topLeft, Point bottomRight);
 
-    private:
-    void initialize(int argc, char ** argv, const char * title, Point topLeft, Point bottomRight);
+   static bool         initialized;    // only run the constructor once!
+   static double       timePeriod;     // interval between frame draws
+   static unsigned int nextTick;       // time (from clock()) of our next draw
 
-    static bool         initialized;    // only run the constructor once!
-    static double       timePeriod;     // interval between frame draws
-    static unsigned int nextTick;       // time (from clock()) of our next draw
-
-    static std::unordered_map<int, bool> heldKeys;
+   static std::unordered_map<keys, bool> heldKeys;
 };
 
 /************************************************************************
@@ -131,6 +149,3 @@ void keyboardCallback(unsigned char key, int x, int y);
 * Set the game in action.  We will get control back in our drawCallback
 *************************************************************************/
 void run();
-
-
-#endif // UI_INTERFACE_H

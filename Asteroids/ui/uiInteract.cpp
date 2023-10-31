@@ -43,7 +43,6 @@
 
 using namespace std;
 
-
 /*********************************************************************
  * SLEEP
  * Pause for a while.  We want to put the program to sleep until it
@@ -157,29 +156,29 @@ void Interface::keyEvent(int key, bool fDown)
 {
     switch(key) {
         case GLUT_KEY_DOWN:
-            setHeldKey(DOWN, fDown);
+            setHeldKey(keys::DOWN, fDown);
             break;
         case GLUT_KEY_UP:
-            setHeldKey(UP, fDown);
+            setHeldKey(keys::UP, fDown);
             break;
         case GLUT_KEY_RIGHT:
-            setHeldKey(RIGHT, fDown);
+            setHeldKey(keys::RIGHT, fDown);
             break;
         case GLUT_KEY_LEFT:
-            setHeldKey(LEFT, fDown);
+            setHeldKey(keys::LEFT, fDown);
             break;
         case 113:
-            setHeldKey(Q, fDown);
+            setHeldKey(keys::Q, fDown);
             break;
         case 114:
-            setHeldKey(R, fDown);
+            setHeldKey(keys::R, fDown);
             break;
         case GLUT_KEY_HOME:
         case ' ':
-            setHeldKey(SPACE, fDown);
+            setHeldKey(keys::SPACE, fDown);
             break;
         case 27:
-            setHeldKey(ESC, fDown);
+            setHeldKey(keys::ESC, fDown);
             break;
         default:
             cout << key << endl;
@@ -191,25 +190,15 @@ void Interface::keyEvent(int key, bool fDown)
  * INTERFACE : GET/SET HELD KEY
  * Basic Getter/Setter to see if key is being held
  *****************************************************/
-bool Interface::getHeldKey(int key) const
+bool Interface::getHeldKey(keys key) const
 {
    return heldKeys[key];
 }
 
-void Interface::setHeldKey(int key, bool value)
+void Interface::setHeldKey(keys key, bool value)
 {
    heldKeys[key] = value;
 }
-
-/*****************************************************
- * INTERFACE : DISPLAY ALL KEY EVENTS STATUS
- * feedback method to debug display all keys and their status
- *****************************************************/
-void Interface::displayAllKeyEventsStatus() const {
-    std::cout << "key events: "
-        << std::endl;
-}
-
 
 /************************************************************************
  * INTEFACE : IS TIME TO DRAW
@@ -218,7 +207,7 @@ void Interface::displayAllKeyEventsStatus() const {
  *************************************************************************/
 bool Interface::isTimeToDraw()
 {
-   return ((unsigned int)clock() >= nextTick);
+   return (unsigned int)clock() >= nextTick;
 }
 
 /************************************************************************
@@ -228,7 +217,7 @@ bool Interface::isTimeToDraw()
  *************************************************************************/
 void Interface::setNextDrawTime()
 {
-   nextTick = clock() + static_cast<int> (timePeriod * CLOCKS_PER_SEC);
+   nextTick = (unsigned int)clock() + static_cast<int> (timePeriod * CLOCKS_PER_SEC);
 }
 
 /************************************************************************
@@ -257,14 +246,15 @@ void *       Interface::p            = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
 
 // held keys
-std::unordered_map<int, bool> Interface::heldKeys {
-    {  { SPACE,   false },
-       { LEFT,    false },
-       { RIGHT,   false },
-       { DOWN,    false },
-       { UP,      false },
-       { Q,       false },
-       { R,       false }
+std::unordered_map<keys, bool> Interface::heldKeys {
+   {
+      { keys::SPACE, false },
+      { keys::LEFT,  false },
+      { keys::RIGHT, false },
+      { keys::DOWN,  false },
+      { keys::UP,    false },
+      { keys::Q,     false },
+      { keys::R,     false }
     }
 };
 
@@ -342,5 +332,3 @@ void Interface::run(void (*callBack)(const Interface *, void *), void *p)
 
    return;
 }
-
-

@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef score_hpp
-#define score_hpp
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -37,5 +36,3 @@ public:
     void add(int dPoints) { score += dPoints; }    
     void reset() { score = 0; }
 };
-
-#endif /* score_hpp */

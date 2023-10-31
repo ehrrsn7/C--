@@ -5,8 +5,7 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#ifndef game_hpp
-#define game_hpp
+#pragma once
 
 // import
 #include <iostream> // debugging
@@ -26,141 +25,138 @@
 #include "level.hpp"
 #include "rocks.hpp"
 
+template <typename T>
+void update(std::vector<T> & objects);
+template <typename T>
+void update(std::vector<T *> objects);
+void update(MovingObject & obj);
+void update(MovingObject * obj);
+
 class Game {
 private:
-    // screen positioning
-    float screenLeft;
-    float screenRight;
-    float screenBottom;
-    float screenTop;
-    Point center;
-    
-    // game objects
-    Ship* ship;
-    std::vector<Laser> lasers;
-    std::vector<Rock*> rocks;
-    Level level;
-    Score score;
-    
-    // in game.cpp:
-    void setUpScreen(Point tl, Point br);
-    void fireLaser();
-    void asteroidBelt();
-    Rock* createRock(int whichRock, Point pInit, Velocity vInit, bool isInitial);
-    void wrapObjects();
-    void wrap(MovingObject* obj);
-    
-    void handleCollisions();
-    bool handleCollisions(std::vector<Laser> & lasers, Rock * rock);
-    bool handleCollision(Ship & ship, Rock * rock);
-    bool handleCollision(Laser & laser, Rock * rock);
-    bool checkCollision(MovingObject & obj1, MovingObject & obj2);
-    bool checkCollision(MovingObject * obj1, MovingObject * obj2);
-    float getClosestDistance(const MovingObject &obj1, const MovingObject &obj2);
-    
-    // "bring out ur deaaaaaaaaaad"
-    void cleanUpZombies();
-    void cleanUpShip();
-    void cleanUpLasers();
-    void cleanUpRocks();
-    
-    // build two new rocks from one existing rock
-    void splitRock(Rock * rock, MovingObject & obj);
-    
-    // helps us reset everything
-    void reset();
-    void resetShip();
-    void resetAllRocks();
-    void removeAllRocks();
-    void removeAllLasers();
-    void resetScore();
+   // screen positioning
+   float screenLeft;
+   float screenRight;
+   float screenBottom;
+   float screenTop;
+   Point center;
+
+   // game objects
+   Ship* ship;
+   std::vector<Laser> lasers;
+   std::vector<Rock*> rocks;
+   Level level;
+   Score score;
+
+   // in game.cpp:
+   void setUpScreen(Point tl, Point br);
+   void fireLaser();
+   void asteroidBelt();
+   Rock * buildRock(int whichRock, Point pInit, Velocity vInit, bool isInitial);
+   void update(MovingObject & obj);
+   void update(MovingObject * obj);
+   void wrap();
+   void wrap(MovingObject* obj);
+   void wrap(std::vector<MovingObject> & collection);
+   void wrap(std::vector<MovingObject *> & collection);
+
+   void handleCollisions();
+   void handleCollision(MovingObject * obj, Rock * rock);
+   bool checkCollision(MovingObject & obj1, MovingObject & obj2);
+   bool checkCollision(MovingObject * obj1, MovingObject * obj2);
+   float getClosestDistance(const MovingObject & obj1, const MovingObject & obj2);
+
+   // "bring out ur deaaaaaaaaaad"
+   void cleanUpZombies();
+   void cleanUpShip();
+   void cleanUpLasers();
+   void cleanUpRocks();
+
+   // build two new rocks from one existing rock
+   void splitRock(Rock * rock, MovingObject & obj);
+
+   // helps us reset everything
+   void reset();
+   void resetShip();
+   void resetAllRocks();
+   void removeAllRocks();
+   void removeAllLasers();
+   void resetScore();
 
 public:
-    Game(Point topLeft, Point bottomRight) {
-        /* Set up the initial conditions of the game */
-        setUpScreen(topLeft, bottomRight);
-        
-        /* GAME OBJECTS */
-        ship = new Ship();
-        asteroidBelt();
-    }
-    
-    ~Game() {}
-    
-    void update() {
-        if (ship != NULL) ship->update();
-        
-        // update lasers
-        for (std::vector<Laser>::iterator it = lasers.begin(); it < lasers.end(); ++it) {
-            it->update(); // no (*it)-> here, laser vector is not *pointer vector
-        }
-        
-        // update rocks
-        for (std::vector<Rock*>::iterator it = rocks.begin(); it < rocks.end(); ++it) {
-            if (*it != NULL) (*it)->update(); // (*it)-> requred, rocks vector is a *pointer vector
-        }
+   Game(Point topLeft, Point bottomRight) {
+      /* Set up the initial conditions of the game */
+      setUpScreen(topLeft, bottomRight);
 
-        wrapObjects();
-        handleCollisions();
-        cleanUpZombies();
-        
-        // TODO: handle game states
-        // for example: when 0 rocks are on the screen, initiate next—level sequence
-    }
+      /* GAME OBJECTS */
+      ship = new Ship();
+      asteroidBelt();
+   }
 
-    // 'const Interface & ui'
-    // this is
-    void display(const Interface & ui) {
-        if (ship != NULL) ship->display();
-        
-        // display lasers)
-        for (Laser it : lasers) it.display();
-        
-        // display rocks
-        for (Rock* it : rocks)
-            if (it != NULL)
-                it->display();
-        
-        level.display();
-        score.display();
-    }
-    
-    void handleInput(const Interface & ui) {
-        /* heldKeys defined/handled in uiInteract.cpp/.hpp */
-        
-        // reset
-        if (ui.getHeldKey(R)) reset();
-        
-        // quit
-        if (ui.getHeldKey(ESC)) exit(0);
-        
-        /* ship controls */
-        // handle NULL ship
-        if (ship != NULL) {
-            
-            // up
-            // accelerate ship
-            if (ui.getHeldKey(UP)) ship->accelerate();
-            
-            // down
-            // apply ship 'brakes'
-            if (ui.getHeldKey(DOWN)) ship->applyBrakes();
+   ~Game() {}
 
-            // space
-            // fire laser
-            if (ui.getHeldKey(SPACE)) fireLaser();
+   void update() {
+      update(ship);
+      for (Laser laser : lasers) update(laser);
+      for (Rock * rock : rocks) update(rock);
 
-            // left / right
-            // rotate (accordingly)
-            if (ui.getHeldKey(LEFT) || ui.getHeldKey(RIGHT)) {
-                if (ui.getHeldKey(LEFT))  ship->rotate(LEFT);
-                if (ui.getHeldKey(RIGHT)) ship->rotate(RIGHT);
-            } 
-            else ship->stopRotating();
-        }
-    }
+      wrap();
+      handleCollisions();
+      cleanUpZombies();
+
+      // TODO: handle game states
+      // for example: when 0 rocks are on the screen, initiate next—level sequence
+   }
+
+   // 'const Interface & ui'
+   void display(const Interface & ui) {
+      if (ship != NULL) ship->display();
+
+      // display lasers)
+      for (Laser it : lasers) it.display();
+
+      // display rocks
+      for (Rock* it : rocks)
+         if (it != NULL)
+            it->display();
+
+      level.display();
+      score.display();
+   }
+
+   void handleInput(const Interface & ui) {
+      /* heldKeys defined/handled in uiInteract.cpp/.hpp */
+
+      // reset
+      if (ui.getHeldKey(keys::R)) reset();
+
+      // quit
+      if (ui.getHeldKey(keys::ESC)) exit(0);
+
+      /* ship controls */
+      // handle NULL ship
+      if (ship != NULL) {
+
+         // up
+         // accelerate ship
+         if (ui.getHeldKey(keys::UP)) ship->accelerate();
+
+         // down
+         // apply ship 'brakes'
+         if (ui.getHeldKey(keys::DOWN)) ship->applyBrakes();
+
+         // space
+         // fire laser
+         if (ui.getHeldKey(keys::SPACE)) fireLaser();
+
+         // left / right
+         // rotate (accordingly)
+         if (ui.getHeldKey(keys::LEFT) || ui.getHeldKey(keys::RIGHT)) {
+            if (ui.getHeldKey(keys::LEFT))  ship->rotate((int)keys::LEFT);
+            if (ui.getHeldKey(keys::RIGHT)) ship->rotate((int)keys::RIGHT);
+         }
+         else 
+            ship->stopRotating();
+      }
+   }
 };
-
-
-#endif /* game_hpp */
-*
