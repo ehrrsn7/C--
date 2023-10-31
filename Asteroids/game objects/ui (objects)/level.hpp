@@ -8,8 +8,8 @@
 #pragma once
 
 #include <iostream>
-#include "point.hpp"
-#include "uiDraw.hpp"
+#include "../../ui/uiDraw.hpp"
+#include "../../vector/point.hpp"
 
 class Level {
 

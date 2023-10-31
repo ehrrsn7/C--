@@ -48,8 +48,8 @@ enum class keys {
    ESC = 27
 };
 
-#include "point.hpp"
 #include <unordered_map> // used to hash heldKeys<bool>
+#include "../vector/point.hpp"
 
 /********************************************
 * INTERFACE

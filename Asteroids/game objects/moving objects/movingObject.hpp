@@ -9,10 +9,11 @@
 
 #include <iostream>
 #include <string>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
-#include "point.hpp"
-#include "velocity.hpp"
+#include "../../vector/point.hpp"
+#include "../../vector/velocity.hpp"
 
 #define FPS 60.0
 
@@ -81,8 +82,8 @@ public:
 
         // update orientation angle ('rotation')
         rotation += dr / FPS;
-        if (rotation < 0) rotation = M_PI*2;
-        else if (rotation > M_PI*2) rotation = 0;
+        if (rotation < 0) rotation = M_PI * 2;
+        else if (rotation > M_PI * 2) rotation = 0;
         
         // update timer (if timer == 0, do nothing)
         if (timerOn) {

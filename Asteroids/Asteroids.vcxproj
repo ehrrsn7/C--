@@ -128,7 +128,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Asteroids.cpp" />
     <ClCompile Include="game objects\moving objects\laser.cpp" />
     <ClCompile Include="game objects\moving objects\movingObject.cpp" />
     <ClCompile Include="game objects\moving objects\rocks.cpp" />
