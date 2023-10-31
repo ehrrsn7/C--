@@ -110,7 +110,7 @@ void Game::update(MovingObject & obj) { obj.update(); }
 
 void Game::update(MovingObject * obj) {
    if (obj == NULL) return;
-   update(obj);
+   update(*obj);
 }
 
 void Game::wrap() {
