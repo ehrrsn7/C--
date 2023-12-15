@@ -10,8 +10,8 @@
 #include <iostream>
 #include <string>
 
-#include "../../ui/uiDraw.hpp"
-#include "../../physics components/vector.hpp"
+#include "ui/uiDraw.hpp"
+#include "physics-components/vector.hpp"
 
 class Score {
 

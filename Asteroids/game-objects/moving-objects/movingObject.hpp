@@ -12,7 +12,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#include "../../physics components/vector.hpp"
+#include "physics-components/vector.hpp"
 #define FPS 60.0
 
 enum gameObjectEnumID {

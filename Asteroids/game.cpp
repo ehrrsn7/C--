@@ -7,7 +7,7 @@
 
 #include "game.hpp"
 
-#include "physics components/physicsFormulas.hpp"
+#include "physics-components/physicsFormulas.hpp"
 
 #include <limits> // for getClosestDistance()
 #include <algorithm>

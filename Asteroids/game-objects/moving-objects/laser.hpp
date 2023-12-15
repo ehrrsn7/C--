@@ -9,8 +9,8 @@
 
 #include <iostream>
 #include "movingObject.hpp"
-#include "../../physics components/vector.hpp"
-#include "../../ui/uiDraw.hpp"
+#include "physics-components/vector.hpp"
+#include "ui/uiDraw.hpp"
 
 #define FIRE_DELAY_TIME .05 // laser firing rate delay in seconds
 #define LASER_SPEED 10 // speed in pixels/frame

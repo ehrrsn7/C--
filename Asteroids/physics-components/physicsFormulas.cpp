@@ -6,7 +6,7 @@
  **********************************************************************/
 
 #include "physicsFormulas.hpp"  // header file
-#include "../game objects/moving objects/movingObject.hpp" // for MovingObject
+#include "game-objects/moving-objects/movingObject.hpp" // for MovingObject
 //#include "ship.hpp"             // for Projectile (for now)
 //#include "earth.hpp"            // for Earth
 

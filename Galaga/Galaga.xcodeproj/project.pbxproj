@@ -136,7 +136,7 @@
 				14149FC427E923600048C816 /* enemy.cpp */,
 				14149FC527E923600048C816 /* enemy.hpp */,
 			);
-			path = "game objects";
+			path = "game-objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

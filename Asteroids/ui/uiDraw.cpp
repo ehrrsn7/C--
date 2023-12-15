@@ -35,7 +35,7 @@
 #include <math.h>
 #endif // _WIN32
 
-#include "../physics components/vector.hpp"
+#include "physics-components/vector.hpp"
 #include "uiDraw.hpp"
 
 using namespace std;

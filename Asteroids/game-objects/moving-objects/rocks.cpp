@@ -6,7 +6,7 @@
 //
 
 #include "rocks.hpp"
-#include "../../physics components/physicsFormulas.hpp"
+#include "physics-components/physicsFormulas.hpp"
 
 void Rock::initializeRotation() {
     setRotation(random(ROCK_ROTATE_SPEED/2, ROCK_ROTATE_SPEED));

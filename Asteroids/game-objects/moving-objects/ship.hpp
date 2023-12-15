@@ -12,8 +12,8 @@
 
 #include "movingObject.hpp"
 #include "laser.hpp"
-#include "../../ui/uiInteract.hpp" // for rotation directions' int values
-#include "../../physics components/physicsFormulas.hpp"
+#include "ui/uiInteract.hpp" // for rotation directions' int values
+#include "physics-components/physicsFormulas.hpp"
 
 #define SHIP_ROTATE_AMOUNT 15 // in rad/s
 #define SHIP_INITIAL_ANGLE 90

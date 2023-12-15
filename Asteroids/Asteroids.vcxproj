@@ -136,10 +136,16 @@
     <ClCompile Include="game objects\ui (objects)\score.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="physics-components\acceleration.cpp" />
+    <ClCompile Include="physics-components\force.cpp" />
+    <ClCompile Include="physics-components\gravity.cpp" />
+    <ClCompile Include="physics-components\physicsFormulas.cpp" />
+    <ClCompile Include="physics-components\position.cpp" />
+    <ClCompile Include="physics-components\vector.cpp" />
+    <ClCompile Include="physics-components\velocity.cpp" />
     <ClCompile Include="ui\uiDraw.cpp" />
     <ClCompile Include="ui\uiInteract.cpp" />
     <ClCompile Include="vector\point.cpp" />
-    <ClCompile Include="vector\velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game objects\moving objects\laser.hpp" />
@@ -149,6 +155,8 @@
     <ClInclude Include="game objects\ui (objects)\level.hpp" />
     <ClInclude Include="game objects\ui (objects)\score.hpp" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="physics-components\physicsFormulas.hpp" />
+    <ClInclude Include="physics-components\vector.hpp" />
     <ClInclude Include="ui\uiDraw.hpp" />
     <ClInclude Include="ui\uiInteract.hpp" />
     <ClInclude Include="vector\point.hpp" />

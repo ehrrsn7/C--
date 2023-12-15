@@ -14,7 +14,7 @@
 
 #include <string>     // To display text on the screen
 #include <cmath>      // for M_PI, sin() and cos()
-#include "../physics components/vector.hpp"
+#include "physics-components/vector.hpp"
 using std::string;
 
 /************************************************************************

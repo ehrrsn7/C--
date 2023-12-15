@@ -39,7 +39,7 @@
 #endif // _WIN32
 
 #include "uiInteract.hpp"
-#include "../physics components/vector.hpp"
+#include "physics-components/vector.hpp"
 
 using namespace std;
 

@@ -49,7 +49,7 @@ enum class keys {
 };
 
 #include <unordered_map> // used to hash heldKeys<bool>
-#include "../physics components/vector.hpp"
+#include "physics-components/vector.hpp"
 
 /********************************************
 * INTERFACE

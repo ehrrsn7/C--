@@ -188,7 +188,7 @@
 				EE538985257DC51800CF4674 /* ui (objects) */,
 				EE53898A257DC51800CF4674 /* moving objects */,
 			);
-			path = "game objects";
+			path = "game-objects";
 			sourceTree = "<group>";
 		};
 		EE538985257DC51800CF4674 /* ui (objects) */ = {
@@ -199,7 +199,7 @@
 				EE538987257DC51800CF4674 /* level.cpp */,
 				EE538988257DC51800CF4674 /* level.hpp */,
 			);
-			path = "ui (objects)";
+			path = "ui(objects)";
 			sourceTree = "<group>";
 		};
 		EE53898A257DC51800CF4674 /* moving objects */ = {
@@ -214,7 +214,7 @@
 				EE538990257DC51800CF4674 /* rocks.cpp */,
 				EE53898E257DC51800CF4674 /* rocks.hpp */,
 			);
-			path = "moving objects";
+			path = "moving-objects";
 			sourceTree = "<group>";
 		};
 		EE538993257DC52A00CF4674 /* vector */ = {
