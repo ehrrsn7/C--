@@ -21,22 +21,19 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game objects\moving objects\laser.cpp">
+    <ClCompile Include="game-objects\moving-objects\movingObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game objects\moving objects\movingObject.cpp">
+    <ClCompile Include="game-objects\moving-objects\rocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game objects\moving objects\rocks.cpp">
+    <ClCompile Include="game-objects\moving-objects\ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game objects\moving objects\ship.cpp">
+    <ClCompile Include="game-objects\ui-objects\level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game objects\ui (objects)\level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game objects\ui (objects)\score.cpp">
+    <ClCompile Include="game-objects\ui-objects\score.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ui\uiDraw.cpp">
@@ -74,22 +71,22 @@
     <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\moving objects\laser.hpp">
+    <ClInclude Include="game-objects\moving-objects\laser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\moving objects\movingObject.hpp">
+    <ClInclude Include="game-objects\moving-objects\movingObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\moving objects\rocks.hpp">
+    <ClInclude Include="game-objects\moving-objects\rocks.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\moving objects\ship.hpp">
+    <ClInclude Include="game-objects\moving-objects\ship.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\ui (objects)\level.hpp">
+    <ClInclude Include="game-objects\ui-objects\level.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game objects\ui (objects)\score.hpp">
+    <ClInclude Include="game-objects\ui-objects\score.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ui\uiDraw.hpp">

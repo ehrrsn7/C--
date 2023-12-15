@@ -128,12 +128,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game objects\moving objects\laser.cpp" />
-    <ClCompile Include="game objects\moving objects\movingObject.cpp" />
-    <ClCompile Include="game objects\moving objects\rocks.cpp" />
-    <ClCompile Include="game objects\moving objects\ship.cpp" />
-    <ClCompile Include="game objects\ui (objects)\level.cpp" />
-    <ClCompile Include="game objects\ui (objects)\score.cpp" />
+    <ClCompile Include="game-objects\moving-objects\movingObject.cpp" />
+    <ClCompile Include="game-objects\moving-objects\rocks.cpp" />
+    <ClCompile Include="game-objects\moving-objects\ship.cpp" />
+    <ClCompile Include="game-objects\ui-objects\score.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="physics-components\acceleration.cpp" />
@@ -148,12 +146,12 @@
     <ClCompile Include="vector\point.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game objects\moving objects\laser.hpp" />
-    <ClInclude Include="game objects\moving objects\movingObject.hpp" />
-    <ClInclude Include="game objects\moving objects\rocks.hpp" />
-    <ClInclude Include="game objects\moving objects\ship.hpp" />
-    <ClInclude Include="game objects\ui (objects)\level.hpp" />
-    <ClInclude Include="game objects\ui (objects)\score.hpp" />
+    <ClInclude Include="game-objects\moving-objects\laser.hpp" />
+    <ClInclude Include="game-objects\moving-objects\movingObject.hpp" />
+    <ClInclude Include="game-objects\moving-objects\rocks.hpp" />
+    <ClInclude Include="game-objects\moving-objects\ship.hpp" />
+    <ClInclude Include="game-objects\ui-objects\level.hpp" />
+    <ClInclude Include="game-objects\ui-objects\score.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="physics-components\physicsFormulas.hpp" />
     <ClInclude Include="physics-components\vector.hpp" />
