@@ -18,14 +18,17 @@ void MovingObject::displayDebugUpdateInfo() {
 void MovingObject::setDeathTimer(double duration) {
     timer = duration;
     timerOn = true;
-    // std::cout << "Laser death timer set to " << duration << std::endl; // debug
 }
 
 void MovingObject::accelerate() {
     if (!alive) return; // quick exit
-    std::cout << name << ".accelerate(v";
-    std::cout << Velocity(v.forward(rotation) * thrust) << ") called.\n";
-    v.add(v.forward(rotation) * thrust);
+
+    // std::cout << name
+    //     << ".accelerate(v"
+    //     << Velocity(v.forward(rotation) * thrust)
+    //     << ") called.\n";
+
+    v += Acceleration::forward(rotation) * thrust;
 }
 
 void MovingObject::hit() {

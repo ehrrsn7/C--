@@ -34,10 +34,9 @@ void Game::fireLaser() {
    // (at desired rate:)
    // get new laser from ship->fire()
    // push new laser onto lasers (vector<>)
-   if (ship->getLaserFiringDelayTimer() <= 0) {
-      lasers.push_back(ship->fire());
-      ship->setLaserFiringDelayTimer();
-   }
+   if (ship->getLaserFiringDelayTimer() > 0) return;
+   lasers.push_back(ship->fire());
+   ship->setLaserFiringDelayTimer();
 }
 
 double dist(Position & p1, Position & p2) {

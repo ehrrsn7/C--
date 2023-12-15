@@ -90,7 +90,7 @@ void test_deg()
    // exercise
    auto angleDegrees = deg(angleRadians);
    // verify
-   assert(angleDegrees = 135);
+   assert(angleDegrees == 135);
    assert(typeid(angleDegrees) == typeid(double));
 }  // breakdown
 
@@ -100,7 +100,7 @@ void test_rad()
    // exercise
    auto angleRadians = rad(angleDegrees);
    // verify
-   assert(angleRadians = -3 * M_PI/2);
+   assert(angleRadians == -3 * M_PI/2);
    assert(typeid(angleRadians) == typeid(double));
 }  // breakdown
 
@@ -165,7 +165,7 @@ void test_timePerFrame()
    // exercise
    auto time = timePerFrame();
    // verify
-   assert(time = 24 * 60 / 30);
+   assert(time == 24 * 60 / 30);
    assert(typeid(time) == typeid(double));
 }  // breakdown
 
