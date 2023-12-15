@@ -12,8 +12,12 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
-#define FPS 60.0
+#endif
 
 enum gameObjectEnumID {
    movingObject,

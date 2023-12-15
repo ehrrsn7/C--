@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath> // for sin/cos (for now until physicsFormulas.h is done)
+#define FPS 60.0
 
 /**************************************************
  * prototypes

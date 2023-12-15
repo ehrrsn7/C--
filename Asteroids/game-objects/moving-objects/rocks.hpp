@@ -10,7 +10,13 @@
 #include <iostream>
 
 #include "movingObject.hpp"
+
+#ifdef __APPLE__
+#include "uiDraw.hpp"
+#endif
+#ifdef _WIN32
 #include "ui/uiDraw.hpp"
+#endif
 
 #define ROCK_INIT_AMOUNT 3 // amount of rocks spawned in first level scene
 #define ROCK_INIT_LAUNCH_FORCE 5 // force applied to rocks that are spawned in N

@@ -8,8 +8,20 @@
 #pragma once
 
 #include <iostream>
-#include "ui/uiDraw.hpp"
-#include "vector/point.hpp"
+
+#ifdef __APPLE__
+#include "physicsFormulas.hpp"
+#endif
+#ifdef _WIN32
+#include "physics-components/physicsFormulas.hpp"
+#endif
+
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
+#include "physics-components/vector.hpp"
+#endif
 
 class Level {
 

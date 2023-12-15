@@ -49,7 +49,13 @@ enum class keys {
 };
 
 #include <unordered_map> // used to hash heldKeys<bool>
+
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
 
 /********************************************
 * INTERFACE

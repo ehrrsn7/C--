@@ -7,7 +7,12 @@
 
 #include "game.hpp"
 
+#ifdef __APPLE__
+#include "physicsFormulas.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/physicsFormulas.hpp"
+#endif
 
 #include <limits> // for getClosestDistance()
 #include <algorithm>

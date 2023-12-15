@@ -35,7 +35,13 @@
 #include <math.h>
 #endif // _WIN32
 
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
+
 #include "uiDraw.hpp"
 
 using namespace std;

@@ -6,7 +6,13 @@
 //
 
 #include "rocks.hpp"
+
+#ifdef __APPLE__
+#include "physicsFormulas.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/physicsFormulas.hpp"
+#endif
 
 void Rock::initializeRotation() {
     setRotation(random(ROCK_ROTATE_SPEED/2, ROCK_ROTATE_SPEED));

@@ -12,8 +12,20 @@
 
 #include "movingObject.hpp"
 #include "laser.hpp"
-#include "ui/uiInteract.hpp" // for rotation directions' int values
+
+#ifdef __APPLE__
+#include "uiInteract.hpp"
+#endif
+#ifdef _WIN32
+#include "ui/uiInteract.hpp"
+#endif
+
+#ifdef __APPLE__
+#include "physicsFormulas.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/physicsFormulas.hpp"
+#endif
 
 #define SHIP_ROTATE_AMOUNT 15 // in rad/s
 #define SHIP_INITIAL_ANGLE 90

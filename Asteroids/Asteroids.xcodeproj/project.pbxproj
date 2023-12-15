@@ -7,33 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		144019CC2AF094F1000119A0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144019CB2AF094F1000119A0 /* main.cpp */; };
-		14AE9D3C2AF16864009F7E7A /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D332AF16864009F7E7A /* position.cpp */; };
-		14AE9D3D2AF16864009F7E7A /* gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D342AF16864009F7E7A /* gravity.cpp */; };
-		14AE9D3E2AF16864009F7E7A /* physicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D362AF16864009F7E7A /* physicsFormulas.cpp */; };
-		14AE9D3F2AF16864009F7E7A /* force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D372AF16864009F7E7A /* force.cpp */; };
-		14AE9D402AF16864009F7E7A /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D382AF16864009F7E7A /* vector.cpp */; };
-		14AE9D412AF16864009F7E7A /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D3A2AF16864009F7E7A /* velocity.cpp */; };
-		14AE9D422AF16864009F7E7A /* acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D3B2AF16864009F7E7A /* acceleration.cpp */; };
-		14AE9D522AF168A5009F7E7A /* testPhysicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D452AF168A4009F7E7A /* testPhysicsFormulas.cpp */; };
-		14AE9D532AF168A5009F7E7A /* testVectorZeros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D462AF168A4009F7E7A /* testVectorZeros.cpp */; };
-		14AE9D542AF168A5009F7E7A /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D472AF168A4009F7E7A /* test.cpp */; };
-		14AE9D552AF168A5009F7E7A /* testVectorOther.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D492AF168A4009F7E7A /* testVectorOther.cpp */; };
-		14AE9D562AF168A5009F7E7A /* testVectorLower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D4C2AF168A4009F7E7A /* testVectorLower.cpp */; };
-		14AE9D572AF168A5009F7E7A /* testVectorUpper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D502AF168A5009F7E7A /* testVectorUpper.cpp */; };
-		EE53897E257DC48000CF4674 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53897D257DC48000CF4674 /* game.cpp */; };
+		14BE4A2A2B2CB86F00125D6E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144019CB2AF094F1000119A0 /* main.cpp */; };
+		14BE4A2B2B2CB86F00125D6E /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53897D257DC48000CF4674 /* game.cpp */; };
+		14BE4A2C2B2CB86F00125D6E /* acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D3B2AF16864009F7E7A /* acceleration.cpp */; };
+		14BE4A2D2B2CB86F00125D6E /* force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D372AF16864009F7E7A /* force.cpp */; };
+		14BE4A2E2B2CB86F00125D6E /* gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D342AF16864009F7E7A /* gravity.cpp */; };
+		14BE4A2F2B2CB86F00125D6E /* physicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D362AF16864009F7E7A /* physicsFormulas.cpp */; };
+		14BE4A302B2CB86F00125D6E /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D332AF16864009F7E7A /* position.cpp */; };
+		14BE4A312B2CB86F00125D6E /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D382AF16864009F7E7A /* vector.cpp */; };
+		14BE4A322B2CB86F00125D6E /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D3A2AF16864009F7E7A /* velocity.cpp */; };
+		14BE4A332B2CB86F00125D6E /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538996257DC52A00CF4674 /* point.cpp */; };
+		14BE4A342B2CB86F00125D6E /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538997257DC52A00CF4674 /* velocity.cpp */; };
+		14BE4A352B2CB86F00125D6E /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538986257DC51800CF4674 /* score.cpp */; };
+		14BE4A372B2CB86F00125D6E /* movingObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53898B257DC51800CF4674 /* movingObject.cpp */; };
+		14BE4A382B2CB86F00125D6E /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538992257DC51800CF4674 /* ship.cpp */; };
+		14BE4A3A2B2CB86F00125D6E /* rocks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538990257DC51800CF4674 /* rocks.cpp */; };
+		14BE4A3B2B2CB86F00125D6E /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899A257DC53200CF4674 /* uiInteract.cpp */; };
+		14BE4A3C2B2CB86F00125D6E /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899C257DC53200CF4674 /* uiDraw.cpp */; };
+		14BE4A3D2B2CB86F00125D6E /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D472AF168A4009F7E7A /* test.cpp */; };
+		14BE4A3E2B2CB86F00125D6E /* testPhysicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D452AF168A4009F7E7A /* testPhysicsFormulas.cpp */; };
+		14BE4A3F2B2CB86F00125D6E /* testVectorLower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D4C2AF168A4009F7E7A /* testVectorLower.cpp */; };
+		14BE4A402B2CB86F00125D6E /* testVectorOther.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D492AF168A4009F7E7A /* testVectorOther.cpp */; };
+		14BE4A412B2CB86F00125D6E /* testVectorUpper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D502AF168A5009F7E7A /* testVectorUpper.cpp */; };
+		14BE4A422B2CB86F00125D6E /* testVectorZeros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D462AF168A4009F7E7A /* testVectorZeros.cpp */; };
 		EE53899F257DC54D00CF4674 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE53899E257DC54C00CF4674 /* GLUT.framework */; };
 		EE5389A1257DC55100CF4674 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5389A0257DC55100CF4674 /* OpenGL.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		EEF2D836257DC96A00AC7863 /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538996257DC52A00CF4674 /* point.cpp */; };
-		EEF2D838257DC96D00AC7863 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538997257DC52A00CF4674 /* velocity.cpp */; };
-		EEF2D83A257DC97200AC7863 /* movingObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53898B257DC51800CF4674 /* movingObject.cpp */; };
-		EEF2D83C257DC98700AC7863 /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538992257DC51800CF4674 /* ship.cpp */; };
-		EEF2D83E257DC98800AC7863 /* laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53898F257DC51800CF4674 /* laser.cpp */; };
-		EEF2D840257DC98A00AC7863 /* rocks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538990257DC51800CF4674 /* rocks.cpp */; };
-		EEF2D842257DC99200AC7863 /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538986257DC51800CF4674 /* score.cpp */; };
-		EEF2D844257DC99B00AC7863 /* level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538987257DC51800CF4674 /* level.cpp */; };
-		EEF2D846257DC9A800AC7863 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899A257DC53200CF4674 /* uiInteract.cpp */; };
-		EEF2D848257DC9AA00AC7863 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899C257DC53200CF4674 /* uiDraw.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,14 +75,12 @@
 		EE53897D257DC48000CF4674 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = SOURCE_ROOT; tabWidth = 3; };
 		EE538983257DC4AB00CF4674 /* game.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538986257DC51800CF4674 /* score.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = score.cpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE538987257DC51800CF4674 /* level.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = level.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538988257DC51800CF4674 /* level.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = level.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538989257DC51800CF4674 /* score.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = score.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53898B257DC51800CF4674 /* movingObject.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = movingObject.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53898C257DC51800CF4674 /* ship.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = ship.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53898D257DC51800CF4674 /* laser.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = laser.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53898E257DC51800CF4674 /* rocks.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = rocks.hpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE53898F257DC51800CF4674 /* laser.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = laser.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538990257DC51800CF4674 /* rocks.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = rocks.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538991257DC51800CF4674 /* movingObject.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = movingObject.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538992257DC51800CF4674 /* ship.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = ship.cpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -113,7 +109,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14AE9D432AF1686E009F7E7A /* physics components */ = {
+		14AE9D432AF1686E009F7E7A /* physics-components */ = {
 			isa = PBXGroup;
 			children = (
 				14AE9D3B2AF16864009F7E7A /* acceleration.cpp */,
@@ -126,7 +122,7 @@
 				14AE9D392AF16864009F7E7A /* vector.hpp */,
 				14AE9D3A2AF16864009F7E7A /* velocity.cpp */,
 			);
-			path = "physics components";
+			path = "physics-components";
 			sourceTree = "<group>";
 		};
 		14AE9D582AF168B1009F7E7A /* test */ = {
@@ -173,43 +169,41 @@
 				144019CB2AF094F1000119A0 /* main.cpp */,
 				EE53897D257DC48000CF4674 /* game.cpp */,
 				EE538983257DC4AB00CF4674 /* game.hpp */,
-				14AE9D432AF1686E009F7E7A /* physics components */,
+				14AE9D432AF1686E009F7E7A /* physics-components */,
 				EE538993257DC52A00CF4674 /* vector */,
-				EE538984257DC51800CF4674 /* game objects */,
+				EE538984257DC51800CF4674 /* game-objects */,
 				EE538998257DC53200CF4674 /* ui */,
 				14AE9D582AF168B1009F7E7A /* test */,
 			);
 			name = Asteroids;
 			sourceTree = "<group>";
 		};
-		EE538984257DC51800CF4674 /* game objects */ = {
+		EE538984257DC51800CF4674 /* game-objects */ = {
 			isa = PBXGroup;
 			children = (
-				EE538985257DC51800CF4674 /* ui (objects) */,
-				EE53898A257DC51800CF4674 /* moving objects */,
+				EE538985257DC51800CF4674 /* ui-objects */,
+				EE53898A257DC51800CF4674 /* moving-objects */,
 			);
 			path = "game-objects";
 			sourceTree = "<group>";
 		};
-		EE538985257DC51800CF4674 /* ui (objects) */ = {
+		EE538985257DC51800CF4674 /* ui-objects */ = {
 			isa = PBXGroup;
 			children = (
 				EE538986257DC51800CF4674 /* score.cpp */,
 				EE538989257DC51800CF4674 /* score.hpp */,
-				EE538987257DC51800CF4674 /* level.cpp */,
 				EE538988257DC51800CF4674 /* level.hpp */,
 			);
-			path = "ui(objects)";
+			path = "ui-objects";
 			sourceTree = "<group>";
 		};
-		EE53898A257DC51800CF4674 /* moving objects */ = {
+		EE53898A257DC51800CF4674 /* moving-objects */ = {
 			isa = PBXGroup;
 			children = (
 				EE53898B257DC51800CF4674 /* movingObject.cpp */,
 				EE538991257DC51800CF4674 /* movingObject.hpp */,
 				EE538992257DC51800CF4674 /* ship.cpp */,
 				EE53898C257DC51800CF4674 /* ship.hpp */,
-				EE53898F257DC51800CF4674 /* laser.cpp */,
 				EE53898D257DC51800CF4674 /* laser.hpp */,
 				EE538990257DC51800CF4674 /* rocks.cpp */,
 				EE53898E257DC51800CF4674 /* rocks.hpp */,
@@ -304,31 +298,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14AE9D402AF16864009F7E7A /* vector.cpp in Sources */,
-				144019CC2AF094F1000119A0 /* main.cpp in Sources */,
-				14AE9D422AF16864009F7E7A /* acceleration.cpp in Sources */,
-				14AE9D3C2AF16864009F7E7A /* position.cpp in Sources */,
-				14AE9D522AF168A5009F7E7A /* testPhysicsFormulas.cpp in Sources */,
-				14AE9D572AF168A5009F7E7A /* testVectorUpper.cpp in Sources */,
-				14AE9D542AF168A5009F7E7A /* test.cpp in Sources */,
-				EEF2D83E257DC98800AC7863 /* laser.cpp in Sources */,
-				14AE9D532AF168A5009F7E7A /* testVectorZeros.cpp in Sources */,
-				EEF2D842257DC99200AC7863 /* score.cpp in Sources */,
-				EEF2D838257DC96D00AC7863 /* velocity.cpp in Sources */,
-				EEF2D83A257DC97200AC7863 /* movingObject.cpp in Sources */,
-				EEF2D844257DC99B00AC7863 /* level.cpp in Sources */,
-				EE53897E257DC48000CF4674 /* game.cpp in Sources */,
-				EEF2D840257DC98A00AC7863 /* rocks.cpp in Sources */,
-				14AE9D3F2AF16864009F7E7A /* force.cpp in Sources */,
-				EEF2D846257DC9A800AC7863 /* uiInteract.cpp in Sources */,
-				14AE9D562AF168A5009F7E7A /* testVectorLower.cpp in Sources */,
-				14AE9D3E2AF16864009F7E7A /* physicsFormulas.cpp in Sources */,
-				14AE9D3D2AF16864009F7E7A /* gravity.cpp in Sources */,
-				EEF2D836257DC96A00AC7863 /* point.cpp in Sources */,
-				EEF2D83C257DC98700AC7863 /* ship.cpp in Sources */,
-				14AE9D412AF16864009F7E7A /* velocity.cpp in Sources */,
-				EEF2D848257DC9AA00AC7863 /* uiDraw.cpp in Sources */,
-				14AE9D552AF168A5009F7E7A /* testVectorOther.cpp in Sources */,
+				14BE4A2A2B2CB86F00125D6E /* main.cpp in Sources */,
+				14BE4A2B2B2CB86F00125D6E /* game.cpp in Sources */,
+				14BE4A2C2B2CB86F00125D6E /* acceleration.cpp in Sources */,
+				14BE4A2D2B2CB86F00125D6E /* force.cpp in Sources */,
+				14BE4A2E2B2CB86F00125D6E /* gravity.cpp in Sources */,
+				14BE4A2F2B2CB86F00125D6E /* physicsFormulas.cpp in Sources */,
+				14BE4A302B2CB86F00125D6E /* position.cpp in Sources */,
+				14BE4A312B2CB86F00125D6E /* vector.cpp in Sources */,
+				14BE4A322B2CB86F00125D6E /* velocity.cpp in Sources */,
+				14BE4A332B2CB86F00125D6E /* point.cpp in Sources */,
+				14BE4A342B2CB86F00125D6E /* velocity.cpp in Sources */,
+				14BE4A352B2CB86F00125D6E /* score.cpp in Sources */,
+				14BE4A372B2CB86F00125D6E /* movingObject.cpp in Sources */,
+				14BE4A382B2CB86F00125D6E /* ship.cpp in Sources */,
+				14BE4A3A2B2CB86F00125D6E /* rocks.cpp in Sources */,
+				14BE4A3B2B2CB86F00125D6E /* uiInteract.cpp in Sources */,
+				14BE4A3C2B2CB86F00125D6E /* uiDraw.cpp in Sources */,
+				14BE4A3D2B2CB86F00125D6E /* test.cpp in Sources */,
+				14BE4A3E2B2CB86F00125D6E /* testPhysicsFormulas.cpp in Sources */,
+				14BE4A3F2B2CB86F00125D6E /* testVectorLower.cpp in Sources */,
+				14BE4A402B2CB86F00125D6E /* testVectorOther.cpp in Sources */,
+				14BE4A412B2CB86F00125D6E /* testVectorUpper.cpp in Sources */,
+				14BE4A422B2CB86F00125D6E /* testVectorZeros.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

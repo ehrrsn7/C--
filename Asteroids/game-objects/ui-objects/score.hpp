@@ -10,8 +10,19 @@
 #include <iostream>
 #include <string>
 
+#ifdef __APPLE__
+#include "uiDraw.hpp"
+#endif
+#ifdef _WIN32
 #include "ui/uiDraw.hpp"
+#endif
+
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
 
 class Score {
 

@@ -6,7 +6,15 @@
  **********************************************************************/
 
 #include "physicsFormulas.hpp"  // header file
-#include "game-objects/moving-objects/movingObject.hpp" // for MovingObject
+
+// for MovingObject
+#ifdef __APPLE__
+#include "movingObject.hpp"
+#endif
+#ifdef _WIN32
+#include "game-objects/moving-objects/movingObject.hpp"
+#endif
+
 //#include "ship.hpp"             // for Projectile (for now)
 //#include "earth.hpp"            // for Earth
 
