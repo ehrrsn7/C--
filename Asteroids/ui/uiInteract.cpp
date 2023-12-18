@@ -16,7 +16,6 @@
 #include <time.h>     // for clock
 #include <cstdlib>    // for rand()
 
-
 #ifdef __APPLE__
 #include <openGL/gl.h>    // Main OpenGL library
 #include <GLUT/glut.h>    // Second OpenGL library
@@ -38,15 +37,8 @@
 #include <math.h>
 #endif // _WIN32
 
-#include "uiInteract.hpp"
-
-#ifdef __APPLE__
-#include "vector.hpp"
-#endif
-#ifdef _WIN32
 #include "physics-components/vector.hpp"
-#endif
-
+#include "uiInteract.hpp"
 
 using namespace std;
 

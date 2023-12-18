@@ -5,17 +5,11 @@
 //  Created by Elijah Harrison on 11/7/20.
 //
 
-#include "game.hpp"
-
-#ifdef __APPLE__
-#include "physicsFormulas.hpp"
-#endif
-#ifdef _WIN32
-#include "physics-components/physicsFormulas.hpp"
-#endif
-
 #include <limits> // for getClosestDistance()
 #include <algorithm>
+
+#include "game.hpp"
+#include "physics-components/physicsFormulas.hpp"
 
 // initialization
 void Game::setUpScreen(const Position & tl, const Position & br) {
@@ -257,35 +251,42 @@ bool Game::checkCollision(MovingObject & obj1, MovingObject & obj2) {
 }
 
 bool Game::checkCollision(MovingObject * obj1, MovingObject * obj2) {
-   if (obj1 == NULL || obj2 == NULL) return false;
-   return checkCollision(*obj1, *obj2);
+   try {
+      if (obj1->isNull()) throw "obj1 is undefined or null.";
+      if (obj2->isNull()) throw "obj2 is undefined or null.";
+      return checkCollision(*obj1, *obj2);
+   }
+   catch (std::string error) {
+      std::cout << error << std::endl;
+      return false;
+   }
 }
 
 double Game::getClosestDistance(MovingObject & obj1, MovingObject & obj2) {
-// find the maximum distance traveled
-double dMax = std::max(abs(obj1.getVelocity().getX()), abs(obj1.getVelocity().getY()));
-dMax = std::max(dMax, abs(obj2.getVelocity().getX())); // Between previous max and |obj2.dx|
-dMax = std::max(dMax, abs(obj2.getVelocity().getY())); // Between previous max and |obj2.dy|
-dMax = std::max(dMax, 0.1); // when dx and dy are 0.0. Go through the loop once.
+   // find the maximum distance traveled
+   double dMax = std::max(abs(obj1.getVelocity().getX()), abs(obj1.getVelocity().getY()));
+   dMax = std::max(dMax, abs(obj2.getVelocity().getX())); // Between previous max and |obj2.dx|
+   dMax = std::max(dMax, abs(obj2.getVelocity().getY())); // Between previous max and |obj2.dy|
+   dMax = std::max(dMax, 0.1); // when dx and dy are 0.0. Go through the loop once.
 
-double distMin = std::numeric_limits<float>::max();
-for (double i = 0.0; i <= dMax; i++) {
-   Position point1(
-      obj1.getPosition().getX() + (obj1.getVelocity().getX() * i / dMax),
-      obj1.getPosition().getY() + (obj1.getVelocity().getY() * i / dMax));
-   Position point2(
-      obj2.getPosition().getX() + (obj2.getVelocity().getX() * i / dMax),
-      obj2.getPosition().getY() + (obj2.getVelocity().getY() * i / dMax));
+   double distMin = std::numeric_limits<float>::max();
+   for (double i = 0.0; i <= dMax; i++) {
+      Position point1(
+         obj1.getPosition().getX() + (obj1.getVelocity().getX() * i / dMax),
+         obj1.getPosition().getY() + (obj1.getVelocity().getY() * i / dMax));
+      Position point2(
+         obj2.getPosition().getX() + (obj2.getVelocity().getX() * i / dMax),
+         obj2.getPosition().getY() + (obj2.getVelocity().getY() * i / dMax));
 
-   double xDiff = point1.getX() - point2.getX();
-   double yDiff = point1.getY() - point2.getY();
+      double xDiff = point1.getX() - point2.getX();
+      double yDiff = point1.getY() - point2.getY();
 
-   double distSquared = (xDiff * xDiff) +(yDiff * yDiff);
+      double distSquared = (xDiff * xDiff) +(yDiff * yDiff);
 
-   distMin = std::min(distMin, distSquared);
-}
+      distMin = std::min(distMin, distSquared);
+   }
 
-return sqrt(distMin);
+   return sqrt(distMin);
 }
 
 void Game::cleanUpZombies() {

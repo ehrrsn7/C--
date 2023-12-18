@@ -14,13 +14,7 @@
 #include <map> // held keys
 #include <cmath>
 
-#ifdef __APPLE__
-#include "physics-components/vector.hpp"
-#endif
-#ifdef _WIN32
-#include "physics-components/vector.hpp"
-#endif
-
+#include "physics-components/vector.hpp" // coordinates
 #include "ui/uiInteract.hpp" // user interaction
 
 // import game objects

@@ -98,6 +98,7 @@ public:
    // getters
    bool getFriction()    const { return friction; }
    bool isAlive()        const { return alive; }
+   bool isNull()         const { return this == NULL || (unsigned long long)this == 0xdddddddddddddddd; }
    double getMass()      const { return mass; }
    double getMomentum()  const { return mass * v.getMagnitude(); }
    double getRadius()    const { return r; }

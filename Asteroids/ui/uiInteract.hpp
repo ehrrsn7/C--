@@ -17,31 +17,29 @@
 #pragma once
 
 #ifdef __APPLE__
-#include <openGL/gl.h>    // Main OpenGL library
-#include <GLUT/glut.h>    // Second OpenGL library
-
-#include "vector.hpp"
+#include <openGL/gl.h>  // Main OpenGL library
+#include <GLUT/glut.h>  // Second OpenGL library
 #endif // __APPLE__
 
 #ifdef __linux__
-#include <GL/gl.h>    // Main OpenGL library
-#include <GL/glut.h>  // Second OpenGL library
-
-#include "vector.hpp"
+#include <GL/gl.h>      // Main OpenGL library
+#include <GL/glut.h>    // Second OpenGL library
 #endif // __linux__
 
 #ifdef _WIN32
 #include <stdio.h>
 #include <stdlib.h>
-#include <Gl/glut.h>           // OpenGL library we copied
-#include <ctime>            // for ::Sleep();
+#include <Gl/glut.h>    // OpenGL library we copied
+#include <ctime>        // for ::Sleep();
 #include <Windows.h>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#endif // _WIN32
+
+#include <unordered_map> // used to hash heldKeys<bool>
 
 #include "physics-components/vector.hpp"
-#endif // _WIN32
 
 enum class keys {
    SPACE = GLUT_KEY_HOME,
@@ -54,8 +52,6 @@ enum class keys {
    ESC = 27,
    CTRL = GLUT_ACTIVE_CTRL
 };
-
-#include <unordered_map> // used to hash heldKeys<bool>
 
 /********************************************
 * INTERFACE
