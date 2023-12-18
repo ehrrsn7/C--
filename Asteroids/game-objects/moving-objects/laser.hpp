@@ -34,7 +34,8 @@
 
 class Laser : public MovingObject {
 public:
-   Laser(double firingAngle, Position shipPoint, Velocity shipVelocity, double shipRadius)
+   Laser(const Interface & ui, double firingAngle, Position shipPoint, Velocity shipVelocity, double shipRadius)
+      : MovingObject(ui)
    {
       setName("Laser");
       setGameObjectID(laser);
@@ -44,7 +45,15 @@ public:
       ));
       setVelocity(Velocity::forward(firingAngle) * LASER_SPEED); // fire!!
       setDeathTimer(LASER_DEATH_TIME); // set to expire after desired amount (LASER_DEATH_TIME)
-    }
+   }
 
-    void display() override { drawDot(getPosition()); }
+   void display() override { drawDot(getPosition()); }
+   
+   // assignment operator '='
+   Laser & operator = (const Laser & rhs) {
+       setPosition(rhs.p);
+       setVelocity(rhs.v);
+       setDeathTimer(rhs.timer);
+       return *this;
+   }
 };

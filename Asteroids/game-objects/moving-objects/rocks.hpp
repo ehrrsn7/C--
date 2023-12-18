@@ -55,7 +55,7 @@ protected:
    int rockIndex;
 
 public:
-   Rock() {
+   Rock(const Interface & ui) : MovingObject(ui) {
       setName("Rock (unknown)");
       setGameObjectID(rock);
       rockIndex = unknownRock;
@@ -66,7 +66,7 @@ public:
       setScoreAmount(ROCK_SCORE);
    }
 
-   Rock(Position pInit, Velocity vInit) : Rock() {
+   Rock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui) {
       initializePosition(pInit);
       initializeVelocity(vInit);
    }
@@ -119,7 +119,7 @@ public:
 
 class BigRock : public Rock {
 public:
-   BigRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+   BigRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
       setName("Big Rock");
       setGameObjectID(rock);
       rockIndex = bigRock;
@@ -131,7 +131,7 @@ public:
 
 class MediumRock : public Rock {
 public:
-   MediumRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+   MediumRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
       setName("Medium Rock");
       setGameObjectID(mediumRock);
       rockIndex = mediumRock;
@@ -140,8 +140,8 @@ public:
       setScoreAmount(MEDIUM_ROCK_SCORE);
    }
 
-   MediumRock(Position pInit, Velocity vInit, Velocity vShipInit) :
-      MediumRock(pInit, vInit)
+   MediumRock(const Interface & ui, Position pInit, Velocity vInit, Velocity vShipInit) :
+      MediumRock(ui, pInit, vInit)
    {
       setVelocity(getVelocity() + vShipInit);
    }
@@ -153,7 +153,7 @@ public:
 
 class SmallRock : public Rock {
 public:
-   SmallRock(Position pInit, Velocity vInit) : Rock(pInit, vInit) {
+   SmallRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
       setName("Small Rock");
       setGameObjectID(smallRock);
       rockIndex = bigRock;
@@ -162,8 +162,8 @@ public:
       setScoreAmount(SMALL_ROCK_SCORE);
    }
 
-   SmallRock(Position pInit, Velocity vInit, Velocity vShipInit) :
-      SmallRock(pInit, vInit)
+   SmallRock(const Interface & ui, Position pInit, Velocity vInit, Velocity vShipInit) :
+      SmallRock(ui, pInit, vInit)
    {
       setVelocity(getVelocity() + vShipInit);
    }

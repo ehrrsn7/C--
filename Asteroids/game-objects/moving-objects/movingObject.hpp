@@ -14,9 +14,10 @@
 
 #ifdef __APPLE__
 #include "vector.hpp"
+#include "uiInteract.hpp"
 #endif
 #ifdef _WIN32
-#include "physics-components/vector.hpp"
+#include "ui/uiInteract.hpp"
 #endif
 
 enum gameObjectEnumID {
@@ -30,7 +31,7 @@ enum gameObjectEnumID {
 };
 
 class MovingObject {
-private:
+protected:
    bool alive; // is alive y/n
    bool brake; // apply brakes/slow down object when brakes are activated
    bool friction; // apply friction/slow down object naturally
@@ -48,32 +49,35 @@ private:
    Position p;
    std::string name;
    Velocity v;
+   const Interface & ui;
 
 public:
-   MovingObject() :
-      alive        (true), // is alive y/n
-      brake        (false), // apply brakes
-      dr           (0.0), // orientation angle rot. vel. in deg. per second
-      friction     (false), // apply friction/brakes
-      gameObjectID (movingObject),
-      mass         (1.0), // kg (default)
-      name         ("* Moving object"),
-      r            (10.0), // in pixels
-      rotation     (0.0), // current orientation angle (degrees)
-      scoreAmount  (0), // points to be added to score when destroyed (if applicable)
-      thrust       (0.0), // acceleration in pixels/s/s
-      timer        (0.0), // self-destruct timer in seconds
-      timerOn      (false), // self-destruct timer y/n
-      i            (0) // debug
-      { }
+   MovingObject(const Interface & ui) :
+       alive(true), // is alive y/n
+       brake(false), // apply brakes
+       dr(0.0), // orientation angle rot. vel. in deg. per second
+       da(0.0),
+       friction(false), // apply friction/brakes
+       gameObjectID(movingObject),
+       ui(ui),
+       mass(1.0), // kg (default)
+       name("* Moving object"),
+       r(10.0), // in pixels
+       rotation(0.0), // current orientation angle (degrees)
+       scoreAmount(0), // points to be added to score when destroyed (if applicable)
+       thrust(0.0), // acceleration in pixels/s/s
+       timer(0.0), // self-destruct timer in seconds
+       timerOn(false), // self-destruct timer y/n
+       i(0) // debug
+   { }
 
-   void update() {
+   void update(const Interface & ui) {
       if (!alive) return;
 
-      p.add(v);
+      p.add(v * abs(ui.frameRate()));
 
       // update orientation angle ('rotation')
-      rotation += dr / FPS;
+      rotation += dr * abs(ui.frameRate());
       if (rotation < 0) rotation = M_PI * 2;
       else if (rotation > M_PI * 2) rotation = 0;
 

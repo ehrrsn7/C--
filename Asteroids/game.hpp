@@ -41,21 +41,21 @@ private:
    Position center;
 
    // game objects
-   Ship* ship;
+   Ship * ship;
    std::vector<Laser> lasers;
-   std::vector<Rock*> rocks;
+   std::vector<Rock *> rocks;
    Level level;
    Score score;
+   const Interface & ui;
 
    // in game.cpp:
-   void setUpScreen(Position tl, Position br);
+   void setUpScreen(const Position & tl, const Position & br);
    void fireLaser();
    void asteroidBelt();
    Rock * buildRock(int whichRock, Position pInit, Velocity vInit, bool isInitial);
-   void update(MovingObject & obj);
-   void update(MovingObject * obj);
+   Position randomizeRockPInit(const Position& pInit, bool isInitial);
    void wrap();
-   void wrap(MovingObject* obj);
+   void wrap(MovingObject * obj);
    void wrap(std::vector<MovingObject> & collection);
    void wrap(std::vector<MovingObject *> & collection);
 
@@ -83,21 +83,21 @@ private:
    void resetScore();
 
 public:
-   Game(Position topLeft, Position bottomRight) {
+   Game(const Interface & ui, const Position & topLeft, const Position & bottomRight) : ui(ui) {
       /* Set up the initial conditions of the game */
       setUpScreen(topLeft, bottomRight);
 
       /* GAME OBJECTS */
-      ship = new Ship();
+      ship = new Ship(ui);
       asteroidBelt();
    }
 
    ~Game() {}
 
    void update() {
-      update(ship);
-      for (Laser laser : lasers) update(laser);
-      for (Rock * rock : rocks) update(rock);
+      ship->update(ui);
+      for (Laser laser : lasers) laser.update(ui);
+      for (Rock * rock : rocks) rock->update(ui);
 
       wrap();
       handleCollisions();
@@ -107,15 +107,14 @@ public:
       // for example: when 0 rocks are on the screen, initiate next—level sequence
    }
 
-   // 'const Interface & ui'
-   void display(const Interface & ui) {
+   void display() {
       if (ship != NULL) ship->display();
 
-      // display lasers)
+      // display lasers
       for (Laser it : lasers) it.display();
 
       // display rocks
-      for (Rock* it : rocks)
+      for (Rock * it : rocks)
          if (it != NULL)
             it->display();
 
@@ -123,11 +122,11 @@ public:
       score.display();
    }
 
-   void handleInput(const Interface & ui) {
+   void handleInput() {
       /* heldKeys defined/handled in uiInteract.cpp/.hpp */
 
       // reset
-      if (ui.getHeldKey(keys::R)) reset();
+      //if (ui.getHeldKey(keys::R)) reset(); // ! glitching intermittently: ctrl key behaves as this key, then if r key is pressed it goes into loop until ctrl is pressed. Also behaving this way even when focused in different applications.
 
       // quit
       if (ui.getHeldKey(keys::ESC)) exit(0);

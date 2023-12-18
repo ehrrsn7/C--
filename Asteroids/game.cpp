@@ -18,7 +18,7 @@
 #include <algorithm>
 
 // initialization
-void Game::setUpScreen(Position tl, Position br) {
+void Game::setUpScreen(const Position & tl, const Position & br) {
    center.set(0, 0); // center of screen
    screenLeft   = tl.getX();
    screenRight  = br.getX();
@@ -40,6 +40,14 @@ void Game::fireLaser() {
    // get new laser from ship->fire()
    // push new laser onto lasers (vector<>)
    if (ship->getLaserFiringDelayTimer() > 0) return;
+   /*std::cout
+       << "space key held: "
+       << ((bool)ui.getHeldKey(keys::SPACE) ? "true" : "false")
+       << " -- " 
+       << "laser firing delay in game.cpp: "
+       << ship->getLaserFiringDelayTimer()
+       << std::endl;*/
+
    lasers.push_back(ship->fire());
    ship->setLaserFiringDelayTimer();
 }
@@ -49,58 +57,59 @@ double dist(Position & p1, Position & p2) {
 }
 
 Rock* Game::buildRock(int whichRock, Position pInit, Velocity vInit, bool isInitial) {
-
-   /* initialize p and v */
-
-   // condition: don't randomize if pInit is non-default
-   if (pInit.getMagnitude() < 10) {
-
-      // default v randomized in individual rock constructors
-      // default p [aka Position(0,0)] set to random location:
-      double newX = random(screenLeft, screenRight);
-      double newY = random(screenBottom, screenTop);
-      pInit.set(newX, newY);
-
-      /* handle ship—rock buffer */
-
-      // condition: only on initialization
-      if (isInitial) {
-
-         // error condition: ship has not been created (should not happen)
-         if (ship != NULL) { // if ship is null (error), then skip
-
-            Position shipPoint = ship->getPosition();
-               double buffer = 100;
-
-               // while dist(rock, ship) < buffer, then REDO RANDOM POINT
-               while (dist(shipPoint, pInit) < buffer) { // redo random point
-                  std::cout << ">>> newRock.p within buffer @ ("
-                     << newX << ", "
-                     << newY << ")"
-                     << ", recalculate." << std::endl;
-                  newX = random(screenLeft, screenRight);
-                  newY = random(screenBottom, screenTop);
-                  pInit.set(newX, newY);
-
-               } // end while rock within buffer radius
-         } // end if ship != NULL
-      } // end if isInitial
-   } // end if pInit != default P(0,0)
+   pInit = randomizeRockPInit(pInit, isInitial);
 
    // create new rock
-   Rock* newRock = NULL;
-   switch(whichRock) {
-      case bigRock:
-         newRock = new BigRock(pInit, vInit);
-         break;
-      case mediumRock:
-         newRock = new MediumRock(pInit, vInit);
-         break;
-      case smallRock:
-         newRock = new SmallRock(pInit, vInit);
-         break;
+   switch (whichRock) {
+   case bigRock:
+      return new BigRock(ui, pInit, vInit);
+      break;
+   case mediumRock:
+      return new MediumRock(ui, pInit, vInit);
+      break;
+   case smallRock:
+      return new SmallRock(ui, pInit, vInit);
+      break;
+   default:
+      return NULL;
    }
-   return newRock;
+}
+
+Position Game::randomizeRockPInit(const Position & pInit, bool isInitial) {
+   if (ship == NULL) throw "null ship (should not happen here)";
+   
+   // condition: don't randomize if pInit is non-default
+   if (pInit.getMagnitude() >= 10) return pInit;
+   
+   // randomize pInit
+   Position p;
+   // default v randomized in individual rock constructors
+   // default p [aka Position(0,0)] set to random location:
+   double newX = random(screenLeft, screenRight);
+   double newY = random(screenBottom, screenTop);
+   p.set(newX, newY);
+
+   /* handle ship—rock buffer */
+
+   // condition: only on initialization
+   if (isInitial) {
+      // error condition: ship has not been created (should not happen)
+
+      Position shipPoint = ship->getPosition();
+      double buffer = 100;
+
+      while (dist(shipPoint, p) < buffer) { // redo random point
+         /*std::cout << ">>> newRock.p within buffer @ ("
+            << newX << ", "
+            << newY << ")"
+            << ", recalculate." << std::endl;*/
+         newX = random(screenLeft, screenRight);
+         newY = random(screenBottom, screenTop);
+         p.set(newX, newY);
+      }
+   }
+
+   return p;
 }
 
 void Game::asteroidBelt() {
@@ -112,24 +121,10 @@ void Game::asteroidBelt() {
    }
 }
 
-void Game::update(MovingObject & obj) { obj.update(); }
-
-void Game::update(MovingObject * obj) {
-   if (obj == NULL) return;
-   update(*obj);
-}
-
 void Game::wrap() {
-   // wrap ship
-   if (ship != NULL)
-      wrap(ship);
-
-   // wrap lasers
-   // for (std::vector<Laser>::iterator it = lasers.begin(); it < lasers.end(); ++it, ++i) {
-   for (Laser & laser : lasers) wrap(&laser);
-
-   // wrap rocks
-   for (Rock * rock : rocks) wrap(rock);
+   if (ship != NULL) wrap(ship); // wrap ship
+   for (Laser & laser : lasers) wrap(&laser); // wrap lasers
+   for (Rock * rock : rocks) wrap(rock); // wrap rocks
 }
 
 void Game::wrap(MovingObject * obj) {
@@ -140,11 +135,11 @@ void Game::wrap(MovingObject * obj) {
    double buffer = obj->getRadius() + 10;
 
    /* SCREEN SIDE VALS REFERENCE
-   * screen left   == topLeft.getX() - obj->getRadius()
-   * screen right  == bottomRight.getX() + obj->getRadius()
-   * screen bottom == bottomRight.getY() - obj->getRadius()
-   * screen top    == topLeft.getY() + obj->getRadius()
-   */
+    * screen left   == topLeft.getX() - obj->getRadius()
+    * screen right  == bottomRight.getX() + obj->getRadius()
+    * screen bottom == bottomRight.getY() - obj->getRadius()
+    * screen top    == topLeft.getY() + obj->getRadius()
+    */
 
    // obj x < screen left => screen right
    if (obj->getPosition().getX() < screenLeft - buffer) {
@@ -262,8 +257,8 @@ bool Game::checkCollision(MovingObject & obj1, MovingObject & obj2) {
 }
 
 bool Game::checkCollision(MovingObject * obj1, MovingObject * obj2) {
-if (obj1 == NULL || obj2 == NULL) return false;
-return checkCollision(*obj1, *obj2);
+   if (obj1 == NULL || obj2 == NULL) return false;
+   return checkCollision(*obj1, *obj2);
 }
 
 double Game::getClosestDistance(MovingObject & obj1, MovingObject & obj2) {
@@ -330,6 +325,8 @@ void Game::cleanUpRocks() {
 }
 
 void Game::reset() {
+   if (!(glutGetModifiers() != GLUT_ACTIVE_CTRL && !ui.getHeldKey(keys::R))) return;
+
    resetShip();
    removeAllLasers();
    resetAllRocks();
@@ -338,7 +335,7 @@ void Game::reset() {
 
 void Game::resetShip() {
    Ship * newShip = NULL;
-   newShip = new Ship();
+   newShip = new Ship(ui);
    ship = newShip;
 }
 
