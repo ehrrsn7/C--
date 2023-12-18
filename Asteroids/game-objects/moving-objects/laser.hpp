@@ -36,6 +36,7 @@ class Laser : public MovingObject {
 public:
    Laser(double firingAngle, Position shipPoint, Velocity shipVelocity, double shipRadius)
    {
+      // set parent properties
       setName("Laser");
       setGameObjectID(laser);
       setPosition(Position(
