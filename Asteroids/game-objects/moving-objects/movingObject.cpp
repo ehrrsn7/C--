@@ -23,11 +23,6 @@ void MovingObject::setDeathTimer(double duration) {
 void MovingObject::accelerate() {
     if (!alive) return; // quick exit
 
-    // std::cout << name
-    //     << ".accelerate(v"
-    //     << Velocity(v.forward(rotation) * thrust)
-    //     << ") called.\n";
-
     v += Acceleration::forward(rotation) * thrust;
 }
 

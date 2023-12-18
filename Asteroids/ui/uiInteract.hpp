@@ -19,11 +19,15 @@
 #ifdef __APPLE__
 #include <openGL/gl.h>    // Main OpenGL library
 #include <GLUT/glut.h>    // Second OpenGL library
+
+#include "vector.hpp"
 #endif // __APPLE__
 
 #ifdef __linux__
 #include <GL/gl.h>    // Main OpenGL library
 #include <GL/glut.h>  // Second OpenGL library
+
+#include "vector.hpp"
 #endif // __linux__
 
 #ifdef _WIN32
@@ -35,6 +39,8 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+
+#include "physics-components/vector.hpp"
 #endif // _WIN32
 
 enum class keys {
@@ -45,17 +51,11 @@ enum class keys {
    UP = GLUT_KEY_UP,
    Q = 113,
    R = 114,
-   ESC = 27
+   ESC = 27,
+   CTRL = GLUT_ACTIVE_CTRL
 };
 
 #include <unordered_map> // used to hash heldKeys<bool>
-
-#ifdef __APPLE__
-#include "vector.hpp"
-#endif
-#ifdef _WIN32
-#include "physics-components/vector.hpp"
-#endif
 
 /********************************************
 * INTERFACE
@@ -103,7 +103,7 @@ public:
    void setHeldKey(keys key, bool value);
 
    // Current frame rate
-   double frameRate() const { return timePeriod;   };
+   double frameRate() const { return timePeriod; };
 
    static void *p;                     // for client
    static void (*callBack)(const Interface *, void *);

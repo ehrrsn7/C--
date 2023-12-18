@@ -130,8 +130,6 @@
   <ItemGroup>
     <ClCompile Include="game-objects\moving-objects\movingObject.cpp" />
     <ClCompile Include="game-objects\moving-objects\rocks.cpp" />
-    <ClCompile Include="game-objects\moving-objects\ship.cpp" />
-    <ClCompile Include="game-objects\ui-objects\score.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="physics-components\acceleration.cpp" />
@@ -143,7 +141,6 @@
     <ClCompile Include="physics-components\velocity.cpp" />
     <ClCompile Include="ui\uiDraw.cpp" />
     <ClCompile Include="ui\uiInteract.cpp" />
-    <ClCompile Include="vector\point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game-objects\moving-objects\laser.hpp" />

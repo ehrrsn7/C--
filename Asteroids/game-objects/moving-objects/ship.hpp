@@ -46,7 +46,7 @@ protected:
    bool brake;
 
 public:
-   Ship(bool brake = false, bool friction = false) : brake(brake) {
+   Ship(const Interface & ui, bool brake = false, bool friction = false) : MovingObject(ui) {
       setName("Player Ship");
       setGameObjectID(rock);
       setThrust(SHIP_ACCELERATE_AMOUNT);
@@ -56,6 +56,7 @@ public:
       brakesAmount = Velocity();
       frictionAmount = Velocity();
       laserFiringDelayTimer = 0.0;
+      this->brake = brake;
    }
 
    void display() override {
@@ -66,20 +67,20 @@ public:
       );
    }
 
-   void update() {
+   void update(const Interface & ui) {
       if (!isAlive()) return; // quick exit
 
-      MovingObject::update();
+      MovingObject::update(ui);
 
       // apply brakes/friction
       if (brake) {
          // TODO: put a constraint here for min/max allowed velocity for calc
-         getVelocity().add(getVelocity() * -(SHIP_BRAKES_AMOUNT / 10));
+         getVelocity().add(getVelocity() * abs(ui.frameRate()) - (SHIP_BRAKES_AMOUNT / 10));
          brake = false; // unset after pressing the brake button
       }
 
       if (getFriction()) {
-         getVelocity().add(getVelocity() * -(SHIP_FRICTION_AMOUNT / 10));
+          getVelocity().add(getVelocity() * abs(ui.frameRate()) * -(SHIP_FRICTION_AMOUNT / 10));
       }
 
       // decrement laser firing delay timer
@@ -87,36 +88,41 @@ public:
 
       // limit speed
       if (getVelocity().getMagnitude() > SHIP_MAX_SPEED) {
-         std::cout << "Max speed (" << SHIP_MAX_SPEED << ") reached.\n";
-         applyBrakes();
+          std::cout << "Max speed (" << SHIP_MAX_SPEED << ") reached.\n";
+          applyBrakes();
       }
    }
 
    void rotate(keys direction) {
-      if (!isAlive()) return; // quick exit
-      if (direction == keys::LEFT) setRotation(SHIP_ROTATE_AMOUNT);
-      if (direction == keys::RIGHT) setRotation(-SHIP_ROTATE_AMOUNT);
+       if (!isAlive()) return; // quick exit
+       switch (direction) {
+       case keys::LEFT:
+           rotation = SHIP_ROTATE_AMOUNT;
+           break;
+       case keys::RIGHT:
+           rotation = -SHIP_ROTATE_AMOUNT;
+           break;
+       default:
+           rotation = 0.0;
+           break;
+       }
    }
 
-   void stopRotating() {
-      // std::cout << "stop turning" << std::endl;
-      setRotation(0.0);
-   }
+   // getters
+   Laser fire() { return Laser(ui, rotation, p, v, r); }
+   double getLaserFiringDelayTimer() const { return laserFiringDelayTimer; }
 
+   // setters
    void applyBrakes() { brake = true; }
+   void setLaserFiringDelayTimer() { laserFiringDelayTimer = FIRE_DELAY_TIME; } /* from laser.hpp */
+   void stopRotating() { setRotation(0.0); }
 
-   Laser fire() { return Laser(getRotation(), getPosition(), getVelocity(), getRadius()); }
-
-   double getLaserFiringDelayTimer() const {
-      return laserFiringDelayTimer;
-   }
-   void setLaserFiringDelayTimer() {
-      laserFiringDelayTimer = FIRE_DELAY_TIME; // from laser.hpp
-   }
    void updateLaserFiringDelayTimer() {
       if (laserFiringDelayTimer >= 0.0) {
-         laserFiringDelayTimer -= 1.0/FPS;
-         // std::cout << "laserFiringDelayTimer: " << laserFiringDelayTimer << std::endl; // debug
+         //std::cout << "laser firing delay before: " << laserFiringDelayTimer << std::endl;
+         laserFiringDelayTimer -= 1.0 * abs(ui.frameRate());
+         //std::cout << "laser firing delay after: " << laserFiringDelayTimer << std::endl;
       }
+      //else { std::cout << "laser firing delay: " << laserFiringDelayTimer << std::endl; }
    }
 };

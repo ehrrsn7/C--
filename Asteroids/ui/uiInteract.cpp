@@ -124,6 +124,11 @@ void keyDownCallback(int key, int x, int y)
    // so we are actually getting the same version as in the constructor.
    Interface ui;
    ui.keyEvent(key, true /*fDown*/);
+   std::cout << "keyDownCallback(" 
+      << "int" << key << ", "
+      << "int " << x << ", "
+      << "int " << y << ", "
+   << ")\n";
 }
 
 /************************************************************************
@@ -138,6 +143,11 @@ void keyUpCallback(int key, int x, int y)
    // so we are actually getting the same version as in the constructor.
    Interface ui;
    ui.keyEvent(key, false /*fDown*/);
+   std::cout << "keyUpCallback("
+      << "int" << key << ", "
+      << "int " << x << ", "
+      << "int " << y << ", "
+   << ")\n";
 }
 
 /***************************************************************
@@ -181,11 +191,16 @@ void Interface::keyEvent(int key, bool fDown)
             setHeldKey(keys::R, fDown);
             break;
         case GLUT_KEY_HOME:
+            setHeldKey(keys::SPACE, fDown);
+            break;
         case ' ':
             setHeldKey(keys::SPACE, fDown);
             break;
         case 27:
             setHeldKey(keys::ESC, fDown);
+            break;
+        case GLUT_ACTIVE_CTRL:
+            setHeldKey(keys::CTRL, fDown);
             break;
         default:
             cout << key << endl;
@@ -255,14 +270,15 @@ void (*Interface::callBack)(const Interface *, void *) = NULL;
 // held keys
 std::unordered_map<keys, bool> Interface::heldKeys {
    {
+      { keys::CTRL,  false },
       { keys::SPACE, false },
       { keys::LEFT,  false },
       { keys::RIGHT, false },
       { keys::DOWN,  false },
       { keys::UP,    false },
       { keys::Q,     false },
-      { keys::R,     false }
-    }
+      { keys::R,     false },
+   }
 };
 
 /************************************************************************
@@ -270,7 +286,6 @@ std::unordered_map<keys, bool> Interface::heldKeys {
  * Nothing here!
  ***********************************************************************/
 Interface::~Interface() { }
-
 
 /************************************************************************
  * INTEFACE : INITIALIZE

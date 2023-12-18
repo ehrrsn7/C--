@@ -106,7 +106,7 @@ double dilateTime(double dt) { return timeDilation() * dt; }
  *    frame rate - fps defined in simulator, 30 in our case
  *    timeDilation - "
  **************************************************/
-double timePerFrame() {return timeDilation() / FPS; }
+double timePerFrame(const double dt) {return timeDilation() * dt; }
 
 
 /**********************************************************************
@@ -153,7 +153,7 @@ double metersToPixels(double meters) {
  *    seconds in day - number of seconds for 1 earth rotation
  **************************************************/
 double earthRotationSpeed() {
-   return -2 * M_PI * timePerFrame() / SECONDS_IN_DAY;
+   return -2 * M_PI * timePerFrame(1 / FPS) / SECONDS_IN_DAY;
 }
 
 /**************************************************

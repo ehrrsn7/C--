@@ -43,7 +43,7 @@ bool hasCollided(MovingObject & obj1, MovingObject & obj2);
  **********************************************************************/
 double timeDilation();
 double dilateTime(double dt);
-double timePerFrame();
+double timePerFrame(const double dt);
 
 /**********************************************************************
  * Pixels to meters/reverse conversions

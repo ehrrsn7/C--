@@ -53,8 +53,8 @@ void update(const Interface * pUI, void * p) {
     Game *pGame = (Game *) p;
 
     pGame->update();
-    pGame->handleInput(*pUI);
-    pGame->display(*pUI);
+    pGame->handleInput();
+    pGame->display();
 }
 
 /*********************************
@@ -67,7 +67,7 @@ int main(int argc, char ** argv) {
     Position bottomRight(SCREEN_WIDTH/2, -SCREEN_HEIGHT/2);
 
     Interface ui(argc, argv, "Asteroids", topLeft, bottomRight);
-    Game game(topLeft, bottomRight);
+    Game game(ui, topLeft, bottomRight);
     ui.run(update, &game);
 
     return 0;
