@@ -16,11 +16,7 @@
 		14BE4A302B2CB86F00125D6E /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D332AF16864009F7E7A /* position.cpp */; };
 		14BE4A312B2CB86F00125D6E /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D382AF16864009F7E7A /* vector.cpp */; };
 		14BE4A322B2CB86F00125D6E /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D3A2AF16864009F7E7A /* velocity.cpp */; };
-		14BE4A332B2CB86F00125D6E /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538996257DC52A00CF4674 /* point.cpp */; };
-		14BE4A342B2CB86F00125D6E /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538997257DC52A00CF4674 /* velocity.cpp */; };
-		14BE4A352B2CB86F00125D6E /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538986257DC51800CF4674 /* score.cpp */; };
 		14BE4A372B2CB86F00125D6E /* movingObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53898B257DC51800CF4674 /* movingObject.cpp */; };
-		14BE4A382B2CB86F00125D6E /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538992257DC51800CF4674 /* ship.cpp */; };
 		14BE4A3A2B2CB86F00125D6E /* rocks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE538990257DC51800CF4674 /* rocks.cpp */; };
 		14BE4A3B2B2CB86F00125D6E /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899A257DC53200CF4674 /* uiInteract.cpp */; };
 		14BE4A3C2B2CB86F00125D6E /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE53899C257DC53200CF4674 /* uiDraw.cpp */; };
@@ -74,7 +70,6 @@
 		EE538971257DC3CE00CF4674 /* Asteroids */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Asteroids; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE53897D257DC48000CF4674 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = SOURCE_ROOT; tabWidth = 3; };
 		EE538983257DC4AB00CF4674 /* game.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE538986257DC51800CF4674 /* score.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = score.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538988257DC51800CF4674 /* level.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = level.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538989257DC51800CF4674 /* score.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = score.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53898B257DC51800CF4674 /* movingObject.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = movingObject.cpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -83,11 +78,8 @@
 		EE53898E257DC51800CF4674 /* rocks.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = rocks.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538990257DC51800CF4674 /* rocks.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = rocks.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538991257DC51800CF4674 /* movingObject.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = movingObject.hpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE538992257DC51800CF4674 /* ship.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = ship.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538994257DC52A00CF4674 /* point.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = point.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538995257DC52A00CF4674 /* velocity.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = velocity.hpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE538996257DC52A00CF4674 /* point.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; tabWidth = 3; };
-		EE538997257DC52A00CF4674 /* velocity.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538999257DC53200CF4674 /* uiDraw.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = uiDraw.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53899A257DC53200CF4674 /* uiInteract.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE53899B257DC53200CF4674 /* uiInteract.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = uiInteract.hpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -190,7 +182,6 @@
 		EE538985257DC51800CF4674 /* ui-objects */ = {
 			isa = PBXGroup;
 			children = (
-				EE538986257DC51800CF4674 /* score.cpp */,
 				EE538989257DC51800CF4674 /* score.hpp */,
 				EE538988257DC51800CF4674 /* level.hpp */,
 			);
@@ -202,7 +193,6 @@
 			children = (
 				EE53898B257DC51800CF4674 /* movingObject.cpp */,
 				EE538991257DC51800CF4674 /* movingObject.hpp */,
-				EE538992257DC51800CF4674 /* ship.cpp */,
 				EE53898C257DC51800CF4674 /* ship.hpp */,
 				EE53898D257DC51800CF4674 /* laser.hpp */,
 				EE538990257DC51800CF4674 /* rocks.cpp */,
@@ -215,9 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				EE538994257DC52A00CF4674 /* point.hpp */,
-				EE538996257DC52A00CF4674 /* point.cpp */,
 				EE538995257DC52A00CF4674 /* velocity.hpp */,
-				EE538997257DC52A00CF4674 /* velocity.cpp */,
 			);
 			path = vector;
 			sourceTree = "<group>";
@@ -307,11 +295,7 @@
 				14BE4A302B2CB86F00125D6E /* position.cpp in Sources */,
 				14BE4A312B2CB86F00125D6E /* vector.cpp in Sources */,
 				14BE4A322B2CB86F00125D6E /* velocity.cpp in Sources */,
-				14BE4A332B2CB86F00125D6E /* point.cpp in Sources */,
-				14BE4A342B2CB86F00125D6E /* velocity.cpp in Sources */,
-				14BE4A352B2CB86F00125D6E /* score.cpp in Sources */,
 				14BE4A372B2CB86F00125D6E /* movingObject.cpp in Sources */,
-				14BE4A382B2CB86F00125D6E /* ship.cpp in Sources */,
 				14BE4A3A2B2CB86F00125D6E /* rocks.cpp in Sources */,
 				14BE4A3B2B2CB86F00125D6E /* uiInteract.cpp in Sources */,
 				14BE4A3C2B2CB86F00125D6E /* uiDraw.cpp in Sources */,

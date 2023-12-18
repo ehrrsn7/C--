@@ -15,7 +15,7 @@
 #include <cmath>
 
 #ifdef __APPLE__
-#include "vector.hpp"
+#include "physics-components/vector.hpp"
 #endif
 #ifdef _WIN32
 #include "physics-components/vector.hpp"

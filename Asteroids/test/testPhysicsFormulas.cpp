@@ -120,9 +120,10 @@ void test_distance()
 
 void test_distance_objs()
 {  // setup
-   MovingObject obj1;
+   Interface ui;
+   MovingObject obj1(ui);
    obj1.setPosition(Position(4, 5));
-   MovingObject obj2;
+   MovingObject obj2(ui);
    obj2.setPosition(Position(9, -5));
    // exercise
    auto d = distance(obj1, obj2);
@@ -163,9 +164,10 @@ void test_dilateTime()
 void test_timePerFrame()
 {  // setup
    // exercise
-   auto time = timePerFrame();
+   auto dt = 60.0;
+   auto time = timePerFrame(dt);
    // verify
-   assert(time == 24 * 60 / 30);
+   assert(time == 24 * dt / 30);
    assert(typeid(time) == typeid(double));
 }  // breakdown
 
@@ -178,6 +180,7 @@ void test_rotationSpeed()
    // bonus
    double dt = 1.0/30;
    earth_rotation_speed = earthRotationSpeed(dt);
+   assert(earth_rotation_speed == -2 * M_PI * (24*60*dt) / 86400);
 }  // breakdown
 
 
@@ -221,11 +224,12 @@ void test_directionOfGravity()
 
 void test_directionOfGravity_objs()
 {  // setup
+   Interface ui;
    Position p;
    p.setPolar(4000000, M_PI/6);
-   MovingObject obj1;
+   MovingObject obj1(ui);
    obj1.setPosition(p);
-   MovingObject obj2;
+   MovingObject obj2(ui);
    // exercise
    auto direction = directionOfGravity(obj1, obj2);
    // verify
