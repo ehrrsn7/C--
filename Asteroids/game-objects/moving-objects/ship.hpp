@@ -94,7 +94,6 @@ public:
       updateLaserFiringDelayTimer();
       applyFriction();
       limitSpeed();
-      std::cout << "ship v " << v << std::endl;
    }
 
    void rotate(keys direction) {

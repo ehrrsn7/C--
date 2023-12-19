@@ -13,7 +13,7 @@ void MovingObject::setDeathTimer(double duration) {
 }
 
 void MovingObject::accelerate() {
-    if (!alive) return; // quick exit
+    if (!isAlive()) return; // quick exit
 
     v += Acceleration::forward(rotation) * thrust * ui.frameRate();
 }

@@ -34,11 +34,9 @@ class MovingObject {
    
 private:
    void updateTimer() {
-      if (timerOn) {
-         // update timer (if timer == 0, kill obj)
-         if (timer > 0) timer -= ui.frameRate();
-         else alive = false;
-      }
+      if (!timerOn || timer <= 0) return;
+      timer -= ui.frameRate();
+      hit();
    }
    
    void updateRotation() {
@@ -93,7 +91,10 @@ public:
    { }
 
    virtual void update() {
-      if (!alive) return;
+      if (!isAlive()) {
+         std::cout << "obj not alive (" << name << ")\n";
+         return;
+      }
       updatePosition();
       updateRotation();
       updateTimer();

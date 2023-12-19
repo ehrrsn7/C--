@@ -52,21 +52,16 @@ public:
       gameObjectID = laser;
       p = offsetToShipPosition(firingAngle, shipPoint, shipRadius);
       v = launch(firingAngle); // fire!!
-      timer = LASER_DEATH_TIME; // set to expire after desired amount (LASER_DEATH_TIME)
-      std::cout << "timer " << timer << std::endl;
+      setDeathTimer(LASER_DEATH_TIME); // sets timerOn to true
    }
 
    void display() override { drawDot(getPosition()); }
-   void update() override {
-      MovingObject::update();
-      std::cout << "laser v " << v << std::endl;
-   }
    
    // assignment operator '='
    Laser & operator = (const Laser & rhs) {
       p = rhs.p;
       v = rhs.v;
-      timer = rhs.timer;
+      setDeathTimer(rhs.timer); // sets timerOn to true
       return *this;
    }
 };

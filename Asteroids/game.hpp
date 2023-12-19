@@ -97,7 +97,8 @@ public:
 
    void update() {
       if (!ship->isNull()) ship->update();
-      for (Laser laser : lasers) laser.update();
+      for (Laser & laser : lasers) laser.update();
+      // timer somehow gets set to 20 here??
       for (Rock * rock : rocks) if (!rock->isNull()) rock->update();
 
       wrap();
