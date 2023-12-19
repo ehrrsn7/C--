@@ -27,7 +27,7 @@ enum gameObjectEnumID {
    playerShip,
    ufo,
    score,
-   level
+   level,
 };
 
 class MovingObject {
@@ -74,7 +74,9 @@ public:
    void update(const Interface & ui) {
       if (!alive) return;
 
-      p.add(v * abs(ui.frameRate()));
+      auto ds = v * abs(ui.frameRate());
+      //if (this->gameObjectID == playerShip) std::cout << "ship ds (" << ui.getHeldKey(keys::SPACE) << ") - " << ds << std::endl;
+      p += v * abs(ui.frameRate());
 
       // update orientation angle ('rotation')
       rotation += dr * abs(ui.frameRate());
@@ -88,7 +90,6 @@ public:
       }
    }
 
-   void displayDebugUpdateInfo();
    void accelerate();
    void hit();
 
@@ -97,8 +98,8 @@ public:
 
    // getters
    bool getFriction()    const { return friction; }
-   bool isAlive()        const { return alive; }
-   bool isNull()         const { return this == NULL || (unsigned long long)this == 0xdddddddddddddddd; }
+   bool isAlive()        const { return isNull() || alive; }
+   bool isNull()         const { return this == nullptr || this == NULL || (unsigned long long)this == 0xdddddddddddddddd; }
    double getMass()      const { return mass; }
    double getMomentum()  const { return mass * v.getMagnitude(); }
    double getRadius()    const { return r; }

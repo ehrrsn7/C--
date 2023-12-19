@@ -13,6 +13,27 @@
 #include "game-objects/moving-objects/movingObject.hpp"
 
 /**********************************************************************
+ * Math functions
+ **********************************************************************/
+
+ /**********************************************************************
+  * Exponential
+  * Implementation of Math.exp from python
+  * Normalize any number within the range [0, 1]
+  **********************************************************************/
+double exp(double x) { return pow(M_E, x); }
+
+/**********************************************************************
+ * Sigmoid
+ * The "squishification" function
+ * Normalize any number within the range [0, 1]
+ * https://stackoverflow.com/questions/62799247/how-to-get-a-sigmoid-function-between-0-and-1-for-probability-of-correct-answer
+ **********************************************************************/
+double sigmoid(double x, double k) {
+   return 1 / (1 + exp(-x / k));
+}
+
+/**********************************************************************
  * Horizontal/Vertical Components
  *    Note: 'Vector&' is polymorphic -- it refers to either itself or
  *    any child of Vector.

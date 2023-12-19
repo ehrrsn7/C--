@@ -7,14 +7,6 @@
 
 #include "movingObject.hpp"
 
-void MovingObject::displayDebugUpdateInfo() {
-    std::cout << name << ".update() :: "
-       << "p.add(v)"
-       << "\t// v: " << v
-       << "\t// p: " << p
-       << "   ";
-}
-
 void MovingObject::setDeathTimer(double duration) {
     timer = duration;
     timerOn = true;
@@ -23,7 +15,7 @@ void MovingObject::setDeathTimer(double duration) {
 void MovingObject::accelerate() {
     if (!alive) return; // quick exit
 
-    v += Acceleration::forward(rotation) * thrust;
+    v += Acceleration::forward(rotation) * thrust * ui.frameRate();
 }
 
 void MovingObject::hit() {

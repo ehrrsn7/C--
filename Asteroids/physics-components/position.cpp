@@ -96,6 +96,36 @@ Position Position::operator- (const Position & rhs) {
 }
 
 /**************************************************
+ * operator +
+ * class: Position
+ * Adds another point to this* and returns it as a new Position
+ **************************************************/
+Position Position::operator+ (const Vector& rhs) const {
+    return Position(x + rhs.getX(), y + rhs.getY());
+}
+
+/**************************************************
+ * operator +=
+ * class: Position
+ * Adds another point to this*
+ **************************************************/
+Position& Position::operator+= (const Vector& rhs) {
+    // add another vector
+    this->add(rhs);
+    return *this;
+}
+
+/**************************************************
+ * operator - (subtraction)
+ * class: Position
+ * Subtracts another point from this*
+ **************************************************/
+Position Position::operator- (const Vector& rhs) {
+    Vector::add(-rhs.getX(), -rhs.getY());
+    return *this;
+}
+
+/**************************************************
  * operator - (negative)
  * class: Position
  * Converts *this into its negative counterpart

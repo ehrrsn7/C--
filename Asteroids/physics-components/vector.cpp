@@ -22,8 +22,8 @@ void Vector::add(const Vector & v) {
 }
 
 void Vector::multiply(double magnitude) {
-   multiplyX(magnitude * sin(getAngleRadians()));
-   multiplyY(magnitude * cos(getAngleRadians()));
+   multiplyX(magnitude * cos(getAngleRadians()));
+   multiplyY(magnitude * sin(getAngleRadians()));
 }
 
 void Vector::setPolar(double magnitude, double angleRadians) {

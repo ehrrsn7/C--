@@ -17,6 +17,12 @@ class MovingObject;
 class Earth;
 
 /**********************************************************************
+ * Math Helper Functions
+ **********************************************************************/
+double exp(double);
+double sigmoid(double x, double k = 0.1);
+
+/**********************************************************************
  * Horizontal/Vertical Components
  **********************************************************************/
 double trigX(const double mag, const double angleRadians);

@@ -40,10 +40,10 @@ public:
       // set parent properties
       setName("Laser");
       setGameObjectID(laser);
-      setPosition(Position(
+      p = Position(
          shipPoint + // initialize at ship's position
-         Velocity::forward(firingAngle) * shipRadius * 6 // offset to front of ship
-      ));
+         Vector::forward(firingAngle) * shipRadius * 6 // offset to front of ship
+      );
       setVelocity(Velocity::forward(firingAngle) * LASER_SPEED); // fire!!
       setDeathTimer(LASER_DEATH_TIME); // set to expire after desired amount (LASER_DEATH_TIME)
    }

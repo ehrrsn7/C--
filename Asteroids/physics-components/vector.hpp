@@ -36,6 +36,11 @@ public:
    Vector & operator = (const Vector & rhs) { // assignment operator '='
       set(rhs.getX(), rhs.getY()); return *this;
    }
+   static Vector & polar(double magnitude, double angleRadians) {
+      Vector v;
+      v.setPolar(magnitude, angleRadians);
+      return v;
+   }
 
    /**************************************************
     * Getters
@@ -138,6 +143,7 @@ public:
    void setPixels(double xPixels, double yPixels);
 
    void add(const Position& p) { Vector::add(p.getX(), p.getY()); }
+   void add(const Vector& s) { Vector::add(s.getX(), s.getY()); }
    void add(const Velocity& dv, double dt);
    void addPixelsX(double dxPixels) { setPixelsX(getPixelsX() + dxPixels);  }
    void addPixelsY(double dyPixels) { setPixelsY(getPixelsY() + dyPixels);  }
@@ -146,15 +152,18 @@ public:
    void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
    void addMeters(double dxMeters, double dyMeters);
 
-  static Position forward(double angleRadians);
+   static Position forward(double angleRadians);
 
    double getZoom() const { return metersFromPixels; }
    void setZoom(double metersFromPixels);
 
    Position operator+ (const Position & rhs) const;
+   Position operator+ (const Vector & rhs) const;
    Position& operator+= (const Position & rhs);
+   Position& operator+= (const Vector & rhs);
 
    Position operator- (const Position & rhs); // subtraction
+   Position operator- (const Vector & rhs);
    Position operator- (); // negative
 
 private:

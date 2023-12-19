@@ -70,7 +70,7 @@ Rock* Game::buildRock(int whichRock, Position pInit, Velocity vInit, bool isInit
 }
 
 Position Game::randomizeRockPInit(const Position & pInit, bool isInitial) {
-   if (ship == NULL) throw "null ship (should not happen here)";
+   if (ship->isNull()) throw "null ship (should not happen here)";
    
    // condition: don't randomize if pInit is non-default
    if (pInit.getMagnitude() >= 10) return pInit;
@@ -122,7 +122,7 @@ void Game::wrap() {
 }
 
 void Game::wrap(MovingObject * obj) {
-   if (obj == NULL) return;
+   if (obj->isNull()) return;
 
    bool debug = false;
    if (debug) printf("wrap() called ");
@@ -172,7 +172,7 @@ void Game::wrap(std::vector<MovingObject *> & objects) {
 
 void Game::handleCollisions() {
    // skip this method if ship is no longer alive
-   if (ship == NULL || !ship->isAlive()) return;
+   if (ship->isNull() || !ship->isAlive()) return;
 
    // handle collisions
    for (Rock * rock : rocks) {
@@ -182,7 +182,7 @@ void Game::handleCollisions() {
 }
 
 void Game::handleCollision(MovingObject * obj, Rock * rock) {
-   if (rock == NULL || !checkCollision(obj, rock)) return;
+   if (rock->isNull() || !checkCollision(obj, rock)) return;
 
    // collision
    splitRock(rock, *obj);
@@ -296,31 +296,26 @@ void Game::cleanUpZombies() {
 }
 
 void Game::cleanUpShip() {
-   if (ship != NULL)
-      if (!ship->isAlive())
-         ship = NULL;
+   if (!ship->isAlive() && !ship->isNull())
+     ship = NULL;
 }
 
 void Game::cleanUpLasers() {
+   if (lasers.empty()) return;
    std::vector<Laser>::iterator it = lasers.begin();
    while (it != lasers.end()) {
-      if (!(*it).isAlive()) {
+      if (!it->isAlive() || it->isNull())
          it = lasers.erase(it);
-         return;
-      }
       else ++it;
    }
 }
 
 void Game::cleanUpRocks() {
+   if (rocks.empty()) return;
    std::vector<Rock*>::iterator it = rocks.begin();
    while (it != rocks.end()) {
-      if ((*it) == NULL) break; // just in case
-      if (!(*it)->isAlive()) {
-         std::cout << "removing " << (*it)->getName() << std::endl;
+      if (!(*it)->isAlive() || (*it)->isNull())
          it = rocks.erase(it);
-         return;
-      }
       else ++it;
    }
 }
