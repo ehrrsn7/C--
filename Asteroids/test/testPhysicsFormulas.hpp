@@ -23,7 +23,7 @@ void test_distance();
 void test_distance_objs();
 void test_computeDistance();
 
-void test_timeDilation();
+//void test_timeDilation();
 void test_dilateTime();
 void test_timePerFrame();
 

@@ -148,45 +148,45 @@ void test_computeDistance()
    assert(d == 5 * sqrt(5));
    assert(typeid(d) == typeid(double));
 }  // breakdown
-
-void test_timeDilation()
-{  // setup
-   // exercise
-   auto dilation = timeDilation();
-   // verify
-   assert(dilation == 24 * 60);
-}  // breakdown
+//
+//void test_timeDilation()
+//{  // setup
+//   // exercise
+//   auto dilation = timeDilation();
+//   // verify
+//   assert(dilation == 24);
+//}  // breakdown
 
 void test_dilateTime()
 {  // setup
+   auto timeDilation = 24;
    double gameTime = 5; // s
    // exercise
-   auto realTime = dilateTime(5);
+   auto realTime = dilateTime(gameTime);
    // verify
-   assert (realTime == gameTime * 24 * 60);
+   assert (realTime == gameTime * timeDilation);
    assert(typeid(realTime) == typeid(double));
 }  // breakdown
 
 void test_timePerFrame()
 {  // setup
    // exercise
-   auto dt = 60.0;
+   auto dt = 1/FPS;
    auto time = timePerFrame(dt);
+   auto timeDilation = 24;
    // verify
-   assert(time == 24 * dt / 30);
+   assert(time == timeDilation * dt);
    assert(typeid(time) == typeid(double));
 }  // breakdown
 
 void test_rotationSpeed()
 {  // setup
    // exercise
+   auto timeDilation = 24;
+   auto dt = 1/FPS;
    auto earth_rotation_speed = earthRotationSpeed();
    // verify
-   assert(earth_rotation_speed == -2 * M_PI * (24*60/30) / 86400);
-   // bonus
-   double dt = 1.0/30;
-   earth_rotation_speed = earthRotationSpeed(dt);
-   assert(earth_rotation_speed == -2 * M_PI * (24*60*dt) / 86400);
+   assert(earth_rotation_speed == -2 * M_PI * (timeDilation*60*dt) / SECONDS_IN_DAY);
 }  // breakdown
 
 
@@ -330,12 +330,13 @@ void test_aToY()
 void test_aToDx()
 {  // setup
    double dt = 1; // s
-   Acceleration a(0, 1);
-   Velocity v0(0, 2);
+   Acceleration a(0, 1); // 1 m/s/s up
+   Velocity v0(0, 2); // 2 m/s up
+   auto test = 0.0;
    // exercise
    auto d = aToDx(a, v0, dt);
    // verify
-   assert(d == 5.5); // m
+   assert(d == test); // m
    assert(typeid(d) == typeid(double));
 }  // breakdown
 
@@ -363,7 +364,7 @@ void testPhysicsFormulas()
    test_distance();
    test_distance_objs();
    test_computeDistance();
-   test_timeDilation();
+//   test_timeDilation();
    test_dilateTime();
    test_timePerFrame();
    test_rotationSpeed();

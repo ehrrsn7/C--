@@ -108,7 +108,7 @@ double distance(MovingObject& obj1, MovingObject& obj2) {
  *    hours in day - 24
  *    minutes in hour - 60
  **************************************************/
-double timeDilation() {return 24 * 60; }
+double timeDilation() {return 24; }
 
 /**************************************************
 * dilate time

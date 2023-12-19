@@ -24,10 +24,6 @@ void Rock::initializePosition() {
    getPosition().setY(random(-500.0, 500.0));
 }
 
-void Rock::initializePosition(Position pInit) {
-   setPosition(pInit);
-}
-
 void Rock::initializeVelocity() {
    std::cout << "Rock::initializeVelocity()\n";
    // launch in random direction
@@ -37,8 +33,9 @@ void Rock::initializeVelocity() {
    std::cout << "initialForce - " << initialForce
        << " initialAcceleration - " << initialAcceleration
        << " impulseTime - " << impulseTime
+       << " dv result - " << initialAcceleration * impulseTime
        << std::endl;
-   setVelocity(getVelocity() + (initialAcceleration * impulseTime));
+   v += initialAcceleration * impulseTime;
 }
 
 void Rock::initializeVelocity(Velocity vInit) {

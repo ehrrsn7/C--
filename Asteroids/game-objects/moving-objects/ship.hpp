@@ -73,36 +73,29 @@ protected:
    
 public:
    Ship(const Interface & ui, bool brake = false, bool friction = false) : MovingObject(ui) {
-      setName("Player Ship");
-      setGameObjectID(playerShip);
-      setThrust(SHIP_ACCELERATE_AMOUNT);
-      setRadius(SHIP_RADIUS);
-      setRotation(rad(SHIP_INITIAL_ANGLE));
-      setFriction(friction);
+      name = "Player Ship";
+      gameObjectID = playerShip;
+      thrust = SHIP_ACCELERATE_AMOUNT;
+      r = SHIP_RADIUS;
+      rotation = rad(SHIP_INITIAL_ANGLE);
+      this->friction = friction;
       brakesAmount = Velocity();
       frictionAmount = Velocity();
-      laserFiringDelayTimer = 0.0;
+      laserFiringDelayTimer = 0.0; // ! - maybe make this nullable?
       this->brake = brake;
    }
 
    void display() override {
-      drawShip(
-         getPosition(), 
-         deg(getRotation()) - SHIP_INITIAL_ANGLE, 
-         getRadius()
-      );
+      double a = deg(rotation) - SHIP_INITIAL_ANGLE;
+      drawShip(p, a, r);
+      std::cout << p << std::endl;
    }
 
    void update() override {
       if (!isAlive() || isNull()) return; // quick exit
-
-      // decrement laser firing delay timer
       updateLaserFiringDelayTimer();
-
       applyBrakes();
-      
       applyFriction();
-
       limitSpeed();
    }
 
@@ -110,13 +103,13 @@ public:
       if (!isAlive() || isNull()) return; // quick exit
       switch (direction) {
       case keys::LEFT:
-         rotation = SHIP_ROTATE_AMOUNT;
+         rotation += SHIP_ROTATE_AMOUNT * ui.frameRate();
          break;
       case keys::RIGHT:
-         rotation = -SHIP_ROTATE_AMOUNT;
+         rotation -= SHIP_ROTATE_AMOUNT * ui.frameRate();
          break;
       default:
-         rotation = 0.0;
+         // rotation = 0.0;
          break;
       }
    }

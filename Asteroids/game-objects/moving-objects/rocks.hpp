@@ -73,12 +73,12 @@ public:
 
    void display() override {
       // Draw asteroid at Position p and angle r
-      drawLargeAsteroid(getPosition(), getRotation());
+      drawLargeAsteroid(p, rotation);
    }
 
    void initializeRotation();
    void initializePosition();
-   void initializePosition(Position pInit);
+   void initializePosition(Position pInit) { p = pInit; }
    void initializeVelocity();
    void initializeVelocity(Velocity vInit);
 
@@ -120,55 +120,51 @@ public:
 class BigRock : public Rock {
 public:
    BigRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
-      setName("Big Rock");
-      setGameObjectID(rock);
+      name = "Big Rock";
+      gameObjectID = bigRock;
       rockIndex = bigRock;
-      setRadius(BIG_ROCK_RADIUS);
-      setRotation(BIG_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
-      setScoreAmount(BIG_ROCK_SCORE);
+      r = BIG_ROCK_RADIUS;
+      rotation = BIG_ROCK_ROTATE_SPEED * random(-1.0, 1.0);
+      scoreAmount = BIG_ROCK_SCORE;
    }
 };
 
 class MediumRock : public Rock {
 public:
    MediumRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
-      setName("Medium Rock");
-      setGameObjectID(mediumRock);
+      name = "Medium Rock";
+      gameObjectID = mediumRock;
       rockIndex = mediumRock;
-      setRadius(MEDIUM_ROCK_RADIUS);
-      setRotation(MEDIUM_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
-      setScoreAmount(MEDIUM_ROCK_SCORE);
+      r = MEDIUM_ROCK_RADIUS;
+      rotation = MEDIUM_ROCK_ROTATE_SPEED * random(-1.0, 1.0);
+      scoreAmount = MEDIUM_ROCK_SCORE;
    }
 
    MediumRock(const Interface & ui, Position pInit, Velocity vInit, Velocity vShipInit) :
       MediumRock(ui, pInit, vInit)
    {
-      setVelocity(getVelocity() + vShipInit);
+      setVelocity(v + vShipInit);
    }
 
-   void display() override {
-      drawMediumAsteroid(getPosition(), getRotation());
-   }
+   void display() override { drawMediumAsteroid(p, rotation); }
 };
 
 class SmallRock : public Rock {
 public:
    SmallRock(const Interface & ui, Position pInit, Velocity vInit) : Rock(ui, pInit, vInit) {
-      setName("Small Rock");
-      setGameObjectID(smallRock);
-      rockIndex = bigRock;
-      setRadius(SMALL_ROCK_RADIUS);
-      setRotation(SMALL_ROCK_ROTATE_SPEED * random(-1.0, 1.0));
-      setScoreAmount(SMALL_ROCK_SCORE);
+      name = "Small Rock";
+      gameObjectID = smallRock;
+      rockIndex = smallRock;
+      r = SMALL_ROCK_RADIUS;
+      rotation = SMALL_ROCK_ROTATE_SPEED * random(-1.0, 1.0);
+      scoreAmount = SMALL_ROCK_SCORE;
    }
 
    SmallRock(const Interface & ui, Position pInit, Velocity vInit, Velocity vShipInit) :
       SmallRock(ui, pInit, vInit)
    {
-      setVelocity(getVelocity() + vShipInit);
+      setVelocity(v + vShipInit);
    }
 
-   void display() override {
-      drawSmallAsteroid(getPosition(), getRotation());
-   }
+   void display() override { drawSmallAsteroid(p, rotation); }
 };

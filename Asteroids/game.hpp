@@ -138,15 +138,18 @@ public:
 
          // up
          // accelerate ship
-         if (ui.getHeldKey(keys::UP)) ship->accelerate();
+         if (ui.getHeldKey(keys::UP))
+            ship->accelerate();
 
          // down
          // apply ship 'brakes'
-         if (ui.getHeldKey(keys::DOWN)) ship->enableBrakes();
+         if (ui.getHeldKey(keys::DOWN))
+            ship->enableBrakes();
 
          // space
          // fire laser
-         if (ui.getHeldKey(keys::SPACE)) fireLaser();
+         if (ui.getHeldKey(keys::SPACE))
+            fireLaser();
 
          // left / right
          // rotate (accordingly)
