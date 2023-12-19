@@ -29,8 +29,8 @@
 
 #define SHIP_ROTATE_AMOUNT 15 // in rad/s
 #define SHIP_INITIAL_ANGLE 90
-#define SHIP_ACCELERATE_AMOUNT 2.0
-#define SHIP_SPEED_LIMIT 15 // pixels per second
+#define SHIP_ACCELERATE_AMOUNT 2000.0 // pixels per second per second
+#define SHIP_SPEED_LIMIT 500 // pixels per second
 #define SHIP_BRAKES_AMOUNT 10
 #define SHIP_FRICTION_AMOUNT 1
 #define SHIP_RADIUS 2 // px
@@ -67,7 +67,7 @@ public:
       );
    }
 
-   void update(const Interface & ui) {
+   void update(const Interface & ui) override {
       if (!isAlive() || isNull()) return; // quick exit
 
       MovingObject::update(ui);

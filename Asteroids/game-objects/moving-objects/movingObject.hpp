@@ -71,21 +71,19 @@ public:
        i(0) // debug
    { }
 
-   void update(const Interface & ui) {
+   virtual void update(const Interface & ui) {
       if (!alive) return;
 
-      auto ds = v * abs(ui.frameRate());
-      //if (this->gameObjectID == playerShip) std::cout << "ship ds (" << ui.getHeldKey(keys::SPACE) << ") - " << ds << std::endl;
       p += v * abs(ui.frameRate());
 
       // update orientation angle ('rotation')
       rotation += dr * abs(ui.frameRate());
-      if (rotation < 0) rotation = M_PI * 2;
-      else if (rotation > M_PI * 2) rotation = 0;
+      /*if (rotation < 0) rotation = M_PI * 2;
+      else if (rotation > M_PI * 2) rotation = 0;*/
 
-      // update timer (if timer == 0, do nothing)
       if (timerOn) {
-         if (timer > 0) timer -= 1.0;
+         // update timer (if timer == 0, kill obj)
+         if (timer > 0) timer -= ui.frameRate();
          else alive = false;
       }
    }
