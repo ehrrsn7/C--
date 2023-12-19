@@ -19,7 +19,7 @@
 #include "ui/uiDraw"
 #endif
 
-#define FIRE_DELAY_TIME .05 // laser firing rate delay in seconds
+#define FIRE_DELAY_TIME .1 // laser firing rate delay in seconds
 #define LASER_SPEED 10 // speed in pixels/frame
 #define LASER_DEATH_TIME 20 // laser expiration time in seconds / 4
 #define LASER_MASS 5 // kg
@@ -57,6 +57,10 @@ public:
    }
 
    void display() override { drawDot(getPosition()); }
+   void update() override {
+      MovingObject::update();
+      std::cout << "laser v " << v << std::endl;
+   }
    
    // assignment operator '='
    Laser & operator = (const Laser & rhs) {

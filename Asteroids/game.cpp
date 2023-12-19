@@ -40,13 +40,7 @@ void Game::fireLaser() {
    // get new laser from ship->fire()
    // push new laser onto lasers (vector<>)
    if (ship->getLaserFiringDelayTimer() > 0) return;
-   /*std::cout
-       << "space key held: "
-       << ((bool)ui.getHeldKey(keys::SPACE) ? "true" : "false")
-       << " -- " 
-       << "laser firing delay in game.cpp: "
-       << ship->getLaserFiringDelayTimer()
-       << std::endl;*/
+   std::cout << "firing laser\n";
 
    lasers.push_back(ship->fire());
    ship->setLaserFiringDelayTimer();

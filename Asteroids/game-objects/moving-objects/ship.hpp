@@ -22,15 +22,15 @@
 #include "ui/uiInteract"
 #endif
 
-#define SHIP_ROTATE_AMOUNT 15 // in rad/s
-#define SHIP_INITIAL_ANGLE 90
-#define SHIP_ACCELERATE_AMOUNT 2000.0 // pixels per second per second
-#define SHIP_SPEED_LIMIT 500 // pixels per second
-#define SHIP_BRAKES_AMOUNT 10
-#define SHIP_FRICTION_AMOUNT 1
-#define SHIP_RADIUS 2 // px
-#define SHIP_MASS 200 // kg
-#define SHIP_MAX_SPEED 500 // px/s
+#define SHIP_ROTATE_AMOUNT 15.0 // in rad/s
+#define SHIP_INITIAL_ANGLE 90.0
+#define SHIP_ACCELERATE_AMOUNT 700.0 // pixels per second per second
+#define SHIP_SPEED_LIMIT 1000.0 // pixels per second
+#define SHIP_BRAKES_AMOUNT 1.0
+#define SHIP_FRICTION_AMOUNT 1.0
+#define SHIP_RADIUS 2.0 // px
+#define SHIP_MASS 200.0 // kg
+#define SHIP_MAX_SPEED 500.0 // px/s
 
 class Ship : public MovingObject {
 
@@ -46,7 +46,7 @@ protected:
       // limit speed
       if (v.getMagnitude() > SHIP_MAX_SPEED) {
          std::cout << "Max speed (" << SHIP_MAX_SPEED << ") reached.\n";
-         enableBrakes();
+         applyBrakes();
       }
    }
    
@@ -64,11 +64,8 @@ protected:
       if (abs(v.getMagnitude()) <= 0.01) return;
       
       // apply brakes
-      if (brake) {
-         auto dv_percent_brakes = 1 - (30 * sigmoid(SHIP_BRAKES_AMOUNT) * abs(ui.frameRate()));
-         v *= dv_percent_brakes;
-         brake = false; // unset after pressing the brake button
-      }
+      auto dv_percent_brakes = 1 - (30 * sigmoid(SHIP_BRAKES_AMOUNT) * abs(ui.frameRate()));
+      v *= dv_percent_brakes;
    }
    
 public:
@@ -88,15 +85,16 @@ public:
    void display() override {
       double a = deg(rotation) - SHIP_INITIAL_ANGLE;
       drawShip(p, a, r);
-      std::cout << p << std::endl;
    }
 
    void update() override {
       if (!isAlive() || isNull()) return; // quick exit
+      if (brake) applyBrakes();
+      MovingObject::update();
       updateLaserFiringDelayTimer();
-      applyBrakes();
       applyFriction();
       limitSpeed();
+      std::cout << "ship v " << v << std::endl;
    }
 
    void rotate(keys direction) {
@@ -109,7 +107,6 @@ public:
          rotation -= SHIP_ROTATE_AMOUNT * ui.frameRate();
          break;
       default:
-         // rotation = 0.0;
          break;
       }
    }
@@ -119,8 +116,8 @@ public:
    double getLaserFiringDelayTimer() const { return laserFiringDelayTimer; }
 
    // setters
-   void enableBrakes() { brake = true; }
-   void setLaserFiringDelayTimer() { laserFiringDelayTimer = FIRE_DELAY_TIME; } /* from laser.hpp */
+   void enableBrakes(bool brake = true) { this->brake = brake; }
+   void setLaserFiringDelayTimer(double delay = FIRE_DELAY_TIME) { laserFiringDelayTimer = delay; } /* from laser.hpp */
    void stopRotating() { setRotation(0.0); }
 
    void updateLaserFiringDelayTimer() {

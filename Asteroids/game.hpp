@@ -142,9 +142,8 @@ public:
             ship->accelerate();
 
          // down
-         // apply ship 'brakes'
-         if (ui.getHeldKey(keys::DOWN))
-            ship->enableBrakes();
+         // tell ship to apply 'brakes'
+         ship->enableBrakes(ui.getHeldKey(keys::DOWN));
 
          // space
          // fire laser
