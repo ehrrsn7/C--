@@ -14,17 +14,12 @@
 #include "laser.hpp"
 
 #ifdef __APPLE__
+#include "physicsFormulas.hpp"
 #include "uiInteract.hpp"
 #endif
 #ifdef _WIN32
-#include "ui/uiInteract.hpp"
-#endif
-
-#ifdef __APPLE__
-#include "physicsFormulas.hpp"
-#endif
-#ifdef _WIN32
 #include "physics-components/physicsFormulas.hpp"
+#include "ui/uiInteract"
 #endif
 
 #define SHIP_ROTATE_AMOUNT 15 // in rad/s
@@ -45,6 +40,37 @@ protected:
    double laserFiringDelayTimer;
    bool brake;
 
+   void limitSpeed() {
+      if (abs(v.getMagnitude()) <= 0.01) return;
+      
+      // limit speed
+      if (v.getMagnitude() > SHIP_MAX_SPEED) {
+         std::cout << "Max speed (" << SHIP_MAX_SPEED << ") reached.\n";
+         enableBrakes();
+      }
+   }
+   
+   void applyFriction() {
+      if (abs(v.getMagnitude()) <= 0.01) return;
+      
+      // apply friction
+      if (friction) {
+         auto dv_percent_friction = 1 - (30 * sigmoid(SHIP_FRICTION_AMOUNT) * abs(ui.frameRate()));
+         v *= dv_percent_friction;
+      }
+   }
+   
+   void applyBrakes() {
+      if (abs(v.getMagnitude()) <= 0.01) return;
+      
+      // apply brakes
+      if (brake) {
+         auto dv_percent_brakes = 1 - (30 * sigmoid(SHIP_BRAKES_AMOUNT) * abs(ui.frameRate()));
+         v *= dv_percent_brakes;
+         brake = false; // unset after pressing the brake button
+      }
+   }
+   
 public:
    Ship(const Interface & ui, bool brake = false, bool friction = false) : MovingObject(ui) {
       setName("Player Ship");
@@ -67,33 +93,17 @@ public:
       );
    }
 
-   void update(const Interface & ui) override {
+   void update() override {
       if (!isAlive() || isNull()) return; // quick exit
-
-      MovingObject::update(ui);
-
-      auto dv_percent_brakes = !brake || abs(v.getMagnitude()) <= 0.01 ? 1 : 1 - (30 * sigmoid(SHIP_BRAKES_AMOUNT) * abs(ui.frameRate()));
-      auto dv_percent_friction = !brake || abs(v.getMagnitude()) <= 0.01 ? 1 : 1 - (30 * sigmoid(SHIP_FRICTION_AMOUNT) * abs(ui.frameRate()));
-      std::cout << "ship speed " << (v.getMagnitude() > .01 ? v.getMagnitude() : 0) << " "
-          << "brakes amount " << dv_percent_brakes * 100 << "% "
-          << "friction amount " << dv_percent_friction * 100 << "% "
-          << std::endl;
-
-      // apply brakes
-      v *= dv_percent_brakes;
-      if (brake) brake = false; // unset after pressing the brake button
-
-      // apply friction
-      v *= dv_percent_friction;
 
       // decrement laser firing delay timer
       updateLaserFiringDelayTimer();
 
-      // limit speed
-      if (v.getMagnitude() > SHIP_MAX_SPEED) {
-         std::cout << "Max speed (" << SHIP_MAX_SPEED << ") reached.\n";
-         applyBrakes();
-      }
+      applyBrakes();
+      
+      applyFriction();
+
+      limitSpeed();
    }
 
    void rotate(keys direction) {
@@ -116,7 +126,7 @@ public:
    double getLaserFiringDelayTimer() const { return laserFiringDelayTimer; }
 
    // setters
-   void applyBrakes() { brake = true; }
+   void enableBrakes() { brake = true; }
    void setLaserFiringDelayTimer() { laserFiringDelayTimer = FIRE_DELAY_TIME; } /* from laser.hpp */
    void stopRotating() { setRotation(0.0); }
 

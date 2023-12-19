@@ -39,7 +39,12 @@
 
 #include <unordered_map> // used to hash heldKeys<bool>
 
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
 
 enum class keys {
    SPACE = GLUT_KEY_HOME,
@@ -76,7 +81,7 @@ public:
    ~Interface();
 
    // This will set the game in motion
-   void run(void (*callBack)(const Interface *, void *), void *p);
+   void run(void (*callBack)(void *), void *p);
 
    // Is it time to redraw the screen
    bool isTimeToDraw();
@@ -102,7 +107,7 @@ public:
    double frameRate() const { return timePeriod; };
 
    static void *p;                     // for client
-   static void (*callBack)(const Interface *, void *);
+   static void (*callBack)(void *);
 
 private:
    void initialize(int argc, char ** argv, const char * title, Position topLeft, Position bottomRight);

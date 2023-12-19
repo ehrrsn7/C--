@@ -11,15 +11,10 @@
 
 #ifdef __APPLE__
 #include "physicsFormulas.hpp"
-#endif
-#ifdef _WIN32
-#include "physics-components/physicsFormulas.hpp"
-#endif
-
-#ifdef __APPLE__
 #include "vector.hpp"
 #endif
 #ifdef _WIN32
+#include "physics-components/physicsFormulas.hpp"
 #include "physics-components/vector.hpp"
 #endif
 

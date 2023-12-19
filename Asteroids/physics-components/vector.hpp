@@ -36,7 +36,7 @@ public:
    Vector & operator = (const Vector & rhs) { // assignment operator '='
       set(rhs.getX(), rhs.getY()); return *this;
    }
-   static Vector & polar(double magnitude, double angleRadians) {
+   static Vector polar(double magnitude, double angleRadians) {
       Vector v;
       v.setPolar(magnitude, angleRadians);
       return v;

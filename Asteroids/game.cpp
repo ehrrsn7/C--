@@ -9,7 +9,13 @@
 #include <algorithm>
 
 #include "game.hpp"
+
+#ifdef __APPLE__
+#include "physicsFormulas.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/physicsFormulas.hpp"
+#endif
 
 // initialization
 void Game::setUpScreen(const Position & tl, const Position & br) {

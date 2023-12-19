@@ -10,12 +10,13 @@
  *    (variables) or a mixture (objects)
  ************************************************************************/
 
+#include "uiDraw.hpp"
+
 #include <string>     // need you ask?
 #include <sstream>    // convert an integer into text
 #include <cassert>    // I feel the need... the need for asserts
 #include <time.h>     // for clock
 #include <iostream>   // debugging
-
 
 #ifdef __APPLE__
 #include <openGL/gl.h>    // Main OpenGL library
@@ -35,8 +36,12 @@
 #include <math.h>
 #endif // _WIN32
 
-#include "uiDraw.hpp"
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
 
 using namespace std;
 

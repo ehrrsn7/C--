@@ -71,7 +71,7 @@ public:
        i(0) // debug
    { }
 
-   virtual void update(const Interface & ui) {
+   virtual void update() {
       if (!alive) return;
 
       p += v * abs(ui.frameRate());

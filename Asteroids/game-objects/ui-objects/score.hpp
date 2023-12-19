@@ -12,15 +12,10 @@
 
 #ifdef __APPLE__
 #include "uiDraw.hpp"
-#endif
-#ifdef _WIN32
-#include "ui/uiDraw.hpp"
-#endif
-
-#ifdef __APPLE__
 #include "vector.hpp"
 #endif
 #ifdef _WIN32
+#include "ui/uiDraw.hpp"
 #include "physics-components/vector.hpp"
 #endif
 

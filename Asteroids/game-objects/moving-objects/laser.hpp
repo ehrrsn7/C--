@@ -12,16 +12,11 @@
 
 #ifdef __APPLE__
 #include "vector.hpp"
-#endif
-#ifdef _WIN32
-#include "physics-components/vector.hpp"
-#endif
-
-#ifdef __APPLE__
 #include "uiDraw.hpp"
 #endif
 #ifdef _WIN32
-#include "ui/uiDraw.hpp"
+#include "physics-components/vector.hpp"
+#include "ui/uiDraw"
 #endif
 
 #define FIRE_DELAY_TIME .05 // laser firing rate delay in seconds

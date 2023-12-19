@@ -49,7 +49,7 @@ ASTEROIDS
  * engine will wait until the proper amount of
  * time has passed and put the drawing on the screen.
  **************************************/
-void update(const Interface * pUI, void * p) {
+void update(void * p) {
     Game *pGame = (Game *) p;
 
     pGame->update();

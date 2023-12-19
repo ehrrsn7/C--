@@ -15,7 +15,12 @@
 #include <string>     // To display text on the screen
 #include <cmath>      // for M_PI, sin() and cos()
 
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
+#endif
 
 using std::string;
 

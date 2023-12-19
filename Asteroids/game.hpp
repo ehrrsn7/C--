@@ -13,8 +13,15 @@
 #include <vector> // dynamic arrays
 #include <map> // held keys
 #include <cmath>
+ 
+// coordinates
+#ifdef __APPLE__
+#include "physics-components/vector.hpp"
+#endif
+#ifdef _WIN32
+#include "vector.hpp"
+#endif
 
-#include "physics-components/vector.hpp" // coordinates
 #include "ui/uiInteract.hpp" // user interaction
 
 // import game objects
@@ -89,9 +96,9 @@ public:
    ~Game() {}
 
    void update() {
-      ship->update(ui);
-      for (Laser laser : lasers) laser.update(ui);
-      for (Rock * rock : rocks) rock->update(ui);
+      if (!ship->isNull()) ship->update();
+      for (Laser laser : lasers) laser.update();
+      for (Rock * rock : rocks) if (!rock->isNull()) rock->update();
 
       wrap();
       handleCollisions();
@@ -135,7 +142,7 @@ public:
 
          // down
          // apply ship 'brakes'
-         if (ui.getHeldKey(keys::DOWN)) ship->applyBrakes();
+         if (ui.getHeldKey(keys::DOWN)) ship->enableBrakes();
 
          // space
          // fire laser

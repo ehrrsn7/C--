@@ -10,6 +10,8 @@
  *     pointer towards the bottom of the file.
  ************************************************************************/
 
+#include "uiInteract.hpp"
+
 #include <string>     // need you ask?
 #include <sstream>    // convert an integer into text
 #include <cassert>    // I feel the need... the need for asserts
@@ -37,8 +39,12 @@
 #include <math.h>
 #endif // _WIN32
 
+#ifdef __APPLE__
+#include "vector.hpp"
+#endif
+#ifdef _WIN32
 #include "physics-components/vector.hpp"
-#include "uiInteract.hpp"
+#endif
 
 using namespace std;
 
@@ -90,7 +96,7 @@ void drawCallback()
    
    //calls the client's display function
    assert(ui.callBack != NULL);
-   ui.callBack(&ui, ui.p);
+   ui.callBack(ui.p);
    
    //loop until the timer runs out
    if (!ui.isTimeToDraw())
@@ -257,7 +263,7 @@ unsigned int Interface::nextTick     = 0;        // redraw now please
 void *       Interface::p            = NULL;
 
 // set callback to null
-void (*Interface::callBack)(const Interface *, void *) = NULL;
+void (*Interface::callBack)(void *) = NULL;
 
 // held keys
 std::unordered_map<keys, bool> Interface::heldKeys {
@@ -336,7 +342,7 @@ void Interface::initialize(int argc, char ** argv, const char * title, Position 
  *                   will need to cast this back to your own data
  *                   type before using it.
  *************************************************************************/
-void Interface::run(void (*callBack)(const Interface *, void *), void *p)
+void Interface::run(void (*callBack)(void *), void *p)
 {
    // setup the callbacks
    this->p = p;

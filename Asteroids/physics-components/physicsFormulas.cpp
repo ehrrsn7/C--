@@ -5,12 +5,16 @@
  * helper function does not retain state)
  **********************************************************************/
 
-#include "physicsFormulas.hpp"  // header file
+#include "physicsFormulas.hpp" // header file
 
-#include <cmath>              // for math functions
+#include <cmath>
 
-// for MovingObject
+#ifdef __APPLE__
+#include "movingObject.hpp"
+#endif
+#ifdef _WIN32
 #include "game-objects/moving-objects/movingObject.hpp"
+#endif
 
 /**********************************************************************
  * Math functions

@@ -5,12 +5,18 @@
 
 #include "testPhysicsFormulas.hpp"
 
+#ifdef __APPLE__
 #include "physicsFormulas.hpp"  // functions to test
 #include "vector.hpp"           // for Vector/children
 #include "movingObject.hpp"     // for MovingObject
 #include "uiInteract.hpp"       // for timestamp and seconds typedefs
-//#include "earth.hpp"            // for earth constants
-//#include "satellite.hpp"        // for test involving gravity, we'll use sputnik for an example
+#endif
+#ifdef _WIN32
+#include "physics-components/physicsFormulas.hpp"
+#include "physics-components/vector.hpp"
+#include "game-objects/moving-objects/movingObject.hpp"
+#include "ui/uiInteract.hpp"
+#endif
 
 // assert helpers
 double nearest(double num, int precision)
