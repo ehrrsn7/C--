@@ -31,25 +31,6 @@ enum gameObjectEnumID {
 };
 
 class MovingObject {
-   
-private:
-   void updateTimer() {
-      if (!timerOn || timer <= 0) return;
-      timer -= ui.frameRate();
-      hit();
-   }
-   
-   void updateRotation() {
-      // update orientation angle ('rotation')
-      rotation += dr * abs(ui.frameRate());
-//      if (rotation < 0) rotation = M_PI * 2;
-//      else if (rotation > M_PI * 2) rotation = 0;
-   }
-   
-   void updatePosition() {
-      p += v * abs(ui.frameRate());
-   }
-   
 protected:
    bool alive; // is alive y/n
    bool brake; // apply brakes/slow down object when brakes are activated
@@ -70,6 +51,10 @@ protected:
    Velocity v;
    const Interface & ui;
 
+   void updateTimer();
+   void updateRotation();
+   void updatePosition();
+   
 public:
    MovingObject(const Interface & ui) :
        alive(true), // is alive y/n

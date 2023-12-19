@@ -13,12 +13,28 @@ void MovingObject::setDeathTimer(double duration) {
 }
 
 void MovingObject::accelerate() {
-    if (!isAlive()) return; // quick exit
-
-    v += Acceleration::forward(rotation) * thrust * ui.frameRate();
+   if (!isAlive()) return; // quick exit
+   v += Acceleration::forward(rotation) * thrust * ui.frameRate();
 }
 
 void MovingObject::hit() {
-    setAlive(false);
-    std::cout << name << ".hit() " << std::endl;
+   setAlive(false);
+   std::cout << name << ".hit() " << std::endl;
+}
+
+void MovingObject::updateTimer() {
+   if (!timerOn) return;
+   if (timer > 0) timer -= ui.frameRate();
+   if (timer <= 0) hit();
+}
+
+void MovingObject::updateRotation() {
+   // update orientation angle ('rotation')
+   rotation += dr * abs(ui.frameRate());
+   if (rotation < 0) rotation = M_PI * 2;
+   else if (rotation > M_PI * 2) rotation = 0;
+}
+
+void MovingObject::updatePosition() {
+   p += v * abs(ui.frameRate());
 }

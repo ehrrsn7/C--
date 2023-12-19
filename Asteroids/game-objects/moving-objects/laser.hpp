@@ -20,8 +20,8 @@
 #endif
 
 #define FIRE_DELAY_TIME .1 // laser firing rate delay in seconds
-#define LASER_SPEED 10 // speed in pixels/frame
-#define LASER_DEATH_TIME 20 // laser expiration time in seconds / 4
+#define LASER_SPEED 100 // speed in pixels/frame
+#define LASER_DEATH_TIME 2 // laser expiration time in seconds
 #define LASER_MASS 5 // kg
 
 #define ALIVE true
@@ -40,7 +40,7 @@ private:
    }
    
    Velocity launch(double firingAngle) {
-      return Velocity::forward(firingAngle * LASER_SPEED);
+      return Velocity::forward(firingAngle) * LASER_SPEED;
    }
    
 public:
@@ -53,6 +53,7 @@ public:
       p = offsetToShipPosition(firingAngle, shipPoint, shipRadius);
       v = launch(firingAngle); // fire!!
       setDeathTimer(LASER_DEATH_TIME); // sets timerOn to true
+      std::cout << "laser v " << v << std::endl;
    }
 
    void display() override { drawDot(getPosition()); }

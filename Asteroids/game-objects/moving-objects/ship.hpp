@@ -22,7 +22,7 @@
 #include "ui/uiInteract"
 #endif
 
-#define SHIP_ROTATE_AMOUNT 15.0 // in rad/s
+#define SHIP_ROTATE_AMOUNT 5.0 // in rad/s
 #define SHIP_INITIAL_ANGLE 90.0
 #define SHIP_ACCELERATE_AMOUNT 700.0 // pixels per second per second
 #define SHIP_SPEED_LIMIT 1000.0 // pixels per second
@@ -111,7 +111,13 @@ public:
    }
 
    // getters
-   Laser fire() { return Laser(ui, rotation, p, v, r); }
+   Laser fire() {
+      auto ang = rotation; // - rad(SHIP_INITIAL_ANGLE);
+      std::cout << "laser fire angle " << deg(ang) << "º\n";
+      setLaserFiringDelayTimer();
+      return Laser(ui, ang, p, v, r);
+   }
+   
    double getLaserFiringDelayTimer() const { return laserFiringDelayTimer; }
 
    // setters

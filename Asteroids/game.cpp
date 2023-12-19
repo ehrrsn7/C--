@@ -35,15 +35,10 @@ void Game::setUpScreen(const Position & tl, const Position & br) {
 
 void Game::fireLaser() {
    // handle "machine gun firing here"
-   // define firing rate above
-   // (at desired rate:)
    // get new laser from ship->fire()
    // push new laser onto lasers (vector<>)
    if (ship->getLaserFiringDelayTimer() > 0) return;
-   std::cout << "firing laser\n";
-
    lasers.push_back(ship->fire());
-   ship->setLaserFiringDelayTimer();
 }
 
 double dist(Position & p1, Position & p2) {
