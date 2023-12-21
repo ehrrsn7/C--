@@ -78,13 +78,14 @@ public:
       this->friction = friction;
       brakesAmount = Velocity();
       frictionAmount = Velocity();
-      laserFiringDelayTimer = 0.0; // ! - maybe make this nullable?
+      laserFiringDelayTimer = 0.0;
       this->brake = brake;
    }
 
    void display() override {
       double a = deg(rotation) - SHIP_INITIAL_ANGLE;
       drawShip(p, a, r);
+      if (ui.getShowCircle()) drawCircle(p, r * 2);
    }
 
    void update() override {
@@ -112,10 +113,8 @@ public:
 
    // getters
    Laser fire() {
-      auto ang = rotation; // - rad(SHIP_INITIAL_ANGLE);
-      std::cout << "laser fire angle " << deg(ang) << "º\n";
       setLaserFiringDelayTimer();
-      return Laser(ui, ang, p, v, r);
+      return Laser(ui, this);
    }
    
    double getLaserFiringDelayTimer() const { return laserFiringDelayTimer; }
@@ -123,7 +122,7 @@ public:
    // setters
    void enableBrakes(bool brake = true) { this->brake = brake; }
    void setLaserFiringDelayTimer(double delay = FIRE_DELAY_TIME) { laserFiringDelayTimer = delay; } /* from laser.hpp */
-   void stopRotating() { setRotation(0.0); }
+   void stopRotating() { da = 0.0; }
 
    void updateLaserFiringDelayTimer() {
       if (laserFiringDelayTimer < 0.0) return;

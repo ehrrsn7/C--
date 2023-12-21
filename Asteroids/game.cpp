@@ -64,46 +64,28 @@ Rock* Game::buildRock(int whichRock, Position pInit, Velocity vInit, bool isInit
    }
 }
 
+Position Game::randomPointOnScreen() {
+   return Position(
+      random(screenLeft, screenRight),
+      random(screenBottom, screenTop));
+}
+
 Position Game::randomizeRockPInit(const Position & pInit, bool isInitial) {
    if (ship->isNull()) throw "null ship (should not happen here)";
-   
-   // condition: don't randomize if pInit is non-default
-   if (pInit.getMagnitude() >= 10) return pInit;
-   
-   // randomize pInit
-   Position p;
-   // default v randomized in individual rock constructors
-   // default p [aka Position(0,0)] set to random location:
-   double newX = random(screenLeft, screenRight);
-   double newY = random(screenBottom, screenTop);
-   p.set(newX, newY);
+
+   if (pInit.getMagnitude() >= 10) // don't randomize if pInit is non-default
+      return pInit;
 
    /* handle ship—rock buffer */
-
-   // condition: only on initialization
-   if (isInitial) {
-      // error condition: ship has not been created (should not happen)
-
-      Position shipPoint = ship->getPosition();
-      double buffer = 100;
-
-      while (dist(shipPoint, p) < buffer) { // redo random point
-         /*std::cout << ">>> newRock.p within buffer @ ("
-            << newX << ", "
-            << newY << ")"
-            << ", recalculate." << std::endl;*/
-         newX = random(screenLeft, screenRight);
-         newY = random(screenBottom, screenTop);
-         p.set(newX, newY);
-      }
-   }
-
+   double buffer = 100;
+   Position p;
+   while (distance(ship->getPosition(), p) < buffer) // redo random point
+      p = randomPointOnScreen();
    return p;
 }
 
 void Game::asteroidBelt() {
    for (int i = 0; i < Rock::amountInit; i++) {
-      std::cout << i << ") asteroid belt \n";
       Position pInit;
       Velocity vInit;
       rocks.push_back(buildRock(bigRock, pInit, vInit, true));
@@ -118,51 +100,31 @@ void Game::wrap() {
 
 void Game::wrap(MovingObject * obj) {
    if (obj->isNull()) return;
-
-   bool debug = false;
-   if (debug) printf("wrap() called ");
    double buffer = obj->getRadius() + 10;
 
-   /* SCREEN SIDE VALS REFERENCE
-    * screen left   == topLeft.getX() - obj->getRadius()
-    * screen right  == bottomRight.getX() + obj->getRadius()
-    * screen bottom == bottomRight.getY() - obj->getRadius()
-    * screen top    == topLeft.getY() + obj->getRadius()
+   /* 
+    SCREEN SIDE VALS REFERENCE
+    screen left   == topLeft.getX() - obj->getRadius()
+    screen right  == bottomRight.getX() + obj->getRadius()
+    screen bottom == bottomRight.getY() - obj->getRadius()
+    screen top    == topLeft.getY() + obj->getRadius()
     */
 
    // obj x < screen left => screen right
-   if (obj->getPosition().getX() < screenLeft - buffer) {
+   if (obj->getPosition().getX() < screenLeft - buffer)
       obj->setPosition(screenRight + buffer, obj->getPosition().getY());
-      if (debug) printf("//  Wrap left -> right");
-   }
 
    // obj x > screen right => screen left
-   else if (obj->getPosition().getX() > screenRight + buffer) {
+   else if (obj->getPosition().getX() > screenRight + buffer)
       obj->setPosition(screenLeft - buffer, obj->getPosition().getY());
-      if (debug) printf("//  Wrap right -> left");
-   }
 
    // obj y < screen bottom => screen top
-   if (obj->getPosition().getY() < screenBottom - buffer) {
+   if (obj->getPosition().getY() < screenBottom - buffer)
       obj->setPosition(obj->getPosition().getX(), screenTop + buffer);
-      if (debug) printf("//  Wrap bottom -> top");
-   }
 
    // obj y > screen top => screen bottom
-   else if (obj->getPosition().getY() > screenTop + buffer) {
+   else if (obj->getPosition().getY() > screenTop + buffer)
       obj->setPosition(obj->getPosition().getX(), screenBottom - buffer);
-      if (debug) printf("//  Wrap top -> bottom");
-   }
-
-   if (debug) printf("\n");
-}
-
-void Game::wrap(std::vector<MovingObject> & objects) {
-   for (MovingObject & obj : objects) wrap(&obj);
-}
-
-void Game::wrap(std::vector<MovingObject *> & objects) {
-   for (MovingObject * obj : objects) wrap(obj);
 }
 
 void Game::handleCollisions() {
@@ -252,7 +214,10 @@ bool Game::checkCollision(MovingObject * obj1, MovingObject * obj2) {
       return checkCollision(*obj1, *obj2);
    }
    catch (std::string error) {
-      std::cout << error << std::endl;
+      std::cout
+         << "In Game::checkCollision(MovingObject* x2) "
+         << error
+         << std::endl;
       return false;
    }
 }
@@ -317,7 +282,6 @@ void Game::cleanUpRocks() {
 
 void Game::reset() {
    if (!(glutGetModifiers() != GLUT_ACTIVE_CTRL && !ui.getHeldKey(keys::R))) return;
-
    resetShip();
    removeAllLasers();
    resetAllRocks();

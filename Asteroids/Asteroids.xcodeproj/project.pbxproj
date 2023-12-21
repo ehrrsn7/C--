@@ -26,6 +26,7 @@
 		14BE4A402B2CB86F00125D6E /* testVectorOther.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D492AF168A4009F7E7A /* testVectorOther.cpp */; };
 		14BE4A412B2CB86F00125D6E /* testVectorUpper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D502AF168A5009F7E7A /* testVectorUpper.cpp */; };
 		14BE4A422B2CB86F00125D6E /* testVectorZeros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AE9D462AF168A4009F7E7A /* testVectorZeros.cpp */; };
+		14C9B0972B325260002ADE8B /* laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C9B0962B325257002ADE8B /* laser.cpp */; };
 		EE53899F257DC54D00CF4674 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE53899E257DC54C00CF4674 /* GLUT.framework */; };
 		EE5389A1257DC55100CF4674 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5389A0257DC55100CF4674 /* OpenGL.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		14AE9D4F2AF168A5009F7E7A /* test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = test.hpp; sourceTree = "<group>"; tabWidth = 3; };
 		14AE9D502AF168A5009F7E7A /* testVectorUpper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = testVectorUpper.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14AE9D512AF168A5009F7E7A /* testPosition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = testPosition.hpp; sourceTree = "<group>"; tabWidth = 3; };
+		14C9B0962B325257002ADE8B /* laser.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = laser.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		EE538971257DC3CE00CF4674 /* Asteroids */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Asteroids; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE53897D257DC48000CF4674 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = SOURCE_ROOT; tabWidth = 3; };
 		EE538983257DC4AB00CF4674 /* game.hpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -194,6 +196,7 @@
 				EE53898B257DC51800CF4674 /* movingObject.cpp */,
 				EE538991257DC51800CF4674 /* movingObject.hpp */,
 				EE53898C257DC51800CF4674 /* ship.hpp */,
+				14C9B0962B325257002ADE8B /* laser.cpp */,
 				EE53898D257DC51800CF4674 /* laser.hpp */,
 				EE538990257DC51800CF4674 /* rocks.cpp */,
 				EE53898E257DC51800CF4674 /* rocks.hpp */,
@@ -297,6 +300,7 @@
 				14BE4A322B2CB86F00125D6E /* velocity.cpp in Sources */,
 				14BE4A372B2CB86F00125D6E /* movingObject.cpp in Sources */,
 				14BE4A3A2B2CB86F00125D6E /* rocks.cpp in Sources */,
+				14C9B0972B325260002ADE8B /* laser.cpp in Sources */,
 				14BE4A3B2B2CB86F00125D6E /* uiInteract.cpp in Sources */,
 				14BE4A3C2B2CB86F00125D6E /* uiDraw.cpp in Sources */,
 				14BE4A3D2B2CB86F00125D6E /* test.cpp in Sources */,

@@ -46,16 +46,22 @@
 #include "physics-components/vector.hpp"
 #endif
 
+#define GLUT_KEY_ESC 27
+#define GLUT_KEY_C 99
+#define GLUT_KEY_Q 113
+#define GLUT_KEY_R 114
+
 enum class keys {
    SPACE = GLUT_KEY_HOME,
    LEFT = GLUT_KEY_LEFT,
    RIGHT = GLUT_KEY_RIGHT,
    DOWN = GLUT_KEY_DOWN,
    UP = GLUT_KEY_UP,
-   Q = 113,
-   R = 114,
-   ESC = 27,
-   CTRL = GLUT_ACTIVE_CTRL
+   CTRL = GLUT_ACTIVE_CTRL,
+   ESC = GLUT_KEY_ESC,
+   C = GLUT_KEY_C,
+   Q = GLUT_KEY_Q,
+   R = GLUT_KEY_R,
 };
 
 /********************************************
@@ -103,6 +109,8 @@ public:
    bool getHeldKey(keys key) const;
    void setHeldKey(keys key, bool value);
 
+   static bool getShowCircle() { return Interface::showCircle; }
+   
    // Current frame rate
    double frameRate() const { return timePeriod; };
 
@@ -115,7 +123,8 @@ private:
    static bool         initialized;    // only run the constructor once!
    static double       timePeriod;     // interval between frame draws
    static unsigned int nextTick;       // time (from clock()) of our next draw
-
+   
+   static bool showCircle;
    static std::unordered_map<keys, bool> heldKeys;
 };
 

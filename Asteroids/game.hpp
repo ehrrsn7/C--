@@ -54,6 +54,8 @@ private:
    void fireLaser();
    void asteroidBelt();
    Rock * buildRock(int whichRock, Position pInit, Velocity vInit, bool isInitial);
+   Position randomPointOnScreen();
+   
    Position randomizeRockPInit(const Position& pInit, bool isInitial);
    void wrap();
    void wrap(MovingObject * obj);

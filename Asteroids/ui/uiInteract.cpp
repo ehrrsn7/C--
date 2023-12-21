@@ -169,41 +169,45 @@ void keyboardCallback(unsigned char key, int x, int y)
  ****************************************************************/
 void Interface::keyEvent(int key, bool fDown)
 {
-    switch(key) {
-        case GLUT_KEY_DOWN:
-            setHeldKey(keys::DOWN, fDown);
-            break;
-        case GLUT_KEY_UP:
-            setHeldKey(keys::UP, fDown);
-            break;
-        case GLUT_KEY_RIGHT:
-            setHeldKey(keys::RIGHT, fDown);
-            break;
-        case GLUT_KEY_LEFT:
-            setHeldKey(keys::LEFT, fDown);
-            break;
-        case 113:
-            setHeldKey(keys::Q, fDown);
-            break;
-        case 114:
-            setHeldKey(keys::R, fDown);
-            break;
-        case GLUT_KEY_HOME:
-            setHeldKey(keys::SPACE, fDown);
-            break;
-        case ' ':
-            setHeldKey(keys::SPACE, fDown);
-            break;
-        case 27:
-            setHeldKey(keys::ESC, fDown);
-            break;
-        case GLUT_ACTIVE_CTRL:
-            setHeldKey(keys::CTRL, fDown);
-            break;
-        default:
-            cout << key << endl;
-            break;
-    }
+   switch(key) {
+   case GLUT_KEY_DOWN:
+      setHeldKey(keys::DOWN, fDown);
+      break;
+   case GLUT_KEY_UP:
+      setHeldKey(keys::UP, fDown);
+      break;
+   case GLUT_KEY_RIGHT:
+      setHeldKey(keys::RIGHT, fDown);
+      break;
+   case GLUT_KEY_LEFT:
+      setHeldKey(keys::LEFT, fDown);
+      break;
+   case GLUT_KEY_HOME:
+      setHeldKey(keys::SPACE, fDown);
+      break;
+   case GLUT_ACTIVE_CTRL:
+      setHeldKey(keys::CTRL, fDown);
+      break;
+   case GLUT_KEY_ESC:
+      setHeldKey(keys::ESC, fDown);
+      break;
+   case ' ':
+      setHeldKey(keys::SPACE, fDown);
+      break;
+   case GLUT_KEY_C:
+      setHeldKey(keys::C, fDown);
+         Interface::showCircle = fDown;
+      break;
+   case GLUT_KEY_Q:
+      setHeldKey(keys::Q, fDown);
+      break;
+   case GLUT_KEY_R:
+      setHeldKey(keys::R, fDown);
+      break;
+   default:
+      cout << key << endl;
+      break;
+   }
 }
 
 /*****************************************************
@@ -264,6 +268,8 @@ void *       Interface::p            = NULL;
 
 // set callback to null
 void (*Interface::callBack)(void *) = NULL;
+
+bool Interface::showCircle = false;
 
 // held keys
 std::unordered_map<keys, bool> Interface::heldKeys {

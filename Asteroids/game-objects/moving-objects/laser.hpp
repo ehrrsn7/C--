@@ -27,42 +27,25 @@
 #define ALIVE true
 #define DEAD false
 
+class Ship; // forward declaration
+
 class Laser : public MovingObject {
 private:
-   Position offsetToShipPosition(double firingAngle, const Position &shipPoint, double shipRadius) {
-      double offsetAmount = shipRadius * 6;
-      return Position(
-         // initialize at ship's position
-         shipPoint +
-         // offset to front of ship
-         Position(Vector::forward(firingAngle)) * offsetAmount
-      );
-   }
+   Velocity launchVelocity(double firingAngle);
    
-   Velocity launch(double firingAngle) {
-      return Velocity::forward(firingAngle) * LASER_SPEED;
+   // private constructor used by Laser::Laser(const Interface&, const Ship*)
+   Laser(const Interface & ui) : MovingObject(ui) {
+      // set default parent properties
+      name = "Laser";
+      gameObjectID = laser;
+      setDeathTimer(LASER_DEATH_TIME); // sets timerOn to true
    }
    
 public:
-   Laser(const Interface & ui, double firingAngle, Position shipPoint, Velocity shipVelocity, double shipRadius)
-      : MovingObject(ui)
-   {
-      // set parent properties
-      name = "Laser";
-      gameObjectID = laser;
-      p = offsetToShipPosition(firingAngle, shipPoint, shipRadius);
-      v = launch(firingAngle); // fire!!
-      setDeathTimer(LASER_DEATH_TIME); // sets timerOn to true
-      std::cout << "laser v " << v << std::endl;
-   }
+   Laser(const Interface & ui, const Ship * ship);
 
    void display() override { drawDot(getPosition()); }
    
    // assignment operator '='
-   Laser & operator = (const Laser & rhs) {
-      p = rhs.p;
-      v = rhs.v;
-      setDeathTimer(rhs.timer); // sets timerOn to true
-      return *this;
-   }
+   Laser & operator = (const Laser & rhs);
 };

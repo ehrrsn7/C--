@@ -71,11 +71,6 @@ public:
       initializeVelocity(vInit);
    }
 
-   void display() override {
-      // Draw asteroid at Position p and angle r
-      drawLargeAsteroid(p, rotation);
-   }
-
    void initializeRotation();
    void initializePosition();
    void initializePosition(Position pInit) { p = pInit; }
@@ -127,6 +122,11 @@ public:
       rotation = BIG_ROCK_ROTATE_SPEED * random(-1.0, 1.0);
       scoreAmount = BIG_ROCK_SCORE;
    }
+   
+   void display() override {
+      if (Interface::getShowCircle()) drawCircle(p, r * 2);
+      drawLargeAsteroid(p, rotation);
+   }
 };
 
 class MediumRock : public Rock {
@@ -146,7 +146,10 @@ public:
       setVelocity(v + vShipInit);
    }
 
-   void display() override { drawMediumAsteroid(p, rotation); }
+   void display() override {
+      if (Interface::getShowCircle()) drawCircle(p, r * 2);
+      drawMediumAsteroid(p, rotation);
+   }
 };
 
 class SmallRock : public Rock {
@@ -165,6 +168,9 @@ public:
    {
       setVelocity(v + vShipInit);
    }
-
-   void display() override { drawSmallAsteroid(p, rotation); }
+   
+   void display() override {
+      if (Interface::getShowCircle()) drawCircle(p, r * 2);
+      drawSmallAsteroid(p, rotation);
+   }
 };
