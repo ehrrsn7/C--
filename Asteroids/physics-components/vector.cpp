@@ -46,13 +46,15 @@ void Vector::addPolar(double magnitude, double angleRadians) {
    return Vector(cos(angleRadians), sin(angleRadians));
 }
 
-Vector Vector::operator + (const Vector& rhs) {
+double Vector::getMagnitude() const { return mag(*this); }
+
+Vector Vector::operator + (const Vector & rhs) {
    Vector newS;
    newS.add(rhs.getX(), rhs.getY());
    return newS;
 }
 
-Vector& Vector::operator += (const Vector& rhs) {
+Vector & Vector::operator += (const Vector & rhs) {
    add(rhs.getX(), rhs.getY());
    return *this;
 }
@@ -63,7 +65,7 @@ Vector Vector::operator * (const double rhs) {
    return newS;
 }
 
-Vector& Vector::operator *= (const double rhs) {
+Vector & Vector::operator *= (const double rhs) {
    multiply(rhs);
    return *this;
 }

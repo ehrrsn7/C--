@@ -76,9 +76,9 @@ public:
    /**************************************************
     * Other Getters/Setters
     **************************************************/
-   double getMagnitude() const      { return mag(*this); }
-   double getAngleRadians() const   { return atan2(getX(), getY()); }
-   double angle() const             { return getAngleRadians(); }
+   double getMagnitude() const;
+   double getAngleRadians() const { return atan2(getX(), getY()); }
+   double angle() const { return getAngleRadians(); }
 
    void setPolar(double magnitude, double angleRadians);
    void setMagnitude(double magnitude, double angleRadians); // just an alias for setPolar
@@ -122,7 +122,6 @@ public:
    Position(bool check) { }
    Position(double metersX, double metersY) : Vector(metersX, metersY) { } // default
    Position(const Position & pt) { *this = pt; }              // copy constructor
-   Position & operator = (const Position & pt);             // assignment operator '='
 
    double getMetersX() const { return getX(); }
    double getMetersY() const { return getY(); }
@@ -152,19 +151,28 @@ public:
    void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
    void addMeters(double dxMeters, double dyMeters);
 
+   // forward: static getter for unit vector
    static Position forward(double angleRadians);
 
-   double getZoom() const { return metersFromPixels; }
+   // scaling helper methods between meters and pixels based on Position::metersFromPixels
+   static double getZoom() { return Position::metersFromPixels; }
    void setZoom(double metersFromPixels);
 
-   Position operator+ (const Position & rhs) const;
-   Position operator+ (const Vector & rhs) const;
-   Position& operator+= (const Position & rhs);
-   Position& operator+= (const Vector & rhs);
+   // operators
+   Position & operator = (const Position & pt);
+   Position & operator = (const Vector & rhs) {
+      Vector::set(rhs);
+      return *this;
+   }
+   
+   Position operator + (const Position & rhs) const;
+   Position operator + (const Vector & rhs) const;
+   Position& operator += (const Position & rhs);
+   Position& operator += (const Vector & rhs);
 
-   Position operator- (const Position & rhs); // subtraction
-   Position operator- (const Vector & rhs);
-   Position operator- (); // negative
+   Position operator - (const Position & rhs); // subtraction
+   Position operator - (const Vector & rhs);
+   Position operator - (); // negative
 
 private:
    static double metersFromPixels;
@@ -200,7 +208,6 @@ public:
    Velocity(const Vector& s) : Vector(s) { }                // base implementation constructor
    Velocity(double dx, double dy) { Vector::set(dx, dy); }  // normal "
    Velocity(const Velocity& s)    { *this = s;           }  // copy "
-   Velocity & operator = (const Velocity & rhs);            // assignment operator '='
 
    // set
    void set(double x, double y) { Vector::set(x, y); }
@@ -214,6 +221,12 @@ public:
   static Velocity forward(double angleRadians);
 
    // operators
+   Velocity & operator = (const Velocity & rhs);
+   Velocity & operator = (const Vector & rhs) {
+      Vector::set(rhs);
+      return *this;
+   }
+   
    Velocity operator+ (const Velocity& rhs) const { // rhs : Δt
       return Velocity(x + rhs.x, y + rhs.y);
    }
@@ -253,9 +266,6 @@ public:
    Acceleration(const Vector& s) : Vector(s) {                   }   // base implementation constructor
    Acceleration(double ddx, double ddy) { Vector::set(ddx, ddy); }   // normal "
    Acceleration(const Acceleration& s)  { *this = s;             }   // copy "
-   Acceleration & operator = (const Acceleration & rhs) {            // assignment operator '='
-      Vector::set(rhs.getX(), rhs.getY()); return *this;
-   }
 
    // set
    void set(double x, double y) { Vector::set(x, y); }
@@ -269,6 +279,16 @@ public:
   static Acceleration forward(double angleRadians);
 
    // operators
+   Acceleration & operator = (const Acceleration & rhs) {
+      Vector::set(rhs.getX(), rhs.getY());
+      return *this;
+   }
+   
+   Acceleration & operator = (const Vector & rhs) {
+      Vector::set(rhs);
+      return *this;
+   }
+   
    Acceleration operator + (const Acceleration& rhs) { // rhs : Δt
       Acceleration newA = *this;
       newA.add(rhs);
@@ -310,9 +330,6 @@ public:
    Force(const Vector& s) : Vector(s) {               }  // base implementation constructor
    Force(double fx, double fy) { Vector::set(fx, fy); }  // normal "
    Force(const Force& s)       { *this = s;           }  // copy "
-   Force & operator = (const Force & rhs) {              // assignment operator '='
-     Vector::set(rhs.getX(), rhs.getY()); return *this;
-   }
 
    // set
    void set(double x, double y) { Vector::set(x, y); }
@@ -326,6 +343,16 @@ public:
   static Force forward(double angleRadians);
 
    // operators
+   Force & operator = (const Force & rhs) {
+      Vector::set(rhs.getX(), rhs.getY()); 
+      return *this;
+   }
+   
+   Force & operator = (const Vector & rhs) {
+      Vector::set(rhs);
+      return *this;
+   }
+   
    Force operator + (const Force& rhs) { // rhs : ΔF
       Force newF = *this;
       newF.add(rhs);
@@ -367,9 +394,6 @@ public:
    Gravity(const Vector& s) : Force(s) {                }   // base implementation constructor
    Gravity(double fx, double fy) { Vector::set(fx, fy); }   // normal "
    Gravity(const Gravity& s)     { *this = s;           }   // copy "
-   Gravity & operator = (const Gravity & rhs) {             // assignment operator '='
-      Vector::set(rhs.getX(), rhs.getY()); return *this;
-   }
 
    // set
    void set(double x, double y) { Vector::set(x, y); }
@@ -383,18 +407,28 @@ public:
   static Gravity forward(double angleRadians);
 
    // operators
-   Gravity operator+ (const Gravity& rhs) { // rhs : ΔG
+   Gravity & operator = (const Gravity & rhs) {
+      Vector::set(rhs.getX(), rhs.getY()); 
+      return *this;
+   }
+   
+   Gravity & operator = (const Vector & rhs) {
+      Vector::set(rhs);
+      return *this;
+   }
+   
+   Gravity operator + (const Gravity& rhs) { // rhs : ΔG
       Gravity newG = *this;
       newG.add(rhs);
       return newG;
    }
 
-   Gravity& operator+= (const Gravity& rhs) { // rhs : ΔG
+   Gravity& operator += (const Gravity& rhs) { // rhs : ΔG
       add(rhs);
       return *this;
    }
 
-   Acceleration operator/ (const double rhs) { // rhs : mass
+   Acceleration operator / (const double rhs) { // rhs : mass
       return toAcceleration(rhs);
    }
 

@@ -14,40 +14,11 @@
 #include "physics-components/physicsFormulas.hpp"
 #endif
 
-void Rock::initializeRotation() {
-    setRotation(random(ROCK_ROTATE_SPEED/2, ROCK_ROTATE_SPEED));
-}
-
-// TODO: change these from being hard coded values to variables
-void Rock::initializePosition() {
-   getPosition().setX(random(-500.0, 500.0));
-   getPosition().setY(random(-500.0, 500.0));
-}
-
-void Rock::initializeVelocity() {
-   std::cout << "Rock::initializeVelocity()\n";
+Velocity Rock::randomizeVelocity() {
    // launch in random direction
-   auto initialForce = Force(Vector().polar(ROCK_INIT_LAUNCH_FORCE, rad(random(0, 360))));
-   auto initialAcceleration = initialForce / getMass();
-   auto impulseTime = 1;
-   std::cout << "initialForce - " << initialForce
-       << " initialAcceleration - " << initialAcceleration
-       << " impulseTime - " << impulseTime
-       << " dv result - " << initialAcceleration * impulseTime
-       << std::endl;
-   v += initialAcceleration * impulseTime;
-}
-
-void Rock::initializeVelocity(Velocity vInit) {
-   std::cout << "Rock::initializeVelocity(Velocity vInit) called.\n";
-
-   // if non-default velocity, add it to our current v
-   if (abs(getVelocity().getMagnitude()) > 0)
-   {
-      setVelocity(vInit);
-      return;
-   }
-   
-   // if default velocity, launch in random direction
-   initializeVelocity(); // call initializeVelocity() to do this
+   double randomAngle = random(0.0, M_PI * 2.0);
+   Force initialForce = Vector::polar(ROCK_INIT_LAUNCH_FORCE, randomAngle); // N
+   Acceleration initialAcceleration = initialForce / mass; // m/s/s
+   double impulseTime = 1.0; // s
+   return initialAcceleration * impulseTime;
 }
